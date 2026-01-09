@@ -341,13 +341,13 @@
 //                       </span>
 //                       <span className="text-sm text-gray-500">{position.department}</span>
 //                     </div>
-                    
+
 //                     <h3 className="text-lg font-bold text-gray-900 mb-2">{position.title}</h3>
 //                     <p className="text-gray-600 text-sm mb-4 flex items-center">
 //                       <MapPin className="h-4 w-4 mr-1" />
 //                       {position.location}
 //                     </p>
-                    
+
 //                     <div className="mb-4">
 //                       <h4 className="font-semibold text-gray-900 mb-2">Key Responsibilities:</h4>
 //                       <ul className="text-sm text-gray-600 space-y-1">
@@ -359,7 +359,7 @@
 //                         ))}
 //                       </ul>
 //                     </div>
-                    
+
 //                     <button
 //                       onClick={() => handleApply(position.title, 'job')}
 //                       className="w-full bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
@@ -398,11 +398,11 @@
 //                           {position.department}
 //                         </span>
 //                       </div>
-                      
+
 //                       <p className="text-gray-600 mb-4 leading-relaxed">
 //                         {position.description}
 //                       </p>
-                      
+
 //                       <div className="flex flex-wrap items-center gap-6 text-sm text-gray-500 mb-4">
 //                         <div className="flex items-center">
 //                           <MapPin className="h-4 w-4 mr-1" />
@@ -417,7 +417,7 @@
 //                           {position.experience}
 //                         </div>
 //                       </div>
-                      
+
 //                       <div className="mb-4">
 //                         <h4 className="font-semibold text-gray-900 mb-2">Key Requirements:</h4>
 //                         <ul className="list-disc list-inside text-gray-600 space-y-1">
@@ -427,7 +427,7 @@
 //                         </ul>
 //                       </div>
 //                     </div>
-                    
+
 //                     <div className="lg:ml-8">
 //                       <ProtectedAction
 //                         onAction={() => handleApply(position.title, 'job')}
@@ -474,10 +474,10 @@
 //                     </span>
 //                     <span className="text-sm text-gray-500">{internship.duration}</span>
 //                   </div>
-                  
+
 //                   <h3 className="text-xl font-bold text-gray-900 mb-3">{internship.title}</h3>
 //                   <p className="text-gray-600 mb-4">{internship.description}</p>
-                  
+
 //                   <div className="space-y-2 mb-4 text-sm text-gray-500">
 //                     <div className="flex items-center">
 //                       <MapPin className="h-4 w-4 mr-2" />
@@ -492,7 +492,7 @@
 //                       Deadline: {internship.deadline}
 //                     </div>
 //                   </div>
-                  
+
 //                   <div className="mb-6">
 //                     <h4 className="font-semibold text-gray-900 mb-2">Requirements:</h4>
 //                     <ul className="list-disc list-inside text-gray-600 text-sm space-y-1">
@@ -501,7 +501,7 @@
 //                       ))}
 //                     </ul>
 //                   </div>
-                  
+
 //                   <ProtectedAction
 //                     onAction={() => handleApply(internship.title, 'internship')}
 //                     fallback={
@@ -545,7 +545,7 @@
 //                 <p className="text-gray-600 text-sm">Submit your application through our online form</p>
 //               </AnimatedCard>
 //             </div>
-            
+
 //             <div className="text-center">
 //               <AnimatedCard animation="zoomIn" delay={200}>
 //                 <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -555,7 +555,7 @@
 //                 <p className="text-gray-600 text-sm">Our team reviews your application and qualifications</p>
 //               </AnimatedCard>
 //             </div>
-            
+
 //             <div className="text-center">
 //               <AnimatedCard animation="zoomIn" delay={400}>
 //                 <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -565,7 +565,7 @@
 //                 <p className="text-gray-600 text-sm">Virtual or in-person interview with the hiring team</p>
 //               </AnimatedCard>
 //             </div>
-            
+
 //             <div className="text-center">
 //               <AnimatedCard animation="zoomIn" delay={600}>
 //                 <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -611,20 +611,492 @@
 
 // export default Careers;
 
+// import React from 'react';
+// import { MapPin, Clock, Users, ArrowRight, ExternalLink } from 'lucide-react';
+// import ProtectedAction from '../components/ProtectedAction';
+// import AnimatedCard from '../components/AnimatedCard';
+// import { useAuth } from '../contexts/AuthContext';
+// import { supabase } from '../lib/supabase';
+// import toast from 'react-hot-toast';
+// import HeroBackground from '../components/HeroBackground';
+// import Background from '../components/Background';
 
-import React from 'react';
-import { MapPin, Clock, Users, ArrowRight, ExternalLink } from 'lucide-react';
-import ProtectedAction from '../components/ProtectedAction';
-import AnimatedCard from '../components/AnimatedCard';
-import { useAuth } from '../contexts/AuthContext';
-import { supabase } from '../lib/supabase';
-import toast from 'react-hot-toast';
-import HeroBackground from '../components/HeroBackground';
-import Background from '../components/Background';
+// import LoadingSpinner from '../components/LoadingSpinner';
+// import { usePageLoading } from '../hooks/usePageLoading';
 
-import LoadingSpinner from '../components/LoadingSpinner'; 
-import { usePageLoading } from '../hooks/usePageLoading';
+// // JobPosition accepts a `type` prop now ('job' | 'internship')
+// const JobPosition = ({ position, handleApply, type }) => {
+//   return (
+//     <AnimatedCard animation="slideUp" delay={0}>
+//       <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow flex flex-col h-full">
+//         <div className="flex-grow">
+//           <h3 className="text-xl font-bold text-gray-900 mb-2">{position.title}</h3>
+//           <p className="text-gray-600 text-sm mb-4">{position.department}</p>
 
+//           <div className="mb-4">
+//             <h4 className="font-semibold text-gray-900 mb-2">Key Responsibilities:</h4>
+//             <ul className="text-sm text-gray-600 space-y-1">
+//               {position.responsibilities.map((resp, idx) => (
+//                 <li key={idx} className="flex items-start">
+//                   <span className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 mr-2 flex-shrink-0"></span>
+//                   {resp}
+//                 </li>
+//               ))}
+//             </ul>
+//           </div>
+//         </div>
+
+//         {/* ProtectedAction: if user allowed -> onAction runs; if not, fallback shows a button that still triggers handleApply */}
+//         <ProtectedAction
+//           onAction={() => handleApply(position.title, type)}
+//           fallback={
+//             <button
+//               // keep same styles as original fallback, but allow click to still call the handler
+//               onClick={() => handleApply(position.title, type)}
+//               className="w-full bg-gray-400 text-white px-4 py-2 rounded-lg font-semibold inline-flex items-center justify-center mt-auto"
+//             >
+//               Sign in to Apply
+//               <ExternalLink className="ml-2 h-5 w-5" />
+//             </button>
+//           }
+//         >
+//           <button
+//             onClick={() => handleApply(position.title, type)}
+//             className="w-full bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-colors inline-flex items-center justify-center mt-auto"
+//           >
+//             Apply Now
+//             <ExternalLink className="ml-2 h-5 w-5" />
+//           </button>
+//         </ProtectedAction>
+//       </div>
+//     </AnimatedCard>
+//   );
+// };
+
+// const Careers = () => {
+//     const loading = usePageLoading();
+
+//   const { user } = useAuth();
+
+//   // NOTE:
+//   // - For 'job' positions we open the Google Form regardless of user login status.
+//   // - If user exists, we also log the activity to Supabase.
+//   // - For 'internship' positions we show a toast and do not redirect.
+//   const handleApply = async (positionTitle, positionType) => {
+//     // If internship -> show popup message and return (no redirect)
+//     if (positionType === 'internship') {
+//       toast.success('Internship opportunities will come soon. Keep checking this page for updates!', {
+//         duration: 4000,
+//         style: {
+//           background: '#3B82F6',
+//           color: 'white',
+//         },
+//       });
+//       return;
+//     }
+
+//     // For job positions, always redirect to Google Form
+//     if (user) {
+//       try {
+//         await supabase
+//           .from('user_activities')
+//           .insert({
+//             user_id: user.id,
+//             activity_type: `Applied for ${positionType}`,
+//             activity_data: {
+//               position_title: positionTitle,
+//               position_type: positionType
+//             }
+//           });
+//         toast.success('Logging application... Redirecting to application form...');
+//       } catch (error) {
+//         console.error('Error logging activity:', error);
+//         toast('Redirecting to application form...');
+//       }
+//     } else {
+//       // Not signed in — still redirect (but don't attempt to log)
+//       toast('Redirecting to application form...');
+//     }
+
+//     // Always open the Google Form for job applications
+//     window.open(
+//       'https://docs.google.com/forms/d/e/1FAIpQLScuNgMbLFhWx-yLSNK-b0JnMeWNdREAYTVi8owvWrxNgXwmRw/viewform',
+//       '_blank'
+//     );
+//   };
+
+//   const openPositions = [
+//     {
+//       id: 1,
+//       title: 'Chief Operations Director (COD)',
+//       department: 'Operations',
+//       responsibilities: [
+//         'Manage day-to-day team operations, timelines, and internal coordination',
+//         'Track tasks and ensure smooth execution of programs',
+//         'Collaborate with all departments to keep projects running on time',
+//       ],
+//     },
+//     {
+//       id: 2,
+//       title: 'Chief Communications Officer (CCO)',
+//       department: 'Communications',
+//       responsibilities: [
+//         'Write and review all content: captions, posts, internal documents, and scripts',
+//         'Maintain the tone and voice of PGT across platforms',
+//         'Collaborate with PR and Design teams for campaigns',
+//       ],
+//     },
+//     {
+//       id: 3,
+//       title: 'Creative Director (CD)',
+//       department: 'Creative',
+//       responsibilities: [
+//         'Design posters, carousels, edit videos, reels, thumbnails, and all brand creatives',
+//         'Maintain visual identity and consistency across platforms',
+//         'Support all departments with design and media content',
+//       ],
+//     },
+//     {
+//       id: 4,
+//       title: 'Chief Strategy Officer (CSO)',
+//       department: 'Strategy',
+//       responsibilities: [
+//         'Lead campaign ideas, innovation, and planning',
+//         'Analyze what\'s working and suggest improvements',
+//         'Assist in building long-term strategies for PGT programs',
+//       ],
+//     },
+//     {
+//       id: 5,
+//       title: 'Public Relations Head (PRH)',
+//       department: 'Public Relations',
+//       responsibilities: [
+//         'Represent PGT publicly and build collaborations',
+//         'Handle outreach to colleges, NGOs, media, and influencers',
+//         'Support visibility and networking of the brand',
+//       ],
+//     },
+//     {
+//       id: 6,
+//       title: 'Campus Director (CAP)',
+//       department: 'Campus Relations',
+//       responsibilities: [
+//         'Act as the official link between PGT and college campus',
+//         'Organize on-ground activities and represent PGT at events',
+//         'Promote awareness and engagement inside campus',
+//       ],
+//     },
+//     {
+//       id: 7,
+//       title: 'Chief Technical Director (CTD)',
+//       department: 'Technology',
+//       responsibilities: [
+//         'Build and manage the official PGT website',
+//         'Create event registration pages and landing pages',
+//         'Maintain form integrations, analytics, and digital tools',
+//       ],
+//     },
+//     {
+//       id: 8,
+//       title: 'General Secretary (GSEC)',
+//       department: 'Administration',
+//       responsibilities: [
+//         'Handle official documentation, letters, and internal announcements',
+//         'Support the Founder in maintaining structure and follow-ups',
+//         'Keep track of internal workflows and communication logs',
+//       ],
+//     },
+//   ];
+
+//   const internshipPrograms = [
+//     {
+//       id: 1,
+//       title: 'Marketing Intern',
+//       department: 'Marketing',
+//       responsibilities: [
+//         'Assist in creating social media content and campaigns',
+//         'Support market research and analysis projects',
+//         'Help with event planning and promotional activities',
+//       ],
+//     },
+//     {
+//       id: 2,
+//       title: 'Content Writing Intern',
+//       department: 'Communications',
+//       responsibilities: [
+//         'Write blog posts, articles, and website content',
+//         'Create engaging social media captions and posts',
+//         'Assist in developing internal communication materials',
+//       ],
+//     },
+//     {
+//       id: 3,
+//       title: 'Graphic Design Intern',
+//       department: 'Creative',
+//       responsibilities: [
+//         'Design social media graphics and promotional materials',
+//         'Create visual content for campaigns and events',
+//         'Support brand consistency across all platforms',
+//       ],
+//     },
+//     {
+//       id: 4,
+//       title: 'Web Development Intern',
+//       department: 'Technology',
+//       responsibilities: [
+//         'Assist in website development and maintenance',
+//         'Help with creating landing pages and forms',
+//         'Support technical documentation and testing',
+//       ],
+//     },
+//     {
+//       id: 5,
+//       title: 'Research Intern',
+//       department: 'Strategy',
+//       responsibilities: [
+//         'Conduct research on industry trends and best practices',
+//         'Analyze data and prepare reports',
+//         'Support strategic planning initiatives',
+//       ],
+//     },
+//     {
+//       id: 6,
+//       title: 'Event Management Intern',
+//       department: 'Operations',
+//       responsibilities: [
+//         'Assist in planning and coordinating events',
+//         'Support logistics and vendor management',
+//         'Help with post-event analysis and reporting',
+//       ],
+//     },
+//   ];
+
+//   const benefits = [
+//     {
+//       title: 'Global Impact',
+//       description: 'Work on projects that transform lives across the world',
+//       icon: '🌍'
+//     },
+//     {
+//       title: 'Professional Growth',
+//       description: 'Continuous learning opportunities and skill development',
+//       icon: '📈'
+//     },
+//     {
+//       title: 'Flexible Work',
+//       description: 'Remote-first culture with flexible working arrangements',
+//       icon: '💻'
+//     },
+//     {
+//       title: 'Health & Wellness',
+//       description: 'Comprehensive health benefits and wellness programs',
+//       icon: '🏥'
+//     },
+//     {
+//       title: 'Team Culture',
+//       description: 'Collaborative, inclusive, and purpose-driven work environment',
+//       icon: '🤝'
+//     },
+//     {
+//       title: 'Learning Budget',
+//       description: 'Annual budget for conferences, courses, and certifications',
+//       icon: '📚'
+//     }
+//   ];
+
+//    if (loading) {
+//     return <LoadingSpinner />;
+//   }
+
+//   return (
+//     <div className="pt-16">
+//       {/* Hero Section */}
+//       <AnimatedCard animation="fadeIn">
+//   <section className="relative bg-gradient-to-r from-blue-600 to-purple-600 text-white py-20 overflow-hidden">
+//     <HeroBackground />
+//     <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+//       <h1 className="text-4xl md:text-5xl font-bold mb-6">
+//         Join Our Mission
+//       </h1>
+//       <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto">
+//         Be part of a global network that's transforming lives through purpose, growth, and meaningful change
+//       </p>
+//     </div>
+//   </section>
+// </AnimatedCard>
+
+//       {/* Why Join Us */}
+//       <section className="py-20">
+//         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+//           <AnimatedCard animation="slideUp">
+//             <div className="text-center mb-16">
+//             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+//               Why Work With Us?
+//             </h2>
+//             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+//               Join a team that's passionate about creating positive change and building a better future
+//             </p>
+//           </div>
+//           </AnimatedCard>
+
+//           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+//             {benefits.map((benefit, index) => (
+//               <AnimatedCard key={index} animation="slideUp" delay={index * 100}>
+//                 <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow text-center">
+//                   <div className="text-4xl mb-4">{benefit.icon}</div>
+//                   <h3 className="text-xl font-bold text-gray-900 mb-3">{benefit.title}</h3>
+//                   <p className="text-gray-600 leading-relaxed">{benefit.description}</p>
+//                 </div>
+//               </AnimatedCard>
+//             ))}
+//           </div>
+//         </div>
+//       </section>
+
+//       {/* Open Positions */}
+//       <section className="py-20 bg-blue-50">
+//         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+//           <div className="text-center mb-16">
+//             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+//               Open Positions
+//             </h2>
+//             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+//               Explore current opportunities to join our growing team
+//             </p>
+//           </div>
+
+//           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+//             {openPositions.map((position, index) => (
+//               <JobPosition key={index} position={position} handleApply={handleApply} type="job" />
+//             ))}
+//           </div>
+//         </div>
+//       </section>
+
+//       {/* Internship Programs */}
+//       <section className="py-20 bg-white">
+//         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+//           <div className="text-center mb-16">
+//             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+//               Internship Programs
+//             </h2>
+//             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+//               Gain valuable experience and kickstart your career with our internship opportunities
+//             </p>
+//           </div>
+
+//           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+//             {internshipPrograms.map((position, index) => (
+//               <JobPosition key={index} position={position} handleApply={handleApply} type="internship" />
+//             ))}
+//           </div>
+//         </div>
+//       </section>
+
+//       {/* Application Process */}
+//       <section className="py-20 bg-blue-50">
+//         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+//           <div className="text-center mb-16">
+//             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+//               Application Process
+//             </h2>
+//             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+//               Our streamlined process ensures we find the right fit for both you and our organization
+//             </p>
+//           </div>
+
+//           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+//             <div className="text-center">
+//               <AnimatedCard animation="zoomIn" delay={0}>
+//                 <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+//                   <span className="text-2xl font-bold text-blue-600">1</span>
+//                 </div>
+//                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Apply Online</h3>
+//                 <p className="text-gray-600 text-sm">Submit your application through our online form</p>
+//               </AnimatedCard>
+//             </div>
+
+//             <div className="text-center">
+//               <AnimatedCard animation="zoomIn" delay={200}>
+//                 <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+//                   <span className="text-2xl font-bold text-green-600">2</span>
+//                 </div>
+//                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Initial Review</h3>
+//                 <p className="text-gray-600 text-sm">Our team reviews your application and qualifications</p>
+//               </AnimatedCard>
+//             </div>
+
+//             <div className="text-center">
+//               <AnimatedCard animation="zoomIn" delay={400}>
+//                 <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+//                   <span className="text-2xl font-bold text-purple-600">3</span>
+//                 </div>
+//                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Interview</h3>
+//                 <p className="text-gray-600 text-sm">Virtual or in-person interview with the hiring team</p>
+//               </AnimatedCard>
+//             </div>
+
+//             <div className="text-center">
+//               <AnimatedCard animation="zoomIn" delay={600}>
+//                 <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+//                   <span className="text-2xl font-bold text-orange-600">4</span>
+//                 </div>
+//                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Welcome</h3>
+//                 <p className="text-gray-600 text-sm">Join our team and start making an impact</p>
+//               </AnimatedCard>
+//             </div>
+//           </div>
+//         </div>
+//       </section>
+
+//       {/* CTA Section */}
+//       <AnimatedCard animation="fadeIn">
+//   <section className="relative py-20 bg-gradient-to-r from-green-600 to-blue-600 text-white overflow-hidden">
+//     <Background />
+//     <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+//       <h2 className="text-3xl md:text-4xl font-bold mb-6">
+//         Ready to Make a Difference?
+//       </h2>
+//       <p className="text-xl mb-8 max-w-2xl mx-auto text-green-100">
+//         Don't see a position that fits? We're always looking for passionate individuals to join our mission.
+//       </p>
+//       <div className="flex flex-col sm:flex-row gap-4 justify-center">
+//         <a
+//           href="/contact"
+//           className="bg-white text-green-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center justify-center"
+//         >
+//           Send Us Your Resume
+//           <ArrowRight className="ml-2 h-5 w-5" />
+//         </a>
+//         <a
+//           href="/contact"
+//           className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-green-600 transition-colors inline-flex items-center justify-center"
+//         >
+//           Get In Touch
+//         </a>
+//       </div>
+//     </div>
+//   </section>
+// </AnimatedCard>
+
+//     </div>
+//   );
+// };
+
+// export default Careers;
+
+import React from "react";
+import { MapPin, Clock, Users, ArrowRight, ExternalLink } from "lucide-react";
+import ProtectedAction from "../components/ProtectedAction";
+import AnimatedCard from "../components/AnimatedCard";
+import { useAuth } from "../contexts/AuthContext";
+import { supabase } from "../lib/supabase";
+import toast from "react-hot-toast";
+import HeroBackground from "../components/HeroBackground";
+import Background from "../components/Background";
+
+import LoadingSpinner from "../components/LoadingSpinner";
+import { usePageLoading } from "../hooks/usePageLoading";
 
 // JobPosition accepts a `type` prop now ('job' | 'internship')
 const JobPosition = ({ position, handleApply, type }) => {
@@ -632,11 +1104,15 @@ const JobPosition = ({ position, handleApply, type }) => {
     <AnimatedCard animation="slideUp" delay={0}>
       <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow flex flex-col h-full">
         <div className="flex-grow">
-          <h3 className="text-xl font-bold text-gray-900 mb-2">{position.title}</h3>
+          <h3 className="text-xl font-bold text-gray-900 mb-2">
+            {position.title}
+          </h3>
           <p className="text-gray-600 text-sm mb-4">{position.department}</p>
-          
+
           <div className="mb-4">
-            <h4 className="font-semibold text-gray-900 mb-2">Key Responsibilities:</h4>
+            <h4 className="font-semibold text-gray-900 mb-2">
+              Key Responsibilities:
+            </h4>
             <ul className="text-sm text-gray-600 space-y-1">
               {position.responsibilities.map((resp, idx) => (
                 <li key={idx} className="flex items-start">
@@ -676,8 +1152,8 @@ const JobPosition = ({ position, handleApply, type }) => {
 };
 
 const Careers = () => {
-    const loading = usePageLoading();
-  
+  const loading = usePageLoading();
+
   const { user } = useAuth();
 
   // NOTE:
@@ -686,126 +1162,129 @@ const Careers = () => {
   // - For 'internship' positions we show a toast and do not redirect.
   const handleApply = async (positionTitle, positionType) => {
     // If internship -> show popup message and return (no redirect)
-    if (positionType === 'internship') {
-      toast.success('Internship opportunities will come soon. Keep checking this page for updates!', {
-        duration: 4000,
-        style: {
-          background: '#3B82F6',
-          color: 'white',
-        },
-      });
+    if (positionType === "internship") {
+      toast.success(
+        "Internship opportunities will come soon. Keep checking this page for updates!",
+        {
+          duration: 4000,
+          style: {
+            background: "#3B82F6",
+            color: "white",
+          },
+        }
+      );
       return;
     }
 
     // For job positions, always redirect to Google Form
     if (user) {
       try {
-        await supabase
-          .from('user_activities')
-          .insert({
-            user_id: user.id,
-            activity_type: `Applied for ${positionType}`,
-            activity_data: {
-              position_title: positionTitle,
-              position_type: positionType
-            }
-          });
-        toast.success('Logging application... Redirecting to application form...');
+        await supabase.from("user_activities").insert({
+          user_id: user.id,
+          activity_type: `Applied for ${positionType}`,
+          activity_data: {
+            position_title: positionTitle,
+            position_type: positionType,
+          },
+        });
+        toast.success(
+          "Logging application... Redirecting to application form..."
+        );
       } catch (error) {
-        console.error('Error logging activity:', error);
-        toast('Redirecting to application form...');
+        console.error("Error logging activity:", error);
+        toast("Redirecting to application form...");
       }
     } else {
       // Not signed in — still redirect (but don't attempt to log)
-      toast('Redirecting to application form...');
+      toast("Redirecting to application form...");
     }
 
     // Always open the Google Form for job applications
     window.open(
-      'https://docs.google.com/forms/d/e/1FAIpQLScuNgMbLFhWx-yLSNK-b0JnMeWNdREAYTVi8owvWrxNgXwmRw/viewform',
-      '_blank'
+      "https://docs.google.com/forms/d/e/1FAIpQLScuNgMbLFhWx-yLSNK-b0JnMeWNdREAYTVi8owvWrxNgXwmRw/viewform",
+      "_blank"
     );
   };
 
   const openPositions = [
     {
       id: 1,
-      title: 'Chief Operations Director (COD)',
-      department: 'Operations',
+      title: "Chief Operations Director (COD)",
+      department: "Operations",
       responsibilities: [
-        'Manage day-to-day team operations, timelines, and internal coordination',
-        'Track tasks and ensure smooth execution of programs',
-        'Collaborate with all departments to keep projects running on time',
+        "Manage day-to-day team operations, timelines, and internal coordination",
+        "Track tasks and ensure smooth execution of programs",
+        "Collaborate with all departments to keep projects running on time",
       ],
     },
     {
       id: 2,
-      title: 'Chief Communications Officer (CCO)',
-      department: 'Communications',
+      title: "Chief Communications Officer (CCO)",
+      department: "Communications",
       responsibilities: [
-        'Write and review all content: captions, posts, internal documents, and scripts',
-        'Maintain the tone and voice of PGT across platforms',
-        'Collaborate with PR and Design teams for campaigns',
+        "Write and review all content: captions, posts, internal documents, and scripts",
+        "Maintain the tone and voice of PGT across platforms",
+        "Collaborate with PR and Design teams for campaigns",
       ],
     },
     {
       id: 3,
-      title: 'Creative Director (CD)',
-      department: 'Creative',
+      title: "Creative Director (CD)",
+      department: "Creative",
       responsibilities: [
-        'Design posters, carousels, edit videos, reels, thumbnails, and all brand creatives',
-        'Maintain visual identity and consistency across platforms',
-        'Support all departments with design and media content',
+        "Design posters, carousels, edit videos, reels, thumbnails, and all brand creatives",
+        "Maintain visual identity and consistency across platforms",
+        "Support all departments with design and media content",
       ],
     },
     {
       id: 4,
-      title: 'Chief Strategy Officer (CSO)',
-      department: 'Strategy',
+      title: "Chief Strategy Officer (CSO)",
+      department: "Strategy",
       responsibilities: [
-        'Lead campaign ideas, innovation, and planning',
-        'Analyze what\'s working and suggest improvements',
-        'Assist in building long-term strategies for PGT programs',
+        "Lead campaign ideas, innovation, and planning",
+        "Analyze what's working and suggest improvements",
+        "Assist in building long-term strategies for PGT programs",
       ],
     },
     {
       id: 5,
-      title: 'Public Relations Head (PRH)',
-      department: 'Public Relations',
+      title: "Public Relations Head (PRH)",
+      department: "Public Relations",
       responsibilities: [
-        'Represent PGT publicly and build collaborations',
-        'Handle outreach to colleges, NGOs, media, and influencers',
-        'Support visibility and networking of the brand',
+        "Represent PGT publicly and build collaborations",
+        "Handle outreach to colleges, NGOs, media, and influencers",
+        "Support visibility and networking of the brand",
       ],
     },
     {
       id: 6,
-      title: 'Campus Director (CAP)',
-      department: 'Campus Relations',
+      title: "Campus Director (CAP)",
+      department: "Campus Relations",
       responsibilities: [
-        'Act as the official link between PGT and college campus',
-        'Organize on-ground activities and represent PGT at events',
-        'Promote awareness and engagement inside campus',
+        "Act as the official link between PGT and college campus",
+        "Organize on-ground activities and represent PGT at events",
+        "Promote awareness and engagement inside campus",
       ],
     },
     {
       id: 7,
-      title: 'Chief Technical Director (CTD)',
-      department: 'Technology',
+      title: "Chief Technical Director (CTD)",
+      department: "Technology",
       responsibilities: [
-        'Build and manage the official PGT website',
-        'Create event registration pages and landing pages',
-        'Maintain form integrations, analytics, and digital tools',
+        "Build and manage the official PGT website",
+        "Create event registration pages and landing pages",
+        "Maintain form integrations, analytics, and digital tools",
       ],
     },
     {
       id: 8,
-      title: 'General Secretary (GSEC)',
-      department: 'Administration',
+      title: "General Secretary (GSEC)",
+      department: "Administration",
       responsibilities: [
-        'Handle official documentation, letters, and internal announcements',
-        'Support the Founder in maintaining structure and follow-ups',
-        'Keep track of internal workflows and communication logs',
+        "Handle official documentation, letters, and internal announcements",
+        "Support the Founder in maintaining structure and follow-ups",
+        "Keep track of internal workflows and communication logs",
       ],
     },
   ];
@@ -813,100 +1292,101 @@ const Careers = () => {
   const internshipPrograms = [
     {
       id: 1,
-      title: 'Marketing Intern',
-      department: 'Marketing',
+      title: "Marketing Intern",
+      department: "Marketing",
       responsibilities: [
-        'Assist in creating social media content and campaigns',
-        'Support market research and analysis projects',
-        'Help with event planning and promotional activities',
+        "Assist in creating social media content and campaigns",
+        "Support market research and analysis projects",
+        "Help with event planning and promotional activities",
       ],
     },
     {
       id: 2,
-      title: 'Content Writing Intern',
-      department: 'Communications',
+      title: "Content Writing Intern",
+      department: "Communications",
       responsibilities: [
-        'Write blog posts, articles, and website content',
-        'Create engaging social media captions and posts',
-        'Assist in developing internal communication materials',
+        "Write blog posts, articles, and website content",
+        "Create engaging social media captions and posts",
+        "Assist in developing internal communication materials",
       ],
     },
     {
       id: 3,
-      title: 'Graphic Design Intern',
-      department: 'Creative',
+      title: "Graphic Design Intern",
+      department: "Creative",
       responsibilities: [
-        'Design social media graphics and promotional materials',
-        'Create visual content for campaigns and events',
-        'Support brand consistency across all platforms',
+        "Design social media graphics and promotional materials",
+        "Create visual content for campaigns and events",
+        "Support brand consistency across all platforms",
       ],
     },
     {
       id: 4,
-      title: 'Web Development Intern',
-      department: 'Technology',
+      title: "Web Development Intern",
+      department: "Technology",
       responsibilities: [
-        'Assist in website development and maintenance',
-        'Help with creating landing pages and forms',
-        'Support technical documentation and testing',
+        "Assist in website development and maintenance",
+        "Help with creating landing pages and forms",
+        "Support technical documentation and testing",
       ],
     },
     {
       id: 5,
-      title: 'Research Intern',
-      department: 'Strategy',
+      title: "Research Intern",
+      department: "Strategy",
       responsibilities: [
-        'Conduct research on industry trends and best practices',
-        'Analyze data and prepare reports',
-        'Support strategic planning initiatives',
+        "Conduct research on industry trends and best practices",
+        "Analyze data and prepare reports",
+        "Support strategic planning initiatives",
       ],
     },
     {
       id: 6,
-      title: 'Event Management Intern',
-      department: 'Operations',
+      title: "Event Management Intern",
+      department: "Operations",
       responsibilities: [
-        'Assist in planning and coordinating events',
-        'Support logistics and vendor management',
-        'Help with post-event analysis and reporting',
+        "Assist in planning and coordinating events",
+        "Support logistics and vendor management",
+        "Help with post-event analysis and reporting",
       ],
     },
   ];
 
   const benefits = [
     {
-      title: 'Global Impact',
-      description: 'Work on projects that transform lives across the world',
-      icon: '🌍'
+      title: "Global Impact",
+      description: "Work on projects that transform lives across the world",
+      icon: "🌍",
     },
     {
-      title: 'Professional Growth',
-      description: 'Continuous learning opportunities and skill development',
-      icon: '📈'
+      title: "Professional Growth",
+      description: "Continuous learning opportunities and skill development",
+      icon: "📈",
     },
     {
-      title: 'Flexible Work',
-      description: 'Remote-first culture with flexible working arrangements',
-      icon: '💻'
+      title: "Flexible Work",
+      description: "Remote-first culture with flexible working arrangements",
+      icon: "💻",
     },
     {
-      title: 'Health & Wellness',
-      description: 'Comprehensive health benefits and wellness programs',
-      icon: '🏥'
+      title: "Health & Wellness",
+      description: "Comprehensive health benefits and wellness programs",
+      icon: "🏥",
     },
     {
-      title: 'Team Culture',
-      description: 'Collaborative, inclusive, and purpose-driven work environment',
-      icon: '🤝'
+      title: "Team Culture",
+      description:
+        "Collaborative, inclusive, and purpose-driven work environment",
+      icon: "🤝",
     },
     {
-      title: 'Learning Budget',
-      description: 'Annual budget for conferences, courses, and certifications',
-      icon: '📚'
-    }
+      title: "Learning Budget",
+      description: "Annual budget for conferences, courses, and certifications",
+      icon: "📚",
+    },
   ];
 
-   if (loading) {
+  if (loading) {
     return <LoadingSpinner />;
   }
 
@@ -914,32 +1394,33 @@ const Careers = () => {
     <div className="pt-16">
       {/* Hero Section */}
       <AnimatedCard animation="fadeIn">
-  <section className="relative bg-gradient-to-r from-blue-600 to-purple-600 text-white py-20 overflow-hidden">
-    <HeroBackground />
-    <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h1 className="text-4xl md:text-5xl font-bold mb-6">
-        Join Our Mission
-      </h1>
-      <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto">
-        Be part of a global network that's transforming lives through purpose, growth, and meaningful change
-      </p>
-    </div>
-  </section>
-</AnimatedCard>
-
+        <section className="relative bg-gradient-to-r from-blue-600 to-purple-600 text-white py-20 overflow-hidden">
+          <HeroBackground />
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">
+              Join Our Mission
+            </h1>
+            <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto">
+              Be part of a global network that's transforming lives through
+              purpose, growth, and meaningful change
+            </p>
+          </div>
+        </section>
+      </AnimatedCard>
 
       {/* Why Join Us */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedCard animation="slideUp">
             <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Why Work With Us?
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Join a team that's passionate about creating positive change and building a better future
-            </p>
-          </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                Why Work With Us?
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Join a team that's passionate about creating positive change and
+                building a better future
+              </p>
+            </div>
           </AnimatedCard>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -947,8 +1428,12 @@ const Careers = () => {
               <AnimatedCard key={index} animation="slideUp" delay={index * 100}>
                 <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow text-center">
                   <div className="text-4xl mb-4">{benefit.icon}</div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">{benefit.title}</h3>
-                  <p className="text-gray-600 leading-relaxed">{benefit.description}</p>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">
+                    {benefit.title}
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    {benefit.description}
+                  </p>
                 </div>
               </AnimatedCard>
             ))}
@@ -970,13 +1455,84 @@ const Careers = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {openPositions.map((position, index) => (
-              <JobPosition key={index} position={position} handleApply={handleApply} type="job" />
+              <JobPosition
+                key={index}
+                position={position}
+                handleApply={handleApply}
+                type="job"
+              />
             ))}
           </div>
         </div>
       </section>
 
-      {/* Internship Programs */}
+     
+   {/* Mentorship Programs - NEW SECTION */}
+<section className="relative py-20 bg-gradient-to-r from-slate-800 to-indigo-900 overflow-hidden">
+  <Background />
+
+  <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <AnimatedCard animation="fadeIn">
+      <div className="bg-white rounded-2xl shadow-lg overflow-hidden p-8 md:p-12 text-center">
+        
+        {/* Header */}
+        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          Mentorship Programs
+        </h2>
+
+        {/* Intro */}
+        <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-10">
+          Structured mentorship designed to support learners from <span className="font-semibold text-blue-600">any educational background</span>,
+          helping them gain clarity, confidence, and real-world skills.
+        </p>
+
+        {/* Structured Grid for Key Info */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 text-left">
+          
+          {/* Card 1: Domain Scope */}
+          <div className="bg-gray-100 p-6 rounded-xl border border-gray-100 hover:border-blue-100 transition-colors">
+            <h3 className="font-bold text-gray-900 text-lg mb-2">150+ Specialized Domains</h3>
+            <p className="text-gray-600 text-sm leading-relaxed">
+              Spanning <strong>11+ broad categories</strong> including technology, engineering, design, business, content, and social impact.
+            </p>
+          </div>
+
+          {/* Card 2: Eligibility */}
+          <div className="bg-gray-100 p-6 rounded-xl border border-gray-100 hover:border-blue-100 transition-colors">
+            <h3 className="font-bold text-gray-900 text-lg mb-2">Open to All Streams</h3>
+            <p className="text-gray-600 text-sm leading-relaxed">
+              Designed for students of <strong>all branches and degrees</strong>. Focuses on guided learning, hands-on practice, and mentor-led growth.
+            </p>
+          </div>
+
+          {/* Card 3: Internships */}
+          <div className="bg-gray-100 p-6 rounded-xl border border-gray-100 hover:border-blue-100 transition-colors">
+            <h3 className="font-bold text-gray-900 text-lg mb-2">Internship Opportunities</h3>
+            <p className="text-gray-600 text-sm leading-relaxed">
+              Available based on performance and readiness. These are offered <strong>separately and free of cost</strong>.
+            </p>
+          </div>
+
+        </div>
+
+        {/* CTA Button */}
+        <a
+          href="https://mentorship.pgtglobalnetwork.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center justify-center bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+        >
+          Apply for Mentorship
+          <ExternalLink className="ml-2 h-5 w-5" />
+        </a>
+
+      </div>
+    </AnimatedCard>
+  </div>
+</section>
+
+
+ {/* Internship Programs */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -984,17 +1540,24 @@ const Careers = () => {
               Internship Programs
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Gain valuable experience and kickstart your career with our internship opportunities
+              Gain valuable experience and kickstart your career with our
+              internship opportunities
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {internshipPrograms.map((position, index) => (
-              <JobPosition key={index} position={position} handleApply={handleApply} type="internship" />
+              <JobPosition
+                key={index}
+                position={position}
+                handleApply={handleApply}
+                type="internship"
+              />
             ))}
           </div>
         </div>
       </section>
+
 
       {/* Application Process */}
       <section className="py-20 bg-blue-50">
@@ -1004,7 +1567,8 @@ const Careers = () => {
               Application Process
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Our streamlined process ensures we find the right fit for both you and our organization
+              Our streamlined process ensures we find the right fit for both you
+              and our organization
             </p>
           </div>
 
@@ -1014,38 +1578,54 @@ const Careers = () => {
                 <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-2xl font-bold text-blue-600">1</span>
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Apply Online</h3>
-                <p className="text-gray-600 text-sm">Submit your application through our online form</p>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  Apply Online
+                </h3>
+                <p className="text-gray-600 text-sm">
+                  Submit your application through our online form
+                </p>
               </AnimatedCard>
             </div>
-            
+
             <div className="text-center">
               <AnimatedCard animation="zoomIn" delay={200}>
                 <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-2xl font-bold text-green-600">2</span>
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Initial Review</h3>
-                <p className="text-gray-600 text-sm">Our team reviews your application and qualifications</p>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  Initial Review
+                </h3>
+                <p className="text-gray-600 text-sm">
+                  Our team reviews your application and qualifications
+                </p>
               </AnimatedCard>
             </div>
-            
+
             <div className="text-center">
               <AnimatedCard animation="zoomIn" delay={400}>
                 <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-2xl font-bold text-purple-600">3</span>
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Interview</h3>
-                <p className="text-gray-600 text-sm">Virtual or in-person interview with the hiring team</p>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  Interview
+                </h3>
+                <p className="text-gray-600 text-sm">
+                  Virtual or in-person interview with the hiring team
+                </p>
               </AnimatedCard>
             </div>
-            
+
             <div className="text-center">
               <AnimatedCard animation="zoomIn" delay={600}>
                 <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-2xl font-bold text-orange-600">4</span>
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Welcome</h3>
-                <p className="text-gray-600 text-sm">Join our team and start making an impact</p>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  Welcome
+                </h3>
+                <p className="text-gray-600 text-sm">
+                  Join our team and start making an impact
+                </p>
               </AnimatedCard>
             </div>
           </div>
@@ -1054,34 +1634,34 @@ const Careers = () => {
 
       {/* CTA Section */}
       <AnimatedCard animation="fadeIn">
-  <section className="relative py-20 bg-gradient-to-r from-green-600 to-blue-600 text-white overflow-hidden">
-    <Background />
-    <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 className="text-3xl md:text-4xl font-bold mb-6">
-        Ready to Make a Difference?
-      </h2>
-      <p className="text-xl mb-8 max-w-2xl mx-auto text-green-100">
-        Don't see a position that fits? We're always looking for passionate individuals to join our mission.
-      </p>
-      <div className="flex flex-col sm:flex-row gap-4 justify-center">
-        <a
-          href="/contact"
-          className="bg-white text-green-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center justify-center"
-        >
-          Send Us Your Resume
-          <ArrowRight className="ml-2 h-5 w-5" />
-        </a>
-        <a
-          href="/contact"
-          className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-green-600 transition-colors inline-flex items-center justify-center"
-        >
-          Get In Touch
-        </a>
-      </div>
-    </div>
-  </section>
-</AnimatedCard>
-
+        <section className="relative py-20 bg-gradient-to-r from-green-600 to-blue-600 text-white overflow-hidden">
+          <Background />
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              Ready to Make a Difference?
+            </h2>
+            <p className="text-xl mb-8 max-w-2xl mx-auto text-green-100">
+              Don't see a position that fits? We're always looking for
+              passionate individuals to join our mission.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href="/contact"
+                className="bg-white text-green-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center justify-center"
+              >
+                Send Us Your Resume
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </a>
+              <a
+                href="/contact"
+                className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-green-600 transition-colors inline-flex items-center justify-center"
+              >
+                Get In Touch
+              </a>
+            </div>
+          </div>
+        </section>
+      </AnimatedCard>
     </div>
   );
 };

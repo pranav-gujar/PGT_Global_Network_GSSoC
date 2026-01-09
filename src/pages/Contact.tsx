@@ -35,7 +35,7 @@ const Contact = () => {
     {
       icon: Clock,
       title: 'Business Hours',
-      details: 'Mon-Fri: 9AM-6PM EST',
+      details: 'Mon-Fri: 9AM-6PM IST',
       description: 'We\'re available during these hours for immediate assistance',
       action: '#'
     }
