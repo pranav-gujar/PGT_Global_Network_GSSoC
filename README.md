@@ -1,6 +1,18 @@
-# PGT Global Network - Official Website
+# PGT Global Network – SSOC Open Source Edition
 
 ![PGT Logo](public/PGT%20New%20Logo%20Transparent.png)
+
+---
+
+## ⚠️ SSOC Contribution Edition
+
+This repository is maintained specifically for **Social Summer of Code (SSOC)** contributions.
+
+The production website (https://www.pgtglobalnetwork.com/) is managed separately and remains stable.
+
+All changes made here will be reviewed before being integrated into the official production system.
+
+---
 
 A modern, responsive website for PGT Global Network built with React, TypeScript, and Tailwind CSS. This platform showcases our programs, impact, and mission to transform lives through purpose-driven growth.
 
@@ -117,8 +129,8 @@ src/
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/absolutely-sharad/PGT-Official_Website.git
-cd PGT-Official_Website
+git clone https://github.com/pranav-gujar/PGT_Global_Network_SSOC.git
+cd PGT_Global_Network_SSOC
 ```
 
 2. **Install dependencies**
@@ -576,6 +588,30 @@ const SEOHead = ({ title, description, image }: SEOProps) => (
 );
 ```
 
+---
+
+## 🤝 Contribution Guidelines (SSOC)
+
+We welcome contributions under SSOC!
+
+### Contribution Flow:
+1. Fork this repository
+2. Create a new feature branch
+3. Work on assigned issue only
+4. Submit a Pull Request
+5. Wait for review and approval
+
+### Important Rules:
+- Do NOT modify production environment configuration
+- Do NOT expose any real API keys
+- Maintain TypeScript type safety
+- Follow existing folder structure
+- Write clean and readable code
+- Mention issue number in PR description
+
+All pull requests will be reviewed before merging.
+
+---
 
 ## 📝 License
 
