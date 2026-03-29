@@ -1,12 +1,12 @@
-# PGT Global Network – SSOC Open Source Edition
+# PGT Global Network – GSSOC Open Source Edition
 
 ![PGT Logo](public/PGT%20New%20Logo%20Transparent.png)
 
 ---
 
-## ⚠️ SSOC Contribution Edition
+## ⚠️ GSSOC Contribution Edition
 
-This repository is maintained specifically for **Social Summer of Code (SSOC)** contributions.
+This repository is maintained specifically for **GirlScript Summer of Code (GSSOC)** contributions.
 
 The production website (https://www.pgtglobalnetwork.com/) is managed separately and remains stable.
 
@@ -68,7 +68,7 @@ A modern, responsive website for PGT Global Network built with React, TypeScript
 - **Autoprefixer 10.4.18** - CSS vendor prefixes
 
 ### Deployment
-- **Netlify** - Static site hosting with CI/CD
+- **Vercel** - Hosting of Frontend + Backend
 
 ## 📁 Project Structure
 
