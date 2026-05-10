@@ -1,12 +1,8 @@
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { AuthProvider } from './contexts/AuthContext';
 import { useScrollToTop } from './hooks/useScrollToTop';
-import { usePageLoading } from './hooks/usePageLoading';
-import AnnouncementBar from './components/AnnouncementBar';
 import AnimatedBackground from './components/AnimatedBackground';
-import LoadingSpinner from './components/LoadingSpinner';
 import Navbar from './components/Navbar';
 import ScrollToTop from './components/ScrollToTop';
 import Home from './pages/Home';
@@ -28,11 +24,10 @@ import Footer from './components/Footer';
 
 const AppContent = () => {
   useScrollToTop();
-  const loading = usePageLoading();
   
   return (
     <>
-      {loading && <LoadingSpinner />}
+      {/* {loading && <LoadingSpinner />} */}
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />

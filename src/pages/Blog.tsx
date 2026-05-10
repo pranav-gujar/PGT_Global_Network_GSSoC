@@ -1,12 +1,12 @@
-import React, { useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
+import SkeletonCard from '../components/Skeletons/Skeletoncard';
 import { Search, Calendar, User, ArrowRight, Filter } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import AnimatedCard from '../components/AnimatedCard';
-import { blogPosts, BlogPost } from '../data/blogPosts'; 
+import { blogPosts } from '../data/blogPosts';
 import HeroBackground from '../components/HeroBackground';
 import Background from '..//components/Background';
 
-import LoadingSpinner from '../components/LoadingSpinner'; 
 import { usePageLoading } from '../hooks/usePageLoading';
 
 const Blog = () => {
@@ -29,7 +29,15 @@ const Blog = () => {
   }, [searchTerm, selectedCategory]);
 
    if (loading) {
-    return <LoadingSpinner />;
+    return (
+  <div className="max-w-7xl mx-auto px-4 py-12">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {[1, 2, 3, 4, 5, 6].map((n) => (
+        <SkeletonCard key={n} />
+      ))}
+    </div>
+  </div>
+  );
   }
 
   return (
