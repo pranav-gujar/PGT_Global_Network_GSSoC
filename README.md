@@ -129,8 +129,8 @@ src/
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/pranav-gujar/PGT_Global_Network_SSOC.git
-cd PGT_Global_Network_SSOC
+git clone https://github.com/pranav-gujar/PGT_Global_Network_GSSOC.git
+cd PGT_Global_Network_GSSOC
 ```
 
 2. **Install dependencies**
@@ -590,9 +590,9 @@ const SEOHead = ({ title, description, image }: SEOProps) => (
 
 ---
 
-## 🤝 Contribution Guidelines (SSOC)
+## 🤝 Contribution Guidelines (GSSOC)
 
-We welcome contributions under SSOC!
+We welcome contributions under GirlScript Summer of Code (GSSoC)!
 
 ### Contribution Flow:
 1. Fork this repository
