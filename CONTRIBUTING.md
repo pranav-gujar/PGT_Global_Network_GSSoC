@@ -1,7 +1,8 @@
-````md
 # 🤝 Contributing to PGT Global Network – GSSoC Open Source Edition
 
-First off, thank you for your interest in contributing to PGT Global Network through GirlScript Summer of Code (GSSoC)!  
+
+## First off, thank you for your interest in contributing to PGT Global Network through GirlScript Summer of Code (GSSoC)!  
+
 
 This repository is maintained specifically for open-source contributions under GSSoC.  
 The production website is managed separately, and all contributions here are reviewed before being integrated into the official system.
