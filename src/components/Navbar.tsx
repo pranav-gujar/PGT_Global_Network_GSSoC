@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, ChevronDown, User, LogOut } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
@@ -6,7 +6,9 @@ import AuthModal from '../components/AuthModal';
 
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const moreDropdownRef = useRef<HTMLDivElement>(null);
+  const userDropdownRef = useRef<HTMLDivElement>(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
@@ -38,9 +40,31 @@ const Navbar = () => {
 
   // Close dropdowns when clicking outside or scrolling
   useEffect(() => {
-    const handleClickOutside = () => {
-      setDropdownOpen(false);
-      setUserDropdownOpen(false);
+    setIsMobileMenuOpen(false);
+    setDropdownOpen(false);
+    setUserDropdownOpen(false);
+  },[location.pathname]);
+
+  useEffect(() => {
+    if(isMobileMenuOpen){
+      document.body.style.overflow = 'hidden';
+    }
+    else{
+      document.body.style.overflow ='';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  },[isMobileMenuOpen]);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (moreDropdownRef.current && !moreDropdownRef.current.contains(e.target as Node)) {
+        setDropdownOpen(false);
+      }
+      if (userDropdownRef.current && !userDropdownRef.current.contains(e.target as Node)) {
+        setUserDropdownOpen(false);
+      }
     };
 
     const handleScroll = () => {
@@ -48,11 +72,11 @@ const Navbar = () => {
       setUserDropdownOpen(false);
     };
 
-    document.addEventListener('click', handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
     window.addEventListener('scroll', handleScroll);
     
     return () => {
-      document.removeEventListener('click', handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
@@ -133,7 +157,7 @@ const Navbar = () => {
               ))}
               
               {/* More Dropdown */}
-              <div className="relative">
+              <div className="relative" ref={moreDropdownRef}>
                 <button
                   // onClick={() => setDropdownOpen(!dropdownOpen)}
                   onClick={(e) => {
@@ -145,7 +169,7 @@ const Navbar = () => {
                   }`}
                 >
                   More
-                  <ChevronDown className="ml-1 h-4 w-4" />
+                  <ChevronDown className={`ml-1 h-4 w-4 transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`} />
                 </button>
                 
                 {dropdownOpen && (
@@ -178,7 +202,7 @@ const Navbar = () => {
                   >
                     <User className="h-4 w-4 mr-1" />
                     Account
-                    <ChevronDown className="ml-1 h-4 w-4" />
+                    <ChevronDown className={`ml-1 h-4 w-4 transition-transform duration-200 ${userDropdownOpen ? 'rotate-180' : ''}`} />
                   </button>
                   
                   {userDropdownOpen && (
@@ -219,60 +243,84 @@ const Navbar = () => {
           {/* Mobile menu button */}
           <div className="lg:hidden">
             <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-700 hover:text-blue-600 focus:outline-none transition-colors duration-200"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-menu"
+              aria-label={isMobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+              className = "inline-flex items-center justify-center p-2 min-h-[44px] min-w-[44px] rounded-md
+                text-gray-700 hover:text-blue-600 hover:bg-gray-100
+                focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors duration-200"
             >
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              <span className="sr-only">
+                {isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+              </span>
+              {isMobileMenuOpen ? (
+                <X className="h-6 w-6" aria-hidden="true" />
+              ) : (
+                <Menu className="h-6 w-6" aria-hidden="true" />
+              )}
             </button>
           </div>
         </div>
       </div>
 
       {/* Mobile Navigation */}
-      {isOpen && (
-        <div className="lg:hidden">
+
+        <div id="mobile-menu"
+          role="navigation"
+          aria-label="Mobile navigation"
+          className={`lg:hidden overflow-y-auto transition-all duration-300 ease-in-out ${isMobileMenuOpen ? 'max-h-[calc(100vh-4rem)] opacity-100'
+            : 'max-h-0 opacity-0 pointer-events-none'
+          }`} 
+          style ={{ WebkitOverflowScrolling: 'touch' }}>
+          
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white/95 backdrop-blur-md border-t border-gray-100 shadow-lg">
             {navItems.map((item) => (
               <Link
                 key={item.name}
                 to={item.path}
-                className={`block px-3 py-2 rounded-md text-base font-medium transition-all duration-200 ${
+                className={`flex items-center px-4 py-3 rounded-lg text-base font-medium transition-all duration-200 min-h-[44px] ${
                   isActive(item.path)
                     ? 'text-blue-600 bg-blue-50'
                     : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
                 }`}
-                onClick={() => setIsOpen(false)}
+                onClick={() => setIsMobileMenuOpen(false)}
               >
                 {item.name}
               </Link>
             ))}
+            <div className="border-t border-gray-100 my-2" />
             {moreItems.map((item) => (
               <Link
                 key={item.name}
                 to={item.path}
-                className={`block px-3 py-2 rounded-md text-base font-medium hover:text-blue-600 hover:bg-gray-50 transition-all duration-200 ${isActive(item.path) ? 'text-blue-600 bg-blue-50' : 'text-gray-700'}`}
-                onClick={() => setIsOpen(false)}
+                className={`flex items-center px-4 py-3 rounded-lg text-base font-medium transition-all duration-200 min-h-[44px] ${
+                  isActive(item.path) 
+                  ? 'text-blue-600 bg-blue-50' : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'}`}
+
+                onClick={() => setIsMobileMenuOpen(false)}
               >
                 {item.name}
               </Link>
             ))}
-            
+            <div className="border-t border-gray-100 my-2" />
+
             {/* Mobile Auth */}
             {user ? (
               <>
                 <Link
                   to="/dashboard"
-                  className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-all duration-200"
-                  onClick={() => setIsOpen(false)}
+                  className="flex items-center px-4 py-3 rounded-lg text-base font=medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-all duration-200 min-h-[44px]"
+                  onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Dashboard
                 </Link>
                 <button
                   onClick={() => {
                     handleLogout();
-                    setIsOpen(false);
+                    setIsMobileMenuOpen(false);
                   }}
-                  className="w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-all duration-200"
+                  className="flex w-full items-center text-left px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:text-red-600 hover:bg-red-50 active:bg-red-100 transition-all duration-200 min-h-[44px]"
                 >
                   Sign Out
                 </button>
@@ -281,16 +329,16 @@ const Navbar = () => {
               <button
                 onClick={() => {
                   setShowAuthModal(true);
-                  setIsOpen(false);
+                  setIsMobileMenuOpen(false);
                 }}
-                className="w-full text-left px-3 py-2 rounded-md text-base font-medium bg-blue-600 text-white hover:bg-blue-700 transition-all duration-200"
+                className="flex w-full items-center justify-center px-4 py-3 rounded-lg text-base font-medium bg-blue-600 text-white hover:bg-blue-700 transition-all duration-200 min-h-[44px] mt-2"
               >
                 Sign In
               </button>
             )}
           </div>
         </div>
-      )}
+      
       
       <AuthModal 
         isOpen={showAuthModal} 
