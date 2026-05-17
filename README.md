@@ -47,6 +47,27 @@ A modern, responsive website for PGT Global Network built with React, TypeScript
 - **ESLint & Prettier** - Code quality and formatting
 - **Responsive Images** - Optimized loading with Pexels integration
 
+###Project Screenshots
+
+# 📸 Project Screenshots
+
+## 🏠 Homepage
+![Homepage](./Screenshots/Homepage.png)
+
+## 📊 Dashboard
+![Dashboard](./Screenshots/Dashboard.png)
+
+## 📰 Blog Page
+![Blog Page](./Screenshots/Blog Page.png)
+
+## ℹ️ About Page
+![About](./Screenshots/About.png)
+
+## 🖼️ Gallery
+![Gallery](./Screenshots/PGT Global Network Gallery.png)
+
+
+
 ## 🛠️ Tech Stack
 
 ### Frontend
@@ -687,3 +708,13 @@ When reporting issues, please include:
 **Built with ❤️ by the PGT Global Network Team**
 
 For more information, visit our [official website](https://www.pgtglobalnetwork.com/) or contact us at [office@pgtglobalnetwork.com](office@pgtglobalnetwork.com).
+
+
+# ✨ Documentation Improvements
+
+- Added updated project screenshots to provide a clearer visual overview of the platform
+- Improved the Quick Start section to make project setup easier for new contributors and beginners
+- Enhanced overall README formatting, structure, and readability for a better documentation experience
+- Added contributor-friendly onboarding guidance to simplify the contribution workflow
+- Included a troubleshooting section to help users resolve common setup issues more efficiently
+- Organized the tech stack and feature sections for cleaner navigation and improved understanding
