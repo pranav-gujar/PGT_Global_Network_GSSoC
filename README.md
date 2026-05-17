@@ -58,8 +58,7 @@ A modern, responsive website for PGT Global Network built with React, TypeScript
 ![Dashboard](./Screenshots/Dashboard.png)
 
 ## 📰 Blog Page
-![Blog Page](./Screenshots/Blog Page.png)
-
+![Blog Page](📰 Blog Page.png)
 ## ℹ️ About Page
 ![About](./Screenshots/About.png)
 
