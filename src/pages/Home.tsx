@@ -101,36 +101,51 @@ const Home = () => {
 
       {/* Hero Section */}
       <AnimatedCard animation="fadeIn">
-        <section className="relative bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 text-white overflow-hidden">
+        <section className="relative bg-gray-950 text-white overflow-hidden min-h-[90vh] flex items-center">
           <HeroBackground />
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-            <div className="text-center relative z-10">
-              <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 relative z-10 w-full">
+            <div className="text-center">
+              
+              {/* Trust Badge */}
+              <div className="animate-fade-in-up">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-md mb-8 shadow-lg shadow-black/20">
+                  <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+                  <span className="text-sm font-medium text-white/90">Over 10,000+ Lives Impacted Globally</span>
+                </div>
+              </div>
+
+              {/* Headline */}
+              <h1 className="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight leading-tight">
                 Transforming Lives Through
-               <span className="block bg-gradient-to-r from-yellow-300 via-amber-400 to-orange-500 bg-clip-text text-transparent font-extrabold mt-3">
+               <span className="block bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400 bg-clip-text text-transparent mt-2 pb-2 drop-shadow-sm">
                  Positivity, Growth & Transformation
                </span>
               </h1>
 
-              <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-blue-100">
+              {/* Subtitle */}
+              <p className="text-lg md:text-xl mb-10 max-w-2xl mx-auto text-gray-300 font-light leading-relaxed">
                 Empowering individuals and organizations worldwide through innovative programs,
                 sustainable growth, and purposeful transformation.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+
+              {/* CTAs */}
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <Link
                   to="/programs"
-                  className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center justify-center"
+                  className="group relative inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white transition-all duration-300 bg-blue-600 border border-blue-500 rounded-full hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-blue-500 shadow-[0_0_20px_rgba(37,99,235,0.4)] hover:shadow-[0_0_30px_rgba(37,99,235,0.6)]"
                 >
                   Explore Programs
-                  <ArrowRight className="ml-2 h-5 w-5" />
+                  <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
                 </Link>
                 <Link
                   to="/about"
-                  className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors inline-flex items-center justify-center"
+                  className="inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white transition-all duration-300 bg-white/5 border border-white/10 rounded-full hover:bg-white/10 hover:border-white/20 backdrop-blur-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-white/50"
                 >
                   Learn More
                 </Link>
               </div>
+              
+              {/* Trust Indicators (Logos / Stats summary if any) - Left empty as badge handles it primarily */}
             </div>
           </div>
         </section>
@@ -244,10 +259,10 @@ const Home = () => {
           <div className="text-center mt-12">
             <Link
               to="/programs"
-              className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors inline-flex items-center"
+              className="group relative inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white transition-all duration-300 bg-blue-600 rounded-full hover:bg-blue-500 hover:shadow-[0_0_20px_rgba(37,99,235,0.4)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600"
             >
               View All Programs
-              <ArrowRight className="ml-2 h-5 w-5" />
+              <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
         </div>
@@ -264,17 +279,17 @@ const Home = () => {
       <p className="text-xl mb-8 max-w-2xl mx-auto text-purple-100">
         Join thousands of individuals and organizations who have experienced growth through our programs.
       </p>
-      <div className="flex flex-col sm:flex-row gap-4 justify-center">
+      <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
         <Link
           to="/careers"
-          className="bg-white text-purple-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center justify-center"
+          className="group relative inline-flex items-center justify-center px-8 py-4 text-base font-bold text-purple-600 transition-all duration-300 bg-white rounded-full hover:bg-gray-50 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-purple-600 focus:ring-white"
         >
           Join Our Team
-          <ArrowRight className="ml-2 h-5 w-5" />
+          <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
         </Link>
         <Link
           to="/contact"
-          className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-purple-600 transition-colors inline-flex items-center justify-center"
+          className="inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white transition-all duration-300 bg-white/10 border border-white/20 rounded-full hover:bg-white/20 hover:border-white/30 backdrop-blur-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-purple-600 focus:ring-white/50"
         >
           Get In Touch
         </Link>

@@ -2,16 +2,24 @@ import React from 'react';
 
 const HeroBackground = () => {
   return (
-    <div className="absolute inset-0 overflow-hidden">
-      {/* Animated gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 animate-gradient-flow"></div>
+    <div className="absolute inset-0 overflow-hidden bg-gray-950">
+      {/* Base deep background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#0a0f1c] via-[#111827] to-[#0f172a]"></div>
+      
+      {/* Glowing orbs for mesh effect */}
+      <div className="absolute top-0 -left-1/4 w-full h-full bg-blue-600/30 rounded-full blur-[120px] mix-blend-screen animate-float-hero" style={{ animationDuration: '18s' }}></div>
+      <div className="absolute top-0 -right-1/4 w-full h-full bg-purple-600/30 rounded-full blur-[120px] mix-blend-screen animate-float-hero" style={{ animationDuration: '22s', animationDelay: '2s' }}></div>
+      <div className="absolute -bottom-1/2 left-1/4 w-full h-full bg-indigo-600/30 rounded-full blur-[120px] mix-blend-screen animate-float-hero" style={{ animationDuration: '25s', animationDelay: '4s' }}></div>
+
+      {/* Grid pattern overlay */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_50%,#000_20%,transparent_100%)] pointer-events-none"></div>
       
       {/* Floating particles */}
-      <div className="absolute inset-0">
-        {[...Array(50)].map((_, i) => (
+      <div className="absolute inset-0 pointer-events-none">
+        {[...Array(30)].map((_, i) => (
           <div
             key={i}
-            className="absolute w-1 h-1 bg-white/30 rounded-full animate-float-hero"
+            className="absolute w-1 h-1 bg-white/40 rounded-full animate-float-hero shadow-[0_0_8px_rgba(255,255,255,0.8)]"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
@@ -22,22 +30,8 @@ const HeroBackground = () => {
         ))}
       </div>
       
-      {/* Wave animation */}
-      {/* Single wave at bottom */}
-<div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none pointer-events-none">
-  <svg
-    className="relative w-[200%] h-24 animate-wave"
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 1440 320"
-    preserveAspectRatio="none"
-  >
-    <path
-      fill="rgba(255,255,255,0.2)"   // 75% opacity, more visible
-      d="M0,192L30,186.7C60,181,120,171,180,181.3C240,192,300,224,360,240C420,256,480,256,540,234.7C600,213,660,171,720,154.7C780,139,840,149,900,170.7C960,192,1020,224,1080,229.3C1140,235,1200,213,1260,192C1320,171,1380,149,1410,138.7L1440,128L1440,320L0,320Z"
-    />
-  </svg>
-</div>
-
+      {/* Bottom fade for seamless transition to next section (gray-50) */}
+      <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-gray-50 to-transparent pointer-events-none"></div>
     </div>
   );
 };
