@@ -52,18 +52,35 @@ A modern, responsive website for PGT Global Network built with React, TypeScript
 # 📸 Project Screenshots
 
 ## 🏠 Homepage
-![Homepage](./Screenshots/Homepage.png)
+<img width="1518" height="743" alt="Screenshot 2026-05-17 103835" src="https://github.com/user-attachments/assets/bb7426bb-835e-4982-949a-42d2dd5afc26" />
+
+
+
 
 ## 📊 Dashboard
-![Dashboard](Screenshot 2026-05-17 103923.png)
+<img width="432" height="727" alt="Screenshot 2026-05-17 103923" src="https://github.com/user-attachments/assets/31f14f1b-25d8-4d3a-ace6-690b990c6765" />
+
+
+
+
 
 ## 📰 Blog Page
-![Blog Page](📰 Blog Page.png)
+<img width="767" height="730" alt="Screenshot 2026-05-17 105154" src="https://github.com/user-attachments/assets/b188e17a-8d24-48f6-957f-23dc84721348" />
+
+
+
+
+
 ## ℹ️ About Page
-![About](./Screenshots/About.png)
+<img width="368" height="656" alt="Screenshot 2026-05-17 104008" src="https://github.com/user-attachments/assets/3dbec0a4-19cd-4d4c-a43a-2e46c5dca9c1" />
+
+
+
+
 
 ## 🖼️ Gallery
-![Gallery](./Screenshots/PGT Global Network Gallery.png)
+<img width="412" height="691" alt="Screenshot 2026-05-17 104216" src="https://github.com/user-attachments/assets/435798b7-5097-46d9-88dc-bebf4936099f" />
+
 
 
 
@@ -631,6 +648,17 @@ We welcome contributions under GirlScript Summer of Code (GSSoC)!
 
 All pull requests will be reviewed before merging.
 
+
+
+  ## Quick Contribution Guide
+
+1. Fork the repository
+2. Clone your fork
+3. Create a new branch
+4. Make changes
+5. Commit changes
+6. Push branch
+7. Create Pull Request
 ---
 
 ## 📝 License
