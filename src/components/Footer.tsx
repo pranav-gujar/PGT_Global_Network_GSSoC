@@ -102,7 +102,7 @@ const Footer = () => {
           </nav>
 
           {/* Programs */}
-          <nav aria-label="Quick Links">
+          <nav aria-label="Programs">
             <h3 className="text-lg font-semibold mb-4">Programs</h3>
             <ul className="space-y-2">
               {programLinks.map((link) => (
