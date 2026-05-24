@@ -1,12 +1,20 @@
 import React from 'react';
-import './Skeleton.css';
 
-interface SkeletonProps {
-  type: 'title' | 'text' | 'thumbnail' | 'avatar';
+interface SkeletonElementProps {
+  type: 'text' | 'title' | 'avatar' | 'thumbnail';
 }
 
-const SkeletonElement: React.FC<SkeletonProps> = ({ type }) => {
-  return <div className={`skeleton ${type}`}></div>;
-};
+export const SkeletonElement: React.FC<SkeletonElementProps> = ({ type }) => {
+  // Base styles for the pulsing background blocks
+  const baseClass = 'animate-pulse bg-gray-200 dark:bg-gray-700 rounded';
 
-export default SkeletonElement;
+  // Specific sizing metrics for different element shapes
+  const typeClasses = {
+    text: 'h-3 w-full my-2',
+    title: 'h-5 w-2/3 my-3',
+    avatar: 'h-10 w-10 rounded-full',
+    thumbnail: 'w-full aspect-video rounded-lg',
+  };
+
+  return <div className={`${baseClass} ${typeClasses[type]}`} />;
+};

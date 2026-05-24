@@ -1,17 +1,15 @@
 import { useState, useMemo } from 'react';
-import SkeletonCard from '../components/Skeletons/Skeletoncard';
-import { Search, Calendar, User, ArrowRight, Filter } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import AnimatedCard from '../components/AnimatedCard';
 import { blogPosts } from '../data/blogPosts';
 import HeroBackground from '../components/HeroBackground';
-import Background from '..//components/Background';
-
+import Background from '../components/Background';
 import { usePageLoading } from '../hooks/usePageLoading';
+import { Search, Filter } from 'lucide-react';
+import AnimatedCard from '../components/AnimatedCard';
+// 1. ADD THIS IMPORT AT THE TOP OF YOUR FILE:
+import { SkeletonCard } from '../components/Skeletons/SkeletonCard';
 
 const Blog = () => {
-    const loading = usePageLoading();
-  
+  const loading = usePageLoading();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
 
@@ -28,60 +26,48 @@ const Blog = () => {
     });
   }, [searchTerm, selectedCategory]);
 
-   if (loading) {
-    return (
-  <div className="max-w-7xl mx-auto px-4 py-12">
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {[1, 2, 3, 4, 5, 6].map((n) => (
-        <SkeletonCard key={n} />
-      ))}
-    </div>
-  </div>
-  );
-  }
-
   return (
     <div className="pt-16">
-      {/* Hero Section */}
       <AnimatedCard animation="fadeIn">
-  <section className="relative bg-gradient-to-r from-blue-600 to-purple-600 text-white py-20 overflow-hidden">
-    <HeroBackground />
-    <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Blog</h1>
-      <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto">
-        Insights, stories, and updates from our global community of changemakers
-      </p>
-    </div>
-  </section>
-</AnimatedCard>
-
+        {/* Hero Section */}
+        <section className="relative bg-gradient-to-r from-blue-600 to-purple-600 text-white py-20 overflow-hidden">
+          <HeroBackground />
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Blog</h1>
+            <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto">
+              Insights, stories, and updates from our global community of changemakers.
+            </p>
+          </div>
+        </section>
+      </AnimatedCard>
 
       {/* Search and Filter Section */}
-      <section className="py-12 bg-gray-50">
+      <section className="py-12 bg-gray-50 dark:bg-gray-900 relative">
+        <Background />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedCard animation="slideUp">
-            <div className="flex flex-col md:flex-row gap-6 items-center justify-between">
+            <div className="flex flex-col md:flex-row gap-6 items-center justify-between mb-12">
               {/* Search Bar */}
-              <div className="relative flex-1 max-w-md">
+              <div className="relative flex-1 max-w-md w-full">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
                 <input
                   type="text"
                   placeholder="Search articles..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
 
               {/* Category Filter */}
-              <div className="flex items-center gap-2">
-                <Filter className="h-5 w-5 text-gray-600" />
+              <div className="flex items-center gap-2 w-full md:w-auto">
+                <Filter className="h-5 w-5 text-gray-600 dark:text-gray-400" />
                 <select
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value)}
-                  className="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
+                  className="w-full md:w-auto px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
-                  {categories.map(category => (
+                  {categories.map((category) => (
                     <option key={category} value={category}>
                       {category}
                     </option>
@@ -90,104 +76,40 @@ const Blog = () => {
               </div>
             </div>
           </AnimatedCard>
-        </div>
-      </section>
 
-      {/* Blog Posts Grid */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {filteredPosts.length === 0 ? (
-            <AnimatedCard animation="fadeIn">
-              <div className="text-center py-12">
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">No articles found</h3>
-                <p className="text-gray-600">Try adjusting your search terms or category filter.</p>
-              </div>
-            </AnimatedCard>
-          ) : (
+          {/* 2. CONDITIONAL RENDERING FOR SKELETONS VS LIVE POSTS */}
+          {loading ? (
+            /* Shows pulsing skeletons inside the layout grid while page is loading */
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredPosts.map((post, index) => (
-                <AnimatedCard key={post.id} animation="slideUp" delay={index * 150}>
-                  <article className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                    <div className="aspect-w-16 aspect-h-9">
-                      <img src={post.image} alt={post.title} className="w-full h-48 object-cover" />
-                    </div>
-
+              {[1, 2, 3, 4, 5, 6].map((n) => (
+                <SkeletonCard key={n} />
+              ))}
+            </div>
+          ) : filteredPosts.length > 0 ? (
+            /* Shows the actual blog posts when loading is complete */
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredPosts.map((post) => (
+                <AnimatedCard key={post.id} animation="fadeIn">
+                  {/* Your actual Blog Card component code usually sits here */}
+                  <div className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md border border-gray-100 dark:border-gray-700">
+                    <img src={post.image} alt={post.title} className="w-full aspect-video object-cover" />
                     <div className="p-6">
-                      <div className="flex items-center justify-between mb-4">
-                        <span className="px-3 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-full">
-                          {post.category}
-                        </span>
-                        <span className="text-gray-500 text-sm">{post.readTime}</span>
-                      </div>
-
-                      <h2 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2">
-                        {post.title}
-                      </h2>
-
-                      <p className="text-gray-600 mb-4 line-clamp-3">{post.excerpt}</p>
-
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-sm text-gray-500">
-                          <User className="h-4 w-4" />
-                          <span>{post.author}</span>
-                          <Calendar className="h-4 w-4 ml-2" />
-                          <span>{new Date(post.date).toLocaleDateString()}</span>
-                        </div>
-
-                        <Link
-                          to={`/blog/${post.slug}`} // ✅ uses slug
-                          className="text-blue-600 font-medium hover:text-blue-800 inline-flex items-center"
-                        >
-                          Read More
-                          <ArrowRight className="ml-1 h-4 w-4" />
-                        </Link>
-                      </div>
+                      <span className="text-sm font-semibold text-blue-600 dark:text-blue-400">{post.category}</span>
+                      <h3 className="text-xl font-bold mt-2 text-gray-900 dark:text-white">{post.title}</h3>
+                      <p className="text-gray-600 dark:text-gray-300 mt-2 line-clamp-3">{post.excerpt}</p>
                     </div>
-                  </article>
+                  </div>
                 </AnimatedCard>
               ))}
+            </div>
+          ) : (
+            /* Fallback empty state if search matches nothing */
+            <div className="text-center py-12">
+              <p className="text-gray-500 dark:text-gray-400 text-lg">No articles found matching your criteria.</p>
             </div>
           )}
         </div>
       </section>
-
-      {/* Newsletter Subscription */}
-      {/* <section className="py-20 bg-blue-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedCard animation="slideUp">
-            <div className="bg-white rounded-2xl shadow-lg p-8 md:p-12 text-center">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Enjoyed reading?</h2>
-              <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-                Keep exploring more inspiring stories from our community.
-              </p>
-
-              <p className="text-gray-500 text-sm mt-4">
-                Your journey doesn’t end here — more stories await.
-              </p>
-            </div>
-          </AnimatedCard>
-        </div>
-      </section> */}
-
-      <AnimatedCard animation="fadeIn">
-  <section className="relative py-20 bg-gradient-to-r from-green-600 to-blue-600 text-white overflow-hidden">
-    <Background />
-    <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 className="text-3xl md:text-4xl font-bold mb-6">
-        Stay Inspired with Our Stories
-      </h2>
-      <p className="text-xl mb-8 max-w-3xl mx-auto text-green-100">
-        Explore insights, experiences, and stories from our global community of changemakers.  
-        Every blog reflects a journey of growth, learning, and meaningful transformation.
-      </p>
-      <p className="text-lg text-green-200 max-w-2xl mx-auto">
-        Dive in, get inspired, and discover how you can make a difference.
-      </p>
-    </div>
-  </section>
-</AnimatedCard>
-
-
     </div>
   );
 };
