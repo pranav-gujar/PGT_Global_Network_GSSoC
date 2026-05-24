@@ -107,17 +107,17 @@ const Home = () => {
             <div className="text-center">
               
               {/* Trust Badge */}
-              <div className="animate-fade-in-up">
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-md mb-8 shadow-lg shadow-black/20">
+              <div className="animate-fade-in-up flex justify-center mb-6">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md shadow-lg shadow-black/10">
                   <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
-                  <span className="text-sm font-medium text-white/90">Over 10,000+ Lives Impacted Globally</span>
+                  <span className="text-sm font-medium text-white/80">Over 10,000+ Lives Impacted Globally</span>
                 </div>
               </div>
 
               {/* Headline */}
               <h1 className="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight leading-tight">
                 Transforming Lives Through
-               <span className="block bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400 bg-clip-text text-transparent mt-2 pb-2 drop-shadow-sm">
+               <span className="block bg-gradient-to-r from-blue-400 to-indigo-200 bg-clip-text text-transparent mt-2 pb-2 drop-shadow-sm">
                  Positivity, Growth & Transformation
                </span>
               </h1>
@@ -132,14 +132,14 @@ const Home = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <Link
                   to="/programs"
-                  className="group relative inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white transition-all duration-300 bg-blue-600 border border-blue-500 rounded-full hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-blue-500 shadow-[0_0_20px_rgba(37,99,235,0.4)] hover:shadow-[0_0_30px_rgba(37,99,235,0.6)]"
+                  className="group relative inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white transition-all duration-300 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full hover:from-blue-500 hover:to-indigo-500 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-blue-500 shadow-[0_0_25px_rgba(37,99,235,0.45)] hover:shadow-[0_0_35px_rgba(99,102,241,0.6)]"
                 >
                   Explore Programs
                   <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
                 </Link>
                 <Link
                   to="/about"
-                  className="inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white transition-all duration-300 bg-white/5 border border-white/10 rounded-full hover:bg-white/10 hover:border-white/20 backdrop-blur-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-white/50"
+                  className="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-gray-300 transition-all duration-300 bg-transparent border border-white/20 rounded-full hover:bg-white/5 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-white/50"
                 >
                   Learn More
                 </Link>
@@ -166,7 +166,7 @@ const Home = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {coreValues.map((value, index) => (
               <AnimatedCard key={index} animation="slideUp" delay={index * 200}>
-                <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+                <div className="bg-white p-8 rounded-xl shadow-md border border-gray-100/55 hover:shadow-lg transition-all duration-300">
                   <div className={`w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center mb-6 ${value.color}`}>
                     <value.icon className="h-8 w-8" />
                   </div>
@@ -233,7 +233,7 @@ const Home = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {programs.map((program, index) => (
               <AnimatedCard key={index} animation="slideUp" delay={index * 200}>
-                <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                <div className="bg-white rounded-xl shadow-md border border-gray-100/55 overflow-hidden hover:shadow-lg transition-all duration-300">
                   <img
                     src={program.image}
                     alt={program.name}
@@ -259,7 +259,7 @@ const Home = () => {
           <div className="text-center mt-12">
             <Link
               to="/programs"
-              className="group relative inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white transition-all duration-300 bg-blue-600 rounded-full hover:bg-blue-500 hover:shadow-[0_0_20px_rgba(37,99,235,0.4)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600"
+              className="group relative inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white transition-all duration-300 bg-blue-600 rounded-full hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-500/25 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600"
             >
               View All Programs
               <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
@@ -282,7 +282,7 @@ const Home = () => {
       <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
         <Link
           to="/careers"
-          className="group relative inline-flex items-center justify-center px-8 py-4 text-base font-bold text-purple-600 transition-all duration-300 bg-white rounded-full hover:bg-gray-50 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-purple-600 focus:ring-white"
+          className="group relative inline-flex items-center justify-center px-8 py-4 text-base font-bold text-purple-600 transition-all duration-300 bg-white rounded-full hover:bg-gray-50 hover:shadow-lg hover:shadow-purple-500/10 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-purple-600 focus:ring-white"
         >
           Join Our Team
           <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
