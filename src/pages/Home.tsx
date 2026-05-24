@@ -107,7 +107,7 @@ const Home = () => {
             <div className="text-center">
               
               {/* Trust Badge */}
-              <div className="animate-fade-in-up flex justify-center mb-6">
+              <div className="animate-fade-in-up flex justify-center mb-8">
                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md shadow-lg shadow-black/10">
                   <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
                   <span className="text-sm font-medium text-white/80">Over 10,000+ Lives Impacted Globally</span>
@@ -115,7 +115,7 @@ const Home = () => {
               </div>
 
               {/* Headline */}
-              <h1 className="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight leading-tight">
+              <h1 className="text-5xl md:text-7xl font-extrabold mb-8 tracking-tight leading-tight">
                 Transforming Lives Through
                <span className="block bg-gradient-to-r from-blue-400 to-indigo-200 bg-clip-text text-transparent mt-2 pb-2 drop-shadow-sm">
                  Positivity, Growth & Transformation
@@ -126,7 +126,7 @@ const Home = () => {
               </h1>
 
               {/* Subtitle */}
-              <p className="text-lg md:text-xl mb-10 max-w-2xl mx-auto text-gray-300 font-light leading-relaxed">
+              <p className="text-lg md:text-xl mb-12 max-w-2xl mx-auto text-gray-300 font-light leading-relaxed">
                 Empowering individuals and organizations worldwide through innovative programs,
                 sustainable growth, and purposeful transformation.
               </p>
