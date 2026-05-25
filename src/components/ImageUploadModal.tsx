@@ -1,4 +1,5 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import { X, Upload, Camera, Check } from 'lucide-react'
 
 interface ImageUploadModalProps {
@@ -18,6 +19,17 @@ const ImageUploadModal: React.FC<ImageUploadModalProps> = ({
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [dragActive, setDragActive] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
 
   const handleFileSelect = (file: File) => {
     if (file && file.type.startsWith('image/')) {
@@ -70,9 +82,9 @@ const ImageUploadModal: React.FC<ImageUploadModalProps> = ({
 
   if (!isOpen) return null
 
-  return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-xl max-w-md w-full p-6 relative">
+  return createPortal(
+    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-start md:items-center p-4 overflow-y-auto">
+      <div className="bg-white rounded-xl max-w-md w-full p-6 relative my-auto">
         <button
           onClick={handleClose}
           className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
@@ -165,7 +177,8 @@ const ImageUploadModal: React.FC<ImageUploadModalProps> = ({
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }
 
