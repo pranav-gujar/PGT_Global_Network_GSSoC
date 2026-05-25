@@ -92,57 +92,85 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTab = 'si
         <form onSubmit={handleSubmit} className="space-y-4">
           {activeTab === 'signup' && (
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Full Name
-              </label>
-              <div className="relative">
-                <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
-                <input
-                  type="text"
-                  value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="Enter your full name"
-                  required
-                />
-              </div>
-            </div>
+  <label
+    htmlFor="signup-fullname"
+    className="block text-sm font-medium text-gray-700 mb-1"
+  >
+    Full Name
+  </label>
+
+  <div className="relative">
+    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+
+    <input
+      id="signup-fullname"
+      name="fullName"
+      type="text"
+      autoComplete="name"
+      value={fullName}
+      onChange={(e) => setFullName(e.target.value)}
+      className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+      placeholder="Enter your full name"
+      required
+    />
+  </div>
+</div>
           )}
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Email Address
-            </label>
-            <div className="relative">
-              <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="Enter your email"
-                required
-              />
-            </div>
-          </div>
+  <label
+    htmlFor={activeTab === 'signin' ? 'signin-email' : 'signup-email'}
+    className="block text-sm font-medium text-gray-700 mb-1"
+  >
+    Email Address
+  </label>
+
+  <div className="relative">
+    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+
+    <input
+      id={activeTab === 'signin' ? 'signin-email' : 'signup-email'}
+      name="email"
+      type="email"
+      autoComplete="email"
+      value={email}
+      onChange={(e) => setEmail(e.target.value)}
+      className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+      placeholder="Enter your email"
+      required
+    />
+  </div>
+</div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Password
-            </label>
-            <div className="relative">
-              <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="Enter your password"
-                required
-                minLength={6}
-              />
-            </div>
-          </div>
+  <label
+    htmlFor={activeTab === 'signin' ? 'signin-password' : 'signup-password'}
+    className="block text-sm font-medium text-gray-700 mb-1"
+  >
+    Password
+  </label>
+
+  <div className="relative">
+    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+
+    <input
+      id={activeTab === 'signin' ? 'signin-password' : 'signup-password'}
+      name="password"
+      type="password"
+      autoComplete={
+  activeTab === 'signin'
+    ? 'current-password'
+    : 'new-password'
+}
+      value={password}
+      onChange={(e) => setPassword(e.target.value)}
+      className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+      placeholder="Enter your password"
+      required
+      minLength={6}
+    />
+  </div>
+</div>
 
           <button
             type="submit"
