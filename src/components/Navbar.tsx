@@ -72,11 +72,22 @@ const Navbar = () => {
       setUserDropdownOpen(false);
     };
 
+    const handleFocusOutside = (e: FocusEvent) => {
+      if (moreDropdownRef.current && !moreDropdownRef.current.contains(e.target as Node)) {
+        setDropdownOpen(false);
+      }
+      if (userDropdownRef.current && !userDropdownRef.current.contains(e.target as Node)) {
+        setUserDropdownOpen(false);
+      }
+    };
+
     document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('focusin', handleFocusOutside);
     window.addEventListener('scroll', handleScroll);
     
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('focusin', handleFocusOutside);
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
@@ -157,14 +168,23 @@ const Navbar = () => {
               ))}
               
               {/* More Dropdown */}
-              <div className="relative" ref={moreDropdownRef}>
+              <div 
+                className="relative" 
+                ref={moreDropdownRef}
+                onKeyDown={(e) => {
+                  if (e.key === 'Escape') setDropdownOpen(false);
+                }}
+              >
                 <button
-                  // onClick={() => setDropdownOpen(!dropdownOpen)}
+                  id="more-menu-button"
+                  aria-haspopup="menu"
+                  aria-expanded={dropdownOpen}
+                  aria-controls="more-menu"
                   onClick={(e) => {
                     e.stopPropagation();
                     setDropdownOpen(!dropdownOpen);
                   }}
-                  className={`flex items-center px-3 py-2 rounded-md font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-all duration-200 ${
+                  className={`flex items-center px-3 py-2 rounded-md font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                     scrolled ? 'text-xs' : 'text-sm'
                   }`}
                 >
@@ -173,12 +193,18 @@ const Navbar = () => {
                 </button>
                 
                 {dropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200">
+                  <div 
+                    id="more-menu"
+                    role="menu"
+                    aria-labelledby="more-menu-button"
+                    className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200 z-50 py-1"
+                  >
                     {moreItems.map((item) => (
                       <Link
                         key={item.name}
                         to={item.path}
-                        className={`block px-4 py-2 text-sm hover:bg-gray-50 ${isActive(item.path) ? 'text-blue-600 bg-blue-50' : 'text-gray-700'}`}
+                        role="menuitem"
+                        className={`block px-4 py-2 text-sm hover:bg-gray-50 focus:bg-gray-50 focus:outline-none ${isActive(item.path) ? 'text-blue-600 bg-blue-50' : 'text-gray-700'}`}
                         onClick={() => setDropdownOpen(false)}
                       >
                         {item.name}
@@ -190,13 +216,23 @@ const Navbar = () => {
 
               {/* Auth Section */}
               {user ? (
-                <div className="relative">
+                <div 
+                  className="relative" 
+                  ref={userDropdownRef}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Escape') setUserDropdownOpen(false);
+                  }}
+                >
                   <button
+                    id="user-menu-button"
+                    aria-haspopup="menu"
+                    aria-expanded={userDropdownOpen}
+                    aria-controls="user-menu"
                     onClick={(e) => {
                       e.stopPropagation();
                       setUserDropdownOpen(!userDropdownOpen);
                     }}
-                    className={`flex items-center px-3 py-2 rounded-md font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-all duration-200 ${
+                    className={`flex items-center px-3 py-2 rounded-md font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                       scrolled ? 'text-xs' : 'text-sm'
                     }`}
                   >
@@ -206,20 +242,27 @@ const Navbar = () => {
                   </button>
                   
                   {userDropdownOpen && (
-                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200">
+                    <div 
+                      id="user-menu"
+                      role="menu"
+                      aria-labelledby="user-menu-button"
+                      className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200 z-50 py-1"
+                    >
                       <Link
                         to="/dashboard"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                        role="menuitem"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 focus:bg-gray-50 focus:outline-none"
                         onClick={() => setUserDropdownOpen(false)}
                       >
                         Dashboard
                       </Link>
                       <button
+                        role="menuitem"
                         onClick={() => {
                           handleLogout();
                           setUserDropdownOpen(false);
                         }}
-                        className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center"
+                        className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 focus:bg-gray-50 focus:outline-none flex items-center"
                       >
                         <LogOut className="h-4 w-4 mr-2" />
                         Sign Out
