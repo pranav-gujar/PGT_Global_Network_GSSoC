@@ -88,73 +88,44 @@ const About = () => {
     <div className="pt-16">
       {/* Hero Section */}
       <AnimatedCard animation="fadeIn">
-  <section className="relative bg-gradient-to-r from-blue-600 to-purple-600 text-white py-20 overflow-hidden">
+  <section className="relative bg-gradient-to-r from-blue-600 to-purple-600 text-white py-28 overflow-hidden">
     <HeroBackground />
     <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="text-center">
-        <span className="inline-block bg-white/20 backdrop-blur-sm text-white text-sm font-semibold px-4 py-2 rounded-full mb-6 border border-white/30">
+        <span className="inline-block bg-white/20 backdrop-blur-sm text-white text-sm font-semibold px-4 py-1.5 rounded-full mb-6 border border-white/30 tracking-wide">
           Est. 2019 · Purpose. Growth. Transformation.
         </span>
-        <h1 className="text-4xl md:text-5xl font-bold mb-6">
+        <h1 className="text-4xl md:text-6xl font-bold mb-5 leading-tight">
           About PGT Global Network
         </h1>
-        <p className="text-lg md:text-xl text-blue-100 max-w-2xl mx-auto mb-3">
-          A purpose-driven global organization empowering individuals, students, and communities worldwide.
-        </p>
-        <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto mb-10">
+        <p className="text-lg md:text-xl text-blue-100 max-w-2xl mx-auto">
           Transforming lives through purpose, growth, and meaningful change since 2019
         </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="/programs" className="bg-white text-blue-600 font-semibold px-8 py-3 rounded-full hover:bg-blue-50 transition-colors">
-            Explore Our Programs
-          </a>
-          <a href="/contact" className="border-2 border-white text-white font-semibold px-8 py-3 rounded-full hover:bg-white/10 transition-colors">
-            Get In Touch
-          </a>
-        </div>
       </div>
     </div>
   </section>
 </AnimatedCard>
 
-{/* Impact Metrics Strip */}
-      <section className="py-16 bg-gradient-to-r from-blue-700 to-purple-700">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedCard animation="fadeIn">
-            <div className="text-center mb-10">
-              <h2 className="text-2xl md:text-3xl font-bold text-white">
-                Our Impact at a Glance
-              </h2>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-              {impactMetrics.map((metric, index) => (
-                <AnimatedCard key={index} animation="slideUp" delay={index * 150}>
-                  <div>
-                    <metric.icon className="h-8 w-8 mx-auto mb-3 text-blue-200" />
-                    <div className="text-4xl md:text-5xl font-extrabold text-white mb-2">
-                      <CountUpNumber end={metric.value} suffix={metric.suffix} duration={2200} />
-                    </div>
-                    <p className="text-blue-100 text-sm font-semibold uppercase tracking-widest">
-                      {metric.label}
-                    </p>
-                  </div>
-                </AnimatedCard>
-              ))}
-            </div>
-          </AnimatedCard>
-        </div>
-      </section>
 
       {/* Mission & Vision */}
-      <section className="py-20">
+     {/* Mission & Vision */}
+      <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="text-center mb-14">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Mission & Vision
+            </h2>
+            <p className="text-xl text-gray-500 max-w-2xl mx-auto">
+              The north star that guides everything we do
+            </p>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
             <AnimatedCard animation="slideLeft">
-              <div className="bg-blue-50 p-8 rounded-xl">
-                <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mb-6">
+              <div className="bg-blue-50 border border-blue-100 p-10 rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300 h-full">
+                <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center mb-6">
                   <Target className="h-8 w-8 text-white" />
                 </div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Mission</h2>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Mission</h3>
                 <p className="text-gray-700 text-lg leading-relaxed">
                   To empower students, individuals, and organizations worldwide through innovative programs, leadership-driven growth, and purposeful action that creates lasting community impact.
                 </p>
@@ -162,11 +133,11 @@ const About = () => {
             </AnimatedCard>
             
             <AnimatedCard animation="slideRight">
-              <div className="bg-purple-50 p-8 rounded-xl">
-                <div className="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center mb-6">
+              <div className="bg-purple-50 border border-purple-100 p-10 rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300 h-full">
+                <div className="w-16 h-16 bg-purple-600 rounded-2xl flex items-center justify-center mb-6">
                   <Eye className="h-8 w-8 text-white" />
                 </div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Vision</h2>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Vision</h3>
                 <p className="text-gray-700 text-lg leading-relaxed">
                   To be a global network where purpose-driven growth transforms lives, enabling every individual and organization to unlock their true potential and contribute meaningfully to society.
                 </p>
@@ -235,41 +206,6 @@ const About = () => {
         </div>
       </section>
 
-      {/* Our Journey — Timeline */}
-      <section className="py-20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Our Journey</h2>
-            <p className="text-xl text-gray-600">From a single vision to a global network</p>
-          </div>
-          <div className="relative">
-          
-            <div className="absolute left-1/2 transform -translate-x-px top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-600 to-purple-600 hidden md:block" />
-            <div className="space-y-12">
-              {milestones.map((milestone, index) => (
-                <AnimatedCard key={index} animation="slideUp" delay={index * 100}>
-                  <div className={`flex flex-col md:flex-row items-start md:items-center gap-6 ${
-                    index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-                  }`}>
-                    <div className="flex-1">
-                      <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
-                        <span className="inline-block bg-blue-600 text-white text-sm font-bold px-3 py-1 rounded-full mb-3">
-                          {milestone.year}
-                        </span>
-                        <h3 className="text-xl font-bold text-gray-900 mb-2">{milestone.title}</h3>
-                        <p className="text-gray-600">{milestone.description}</p>
-                      </div>
-                    </div>
-                    
-                    <div className="hidden md:flex w-4 h-4 bg-blue-600 rounded-full border-4 border-white shadow-md flex-shrink-0 z-10" />
-                    <div className="flex-1 hidden md:block" />
-                  </div>
-                </AnimatedCard>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Founder's Note */}
       <section className="py-20">
@@ -329,34 +265,6 @@ const About = () => {
         </div>
       </section>
 
-      {/* Key Initiatives */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Our Key Initiatives</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Purpose-driven programs creating meaningful impact across the globe
-            </p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
-            {initiatives.map((initiative, index) => (
-              <AnimatedCard key={index} animation="slideUp" delay={index * 100}>
-                <div className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 p-6 text-center h-full flex flex-col items-center justify-start">
-                  <div className="w-20 h-20 flex items-center justify-center mb-4">
-                    <img
-                      src={initiative.logo}
-                      alt={`${initiative.name} program logo`}
-                      className="max-w-full max-h-full object-contain"
-                    />
-                  </div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-2">{initiative.name}</h3>
-                  <p className="text-gray-500 text-sm leading-relaxed">{initiative.description}</p>
-                </div>
-              </AnimatedCard>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Founding Principles */}
       <section className="py-20 bg-blue-50">
