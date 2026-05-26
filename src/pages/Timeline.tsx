@@ -1,5 +1,5 @@
 import React from 'react';
-import { Calendar, Award, Users, Globe, Zap, Target, Star } from 'lucide-react';
+import { Calendar, Award, Users, Globe, Zap, Target, Star, Sparkles, ArrowRight } from 'lucide-react';
 import CountUpNumber from '../components/CountUpNumber';
 import AnimatedCard from '../components/AnimatedCard';
 import HeroBackground from '../components/HeroBackground';
@@ -288,40 +288,92 @@ const Timeline = () => {
       </section>
 
       {/* Future Vision */}
-<AnimatedCard animation="fadeIn">
-  <section className="relative py-20 bg-gradient-to-r from-green-600 to-blue-600 text-white overflow-hidden">
-    <Background />
-    <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 className="text-3xl md:text-4xl font-bold mb-12">Looking Ahead</h2>
+      {/* Future Vision */}
+      <section className="py-20 bg-transparent">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <AnimatedCard animation="fadeIn">
+            <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#0a0f1c] via-[#111827] to-[#0f172a] text-white p-8 md:p-16 shadow-2xl shadow-gray-250/20 border border-white/10">
+              
+              {/* Decorative Blur Backgrounds (Mesh Effect) */}
+              <div className="absolute top-0 -left-1/4 w-full h-full bg-blue-650/10 rounded-full blur-[120px] mix-blend-screen pointer-events-none" />
+              <div className="absolute top-0 -right-1/4 w-full h-full bg-purple-600/10 rounded-full blur-[120px] mix-blend-screen pointer-events-none" />
+              <div className="absolute -bottom-1/2 left-1/4 w-full h-full bg-indigo-600/8 rounded-full blur-[120px] mix-blend-screen pointer-events-none" />
+              
+              {/* Grid Pattern Overlay */}
+              <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_50%,#000_20%,transparent_100%)] pointer-events-none" />
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-        {/* Impact Target */}
-        <div className="bg-white/10 backdrop-blur-md p-6 rounded-lg shadow-md">
-          <div className="text-4xl font-bold text-white mb-2">
-            <CountUpNumber end={100000} suffix="+" duration={3000} />
-          </div>
-          <p className="text-lg text-green-100">Lives to Impact</p>
-        </div>
+              {/* Star particles */}
+              <div className="absolute inset-0 pointer-events-none">
+                {[...Array(6)].map((_, i) => (
+                  <div
+                    key={i}
+                    className="absolute w-1 h-1 bg-white/25 rounded-full animate-pulse shadow-[0_0_4px_rgba(255,255,255,0.4)]"
+                    style={{
+                      left: `${15 + (i * 14.5)}%`,
+                      top: `${20 + ((i % 3) * 25)}%`,
+                      animationDelay: `${i * 0.8}s`,
+                      animationDuration: `${2 + (i % 2)}s`
+                    }}
+                  />
+                ))}
+              </div>
 
-        {/* Countries to Reach */}
-        <div className="bg-white/10 backdrop-blur-md p-6 rounded-lg shadow-md">
-          <div className="text-4xl font-bold text-white mb-2">
-            <CountUpNumber end={100} suffix="+" duration={3000} />
-          </div>
-          <p className="text-lg text-green-100">Countries to Reach</p>
-        </div>
+              <div className="relative z-10 text-center max-w-3xl mx-auto space-y-8">
+                <div className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md shadow-sm">
+                  <Sparkles className="w-3.5 h-3.5 text-yellow-300 animate-pulse" />
+                  <span className="text-xs font-black tracking-wider uppercase text-white/95">Our Vision</span>
+                </div>
+                
+                <h2 className="text-3xl md:text-5xl font-black tracking-tight leading-tight">
+                  Looking Ahead
+                </h2>
 
-        {/* Target Year */}
-        <div className="bg-white/10 backdrop-blur-md p-6 rounded-lg shadow-md">
-          <div className="text-4xl font-bold text-white mb-2">
-            <CountUpNumber end={2030} duration={3000} />
-          </div>
-          <p className="text-lg text-green-100">Target Year</p>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto pt-4 text-center">
+                  {/* Impact Target */}
+                  <div className="bg-white/5 border border-white/10 backdrop-blur-md p-6 rounded-2xl shadow-md">
+                    <div className="text-4xl font-extrabold text-white mb-2">
+                      <CountUpNumber end={100000} suffix="+" duration={3000} />
+                    </div>
+                    <p className="text-sm font-semibold tracking-wide text-blue-200">Lives to Impact</p>
+                  </div>
+
+                  {/* Countries to Reach */}
+                  <div className="bg-white/5 border border-white/10 backdrop-blur-md p-6 rounded-2xl shadow-md">
+                    <div className="text-4xl font-extrabold text-white mb-2">
+                      <CountUpNumber end={100} suffix="+" duration={3000} />
+                    </div>
+                    <p className="text-sm font-semibold tracking-wide text-blue-200">Countries to Reach</p>
+                  </div>
+
+                  {/* Target Year */}
+                  <div className="bg-white/5 border border-white/10 backdrop-blur-md p-6 rounded-2xl shadow-md">
+                    <div className="text-4xl font-extrabold text-white mb-2">
+                      <CountUpNumber end={2030} duration={3000} />
+                    </div>
+                    <p className="text-sm font-semibold tracking-wide text-blue-200">Target Year</p>
+                  </div>
+                </div>
+
+                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
+                  <a
+                    href="/contact"
+                    className="group/btn relative w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-650 text-white font-extrabold rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.03] transition-all duration-300 text-sm"
+                  >
+                    <span>Partner With Us</span>
+                    <ArrowRight className="ml-2 w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform" />
+                  </a>
+                  <a
+                    href="/about"
+                    className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 bg-white/10 border border-white/25 hover:bg-white/20 backdrop-blur-md text-white font-bold rounded-xl shadow-md hover:shadow-lg hover:scale-[1.03] transition-all duration-300 text-sm"
+                  >
+                    Learn More About Us
+                  </a>
+                </div>
+              </div>
+            </div>
+          </AnimatedCard>
         </div>
-      </div>
-    </div>
-  </section>
-</AnimatedCard>
+      </section>
 
     </div>
   );
