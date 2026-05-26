@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { X, Mail, Lock, User } from 'lucide-react'
 import { useAuth } from '../contexts/AuthContext'
@@ -16,6 +16,54 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTab = 'si
   const [fullName, setFullName] = useState('')
   const [loading, setLoading] = useState(false)
   const { signIn, signUp } = useAuth()
+  const modalRef = useRef<HTMLDivElement>(null)
+
+  // Close modal on Escape key press
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        onClose()
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [isOpen, onClose])
+
+  // Focus trap implementation
+  useEffect(() => {
+    if (!isOpen) return
+
+    const modalElement = modalRef.current
+    if (!modalElement) return
+
+    const focusableElements = modalElement.querySelectorAll(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    )
+    const firstElement = focusableElements[0] as HTMLElement
+    const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement
+
+    // Focus close button initially
+    firstElement?.focus()
+
+    const handleTab = (e: KeyboardEvent) => {
+      if (e.key !== 'Tab') return
+
+      if (e.shiftKey) {
+        if (document.activeElement === firstElement) {
+          lastElement?.focus()
+          e.preventDefault()
+        }
+      } else {
+        if (document.activeElement === lastElement) {
+          firstElement?.focus()
+          e.preventDefault()
+        }
+      }
+    }
+
+    window.addEventListener('keydown', handleTab)
+    return () => window.removeEventListener('keydown', handleTab)
+  }, [isOpen])
 
   useEffect(() => {
     if (isOpen) {
@@ -56,8 +104,18 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTab = 'si
   if (!isOpen) return null
 
   return createPortal(
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-start md:items-center p-4 overflow-y-auto">
-      <div className="bg-white rounded-xl max-w-md w-full p-6 relative my-auto">
+    <div 
+      className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-start md:items-center p-4 overflow-y-auto"
+      onClick={onClose}
+    >
+      <div 
+        ref={modalRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="auth-modal-title"
+        className="bg-white rounded-xl max-w-md w-full p-6 relative my-auto"
+        onClick={(e) => e.stopPropagation()}
+      >
         <button
           onClick={onClose}
           className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
@@ -66,7 +124,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTab = 'si
         </button>
 
         <div className="text-center mb-6">
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">
+          <h2 id="auth-modal-title" className="text-2xl font-bold text-gray-900 mb-2">
             {activeTab === 'signin' ? 'Welcome Back' : 'Create Account'}
           </h2>
           <p className="text-gray-600">
