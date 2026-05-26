@@ -99,17 +99,13 @@ const Dashboard = () => {
   }
 
   const handleSaveProfile = async () => {
-    console.log('Save button clicked!');
     setSaving(true)
     try {
-      console.log('Updating profile with data:', editData);
       await updateProfile(editData)
-      console.log('Profile update successful');
       setProfile({ ...profile, ...editData })
       setEditMode(false)
     } catch (error) {
       console.error('Failed to save profile:', error)
-      toast.error('Failed to save profile. Please check your connection and try again.')
     } finally {
       setSaving(false)
     }
