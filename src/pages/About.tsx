@@ -299,20 +299,20 @@ const About = () => {
       </section>
 
       <AnimatedCard animation="fadeIn">
-  <section className="relative py-20 bg-gradient-to-r from-purple-600 to-blue-600 text-white overflow-hidden">
+  <section className="relative py-24 bg-gradient-to-r from-purple-600 to-blue-600 text-white overflow-hidden">
     <Background />
     <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <h2 className="text-3xl md:text-4xl font-bold mb-6">
         Join Our Mission of Positive Change
       </h2>
-      <p className="text-xl mb-8 max-w-3xl mx-auto text-blue-100">
+      <p className="text-xl mb-6 max-w-3xl mx-auto text-blue-100">
         From our founding vision to today, we continue to empower individuals and communities worldwide.  
         Discover how you can be part of this transformative journey.
       </p>
-      <p className="text-lg text-blue-200 max-w-2xl mx-auto">
+      <p className="text-lg text-blue-200 max-w-2xl mx-auto mb-10">
         Learn, grow, and create meaningful impact with us.
       </p>
-       <div className="flex flex-col sm:flex-row gap-4 justify-center">
+      <div className="flex flex-col sm:flex-row gap-4 justify-center">
         <a href="/programs" className="bg-white text-purple-700 font-semibold px-8 py-3 rounded-full hover:bg-purple-50 transition-colors">
           View Our Programs
         </a>
@@ -323,6 +323,7 @@ const About = () => {
     </div>
   </section>
 </AnimatedCard>
+
 
     </div>
   );
