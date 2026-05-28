@@ -1,9 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Users, Target, Zap, Brain, GraduationCap } from 'lucide-react';
+import { ArrowRight, Users, Target, Zap, Brain, GraduationCap, BookOpen } from 'lucide-react';
 import AnimatedCard from '../components/AnimatedCard';
 import HeroBackground from '../components/HeroBackground';
 import Background from '../components/Background';
@@ -55,6 +55,7 @@ useEffect(() => {
     name: 'D3 Program',
     fullName: 'Daily Discovery Digest',
     icon: Target,
+    category: 'Content & Media',
     description: 'A flagship daily inspiration series delivering knowledge, awareness, and impactful stories to students.',
     features: [
       'Daily Instagram & Facebook Stories',
@@ -74,6 +75,7 @@ useEffect(() => {
     name: 'VoA Initiative',
     fullName: 'Voices of Ability',
     icon: Users,
+    category: 'Content & Media',
     description: 'A storytelling series highlighting individuals who turned challenges into change and built impact.',
     features: [
       'Life Journey Recordings',
@@ -93,6 +95,7 @@ useEffect(() => {
     name: 'Seminarix',
     fullName: 'Seminar Series for Students',
     icon: GraduationCap,
+    category: 'Events & Campaigns',
     description: 'On-ground seminar sessions empowering students with academics, motivation, and wellness tools.',
     features: [
       'Motivational Talks',
@@ -112,6 +115,7 @@ useEffect(() => {
     name: 'MotivMinds',
     fullName: 'One-Minute Empowerment',
     icon: Brain,
+    category: 'Content & Media',
     description: 'A video series sharing short and inspiring one-minute messages of motivation and real-world wisdom.',
     features: [
       'One-Minute Videos',
@@ -131,6 +135,7 @@ useEffect(() => {
     name: 'HED Program',
     fullName: 'Happy Eco Diwali',
     icon: Zap,
+    category: 'Events & Campaigns',
     description: 'The longest-running campaign promoting eco-friendly Diwali celebrations through awareness and innovation.',
     features: [
       'Eco-Friendly Celebrations',
@@ -147,7 +152,11 @@ useEffect(() => {
   }
 ];
 
- if (loading) {
+  const [activeCategory, setActiveCategory] = useState<string>("All");
+  const categories = ["All", ...new Set(programs.map((p) => p.category))];
+  const filteredPrograms = activeCategory === "All" ? programs : programs.filter((p) => p.category === activeCategory);
+
+  if (loading) {
     return <LoadingSpinner />;
   }
 
@@ -170,6 +179,27 @@ useEffect(() => {
 </AnimatedCard>
 
 
+      {/* Category Filter */}
+      <section className="py-8 bg-gray-50 border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-wrap justify-center gap-3">
+            {categories.map((category) => (
+              <button
+                key={category}
+                onClick={() => setActiveCategory(category)}
+                className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${
+                  activeCategory === category
+                    ? "bg-blue-600 text-white shadow-md shadow-blue-200"
+                    : "bg-white text-gray-700 hover:bg-blue-50 hover:text-blue-600 border border-gray-200"
+                }`}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Programs Overview */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -184,8 +214,23 @@ useEffect(() => {
           </div>
           </AnimatedCard>
 
+          {filteredPrograms.length === 0 ? (
+            <div className="text-center py-20">
+              <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <BookOpen className="h-10 w-10 text-gray-400" />
+              </div>
+              <h3 className="text-2xl font-semibold text-gray-900 mb-2">No programs found</h3>
+              <p className="text-gray-600 mb-6">No programs match the selected category. Try a different filter.</p>
+              <button
+                onClick={() => setActiveCategory("All")}
+                className="text-blue-600 font-medium hover:text-blue-700 underline underline-offset-2"
+              >
+                Show all programs
+              </button>
+            </div>
+          ) : (
           <div className="space-y-16">
-            {programs.map((program, index) => (
+            {filteredPrograms.map((program, index) => (
               <AnimatedCard key={program.id} animation="slideUp" delay={index * 200}>
   <div
     id={program.id}   // 👈 added this line
@@ -251,6 +296,7 @@ useEffect(() => {
 
             ))}
           </div>
+          )}
         </div>
       </section>
 
