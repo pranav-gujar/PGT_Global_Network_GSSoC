@@ -1,9 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Users, Target, Zap, Brain, GraduationCap } from 'lucide-react';
+import { ArrowRight, Users, Target, Zap, Brain, GraduationCap, X } from 'lucide-react';
 import AnimatedCard from '../components/AnimatedCard';
 import HeroBackground from '../components/HeroBackground';
 import Background from '../components/Background';
@@ -49,11 +49,14 @@ useEffect(() => {
 
 
 
+  const [selectedCategory, setSelectedCategory] = useState('all');
+
   const programs = [
   {
     id: 'd3',
     name: 'D3 Program',
     fullName: 'Daily Discovery Digest',
+    category: 'Awareness',
     icon: Target,
     description: 'A flagship daily inspiration series delivering knowledge, awareness, and impactful stories to students.',
     features: [
@@ -73,6 +76,7 @@ useEffect(() => {
     id: 'voa',
     name: 'VoA Initiative',
     fullName: 'Voices of Ability',
+    category: 'Storytelling',
     icon: Users,
     description: 'A storytelling series highlighting individuals who turned challenges into change and built impact.',
     features: [
@@ -92,6 +96,7 @@ useEffect(() => {
     id: 'seminarix',
     name: 'Seminarix',
     fullName: 'Seminar Series for Students',
+    category: 'Education',
     icon: GraduationCap,
     description: 'On-ground seminar sessions empowering students with academics, motivation, and wellness tools.',
     features: [
@@ -111,6 +116,7 @@ useEffect(() => {
     id: 'motivminds',
     name: 'MotivMinds',
     fullName: 'One-Minute Empowerment',
+    category: 'Motivation',
     icon: Brain,
     description: 'A video series sharing short and inspiring one-minute messages of motivation and real-world wisdom.',
     features: [
@@ -130,6 +136,7 @@ useEffect(() => {
     id: 'hed',
     name: 'HED Program',
     fullName: 'Happy Eco Diwali',
+    category: 'Environmental',
     icon: Zap,
     description: 'The longest-running campaign promoting eco-friendly Diwali celebrations through awareness and innovation.',
     features: [
@@ -150,6 +157,14 @@ useEffect(() => {
  if (loading) {
     return <LoadingSpinner />;
   }
+
+  // Extract unique categories
+  const categories = ['all', ...Array.from(new Set(programs.map(p => p.category)))];
+  
+  // Filter programs based on selected category
+  const filteredPrograms = selectedCategory === 'all' 
+    ? programs 
+    : programs.filter(p => p.category === selectedCategory);
 
 
   return (
@@ -184,8 +199,49 @@ useEffect(() => {
           </div>
           </AnimatedCard>
 
+          {/* Filter Section */}
+          <AnimatedCard animation="slideUp">
+            <div className="mb-12">
+              <h3 className="text-lg font-semibold text-gray-900 mb-6">Filter by Category</h3>
+              <div className="flex flex-wrap gap-3">
+                {categories.map(category => (
+                  <button
+                    key={category}
+                    onClick={() => setSelectedCategory(category)}
+                    className={`px-4 py-2 rounded-full font-medium transition-all duration-300 ${
+                      selectedCategory === category
+                        ? 'bg-blue-600 text-white shadow-lg'
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    }`}
+                  >
+                    {category === 'all' ? 'All Programs' : category}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </AnimatedCard>
+
+          {/* Empty State */}
+          {filteredPrograms.length === 0 && (
+            <AnimatedCard animation="slideUp">
+              <div className="text-center py-16">
+                <X className="mx-auto h-16 w-16 text-gray-300 mb-4" />
+                <h3 className="text-2xl font-semibold text-gray-900 mb-2">No programs found</h3>
+                <p className="text-gray-600 mb-6">
+                  Try selecting a different category or view all programs.
+                </p>
+                <button
+                  onClick={() => setSelectedCategory('all')}
+                  className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+                >
+                  View All Programs
+                </button>
+              </div>
+            </AnimatedCard>
+          )}
+
           <div className="space-y-16">
-            {programs.map((program, index) => (
+            {filteredPrograms.map((program, index) => (
               <AnimatedCard key={program.id} animation="slideUp" delay={index * 200}>
   <div
     id={program.id}   // 👈 added this line
