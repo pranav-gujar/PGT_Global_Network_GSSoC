@@ -71,7 +71,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTab = 'si
 
         {showVerificationScreen ? (
           <div className="text-center py-6">
-            <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-blue-100 mb-6 animate-bounce">
+            <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-blue-100 mb-6">
               <Mail className="h-8 w-8 text-blue-600" />
             </div>
             <h2 className="text-2xl font-bold text-gray-900 mb-2">Verify your email</h2>
