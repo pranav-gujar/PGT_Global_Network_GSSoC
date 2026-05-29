@@ -18,6 +18,7 @@ const Dashboard = () => {
   const [likes, setLikes] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [editMode, setEditMode] = useState(false)
+  const [saving, setSaving] = useState(false)
   const [showImageModal, setShowImageModal] = useState(false)
   const [profileImage, setProfileImage] = useState<string>('')
   const [editData, setEditData] = useState({
@@ -98,11 +99,16 @@ const Dashboard = () => {
   }
 
   const handleSaveProfile = async () => {
+    setSaving(true)
     try {
       await updateProfile(editData)
       setProfile({ ...profile, ...editData })
       setEditMode(false)
-    } catch (error) {}
+    } catch (error) {
+      console.error('Failed to save profile:', error)
+    } finally {
+      setSaving(false)
+    }
   }
 
   const handleImageUpload = async (file: File, _previewUrl?: string) => {
@@ -181,13 +187,21 @@ const Dashboard = () => {
                   <div className="flex space-x-2">
                     <button
                       onClick={handleSaveProfile}
-                      className="text-green-600 hover:text-green-800"
+                      disabled={saving}
+                      className={`text-green-600 hover:text-green-800 disabled:opacity-50 disabled:cursor-not-allowed`}
+                      title={saving ? 'Saving...' : 'Save'}
                     >
-                      <Save className="h-5 w-5" />
+                      {saving ? (
+                        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-green-600" />
+                      ) : (
+                        <Save className="h-5 w-5" />
+                      )}
                     </button>
                     <button
                       onClick={() => setEditMode(false)}
-                      className="text-gray-600 hover:text-gray-800"
+                      disabled={saving}
+                      className="text-gray-600 hover:text-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
+                      title="Cancel"
                     >
                       <X className="h-5 w-5" />
                     </button>
@@ -214,7 +228,8 @@ const Dashboard = () => {
                   </div>
                   <button
                     onClick={() => setShowImageModal(true)}
-                    className="absolute -bottom-1 -right-1 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors shadow-lg"
+                    disabled={saving}
+                    className="absolute -bottom-1 -right-1 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
                     title="Change profile photo"
                   >
                     <Camera className="h-4 w-4" />
@@ -225,7 +240,8 @@ const Dashboard = () => {
                     type="text"
                     value={editData.full_name}
                     onChange={(e) => setEditData({ ...editData, full_name: e.target.value })}
-                    className="text-xl font-bold text-gray-900 text-center border-b border-gray-300 focus:border-blue-500 outline-none"
+                    disabled={saving}
+                    className="text-xl font-bold text-gray-900 text-center border-b border-gray-300 focus:border-blue-500 outline-none disabled:opacity-50"
                     placeholder="Your full name"
                   />
                 ) : (
@@ -241,7 +257,8 @@ const Dashboard = () => {
                     <textarea
                       value={editData.bio}
                       onChange={(e) => setEditData({ ...editData, bio: e.target.value })}
-                      className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      disabled={saving}
+                      className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-50"
                       rows={3}
                       placeholder="Tell us about yourself..."
                     />
@@ -257,7 +274,8 @@ const Dashboard = () => {
                       type="text"
                       value={editData.location}
                       onChange={(e) => setEditData({ ...editData, location: e.target.value })}
-                      className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      disabled={saving}
+                      className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-50"
                       placeholder="Your location"
                     />
                   ) : (
@@ -272,7 +290,8 @@ const Dashboard = () => {
                       type="url"
                       value={editData.website}
                       onChange={(e) => setEditData({ ...editData, website: e.target.value })}
-                      className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      disabled={saving}
+                      className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-50"
                       placeholder="https://yourwebsite.com"
                     />
                   ) : (
