@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from '../components/TransitionLink';
 import { Target, Eye, Heart, Users, Globe, Award, ArrowRight, Sparkles } from 'lucide-react';
 import founderImg from '../assets/founderImg.jpg';
 import AnimatedCard from '../components/AnimatedCard';

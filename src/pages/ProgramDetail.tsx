@@ -1,5 +1,6 @@
 import React from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { Link } from '../components/TransitionLink';
 import { ArrowLeft, ArrowRight, Users, Clock, Globe, Target, CheckCircle, Star, Sparkles, Check } from 'lucide-react';
 import AnimatedCard from '../components/AnimatedCard';
 import CountUpNumber from '../components/CountUpNumber';

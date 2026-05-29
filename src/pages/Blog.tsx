@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { Search, Calendar, User, ArrowRight, Filter, Sparkles } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link } from '../components/TransitionLink';
 import AnimatedCard from '../components/AnimatedCard';
 import { blogPosts, BlogPost } from '../data/blogPosts'; 
 import HeroBackground from '../components/HeroBackground';

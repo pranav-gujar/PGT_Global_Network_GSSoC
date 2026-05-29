@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from '../components/TransitionLink';
 import { ArrowRight, Users, Target, Zap, Brain, GraduationCap, Award, Clock, Sparkles, Check, Filter } from 'lucide-react';
 import AnimatedCard from '../components/AnimatedCard';
 import HeroBackground from '../components/HeroBackground';
