@@ -1,6 +1,6 @@
 import React from 'react';
 import { MapPin, Phone, Mail, Clock, Send, Sparkles, ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link } from '../components/TransitionLink';
 import AnimatedCard from '../components/AnimatedCard';
 import HeroBackground from '../components/HeroBackground';
 import Background from '../components/Background';

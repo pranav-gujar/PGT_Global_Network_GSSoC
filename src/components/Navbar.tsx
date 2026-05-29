@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, ChevronDown, User, LogOut } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
+import { usePageTransition } from '../contexts/PageTransitionContext';
 import AuthModal from '../components/AuthModal';
+import { Link } from './TransitionLink';
 
 
 const Navbar = () => {
@@ -15,15 +17,16 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const { user, signOut } = useAuth();
+  const { navigateWithTransition } = usePageTransition();
 
   const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
        await signOut();
-       navigate('/'); // 👈 send user back to home after logout
+       navigateWithTransition('/'); // 👈 send user back to home after logout with smooth transition
       } catch (error) {
-        console.error('Error signing out:', error);
+         console.error('Error signing out:', error);
     }
   };
 

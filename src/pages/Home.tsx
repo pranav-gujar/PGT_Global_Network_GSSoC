@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from '../components/TransitionLink';
 import { ArrowRight, Target, TrendingUp, Zap, Users, Globe, Award, Star, BookOpen, Hourglass, GraduationCap, Sparkles } from 'lucide-react';
 import CountUpNumber from '../components/CountUpNumber';
 import HeroBackground from '../components/HeroBackground';

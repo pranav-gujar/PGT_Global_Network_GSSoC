@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { AuthProvider } from './contexts/AuthContext';
+import { PageTransitionProvider } from './contexts/PageTransitionContext';
 import { useScrollToTop } from './hooks/useScrollToTop';
 import { usePageLoading } from './hooks/usePageLoading';
 import AnnouncementBar from './components/AnnouncementBar';
@@ -32,7 +33,7 @@ const AppContent = () => {
   
   return (
     <>
-      {loading && <LoadingSpinner />}
+      <LoadingSpinner show={loading} />
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -62,10 +63,12 @@ function App() {
   return (
     <AuthProvider>
       <Router>
-        <AnimatedBackground />
-        <div className="min-h-screen bg-white">
-          <AppContent />
-        </div>
+        <PageTransitionProvider>
+          <AnimatedBackground />
+          <div className="min-h-screen bg-white">
+            <AppContent />
+          </div>
+        </PageTransitionProvider>
       </Router>
     </AuthProvider>
   );
