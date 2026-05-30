@@ -30,7 +30,7 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ show = true }) => {
 
   return (
     <div
-      className={`fixed inset-0 bg-white/90 backdrop-blur-sm z-50 flex items-center justify-center transition-all duration-300 ${
+      className={`fixed inset-0 bg-white z-50 flex items-center justify-center transition-all duration-300 ${
         active ? 'opacity-100' : 'opacity-0 pointer-events-none'
       }`}
     >
