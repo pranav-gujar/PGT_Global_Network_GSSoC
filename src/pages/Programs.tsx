@@ -25,6 +25,9 @@ interface ColorClasses {
   navPillBorder: string;
   navPillText: string;
   navPillHover: string;
+  navAccentBar: string;
+  navActiveBg: string;
+  navActiveText: string;
 }
 
 const colorMap: Record<string, ColorClasses> = {
@@ -38,6 +41,9 @@ const colorMap: Record<string, ColorClasses> = {
     navPillBorder: 'border-blue-500',
     navPillText:   'text-blue-700',
     navPillHover:  'hover:bg-blue-500 hover:text-white',
+    navAccentBar:  'bg-blue-500',
+    navActiveBg:   'bg-blue-600',
+    navActiveText: 'text-white',
   },
   purple: {
     badge:         'bg-purple-100 text-purple-700 border border-purple-200',
@@ -49,6 +55,9 @@ const colorMap: Record<string, ColorClasses> = {
     navPillBorder: 'border-purple-500',
     navPillText:   'text-purple-700',
     navPillHover:  'hover:bg-purple-500 hover:text-white',
+    navAccentBar:  'bg-purple-500',
+    navActiveBg:   'bg-purple-600',
+    navActiveText: 'text-white',
   },
   emerald: {
     badge:         'bg-emerald-100 text-emerald-700 border border-emerald-200',
@@ -60,6 +69,9 @@ const colorMap: Record<string, ColorClasses> = {
     navPillBorder: 'border-emerald-500',
     navPillText:   'text-emerald-700',
     navPillHover:  'hover:bg-emerald-500 hover:text-white',
+    navAccentBar:  'bg-emerald-500',
+    navActiveBg:   'bg-emerald-600',
+    navActiveText: 'text-white',
   },
   orange: {
     badge:         'bg-orange-100 text-orange-700 border border-orange-200',
@@ -71,6 +83,9 @@ const colorMap: Record<string, ColorClasses> = {
     navPillBorder: 'border-orange-500',
     navPillText:   'text-orange-700',
     navPillHover:  'hover:bg-orange-500 hover:text-white',
+    navAccentBar:  'bg-orange-500',
+    navActiveBg:   'bg-orange-600',
+    navActiveText: 'text-white',
   },
   green: {
     badge:         'bg-green-100 text-green-700 border border-green-200',
@@ -82,6 +97,9 @@ const colorMap: Record<string, ColorClasses> = {
     navPillBorder: 'border-green-500',
     navPillText:   'text-green-700',
     navPillHover:  'hover:bg-green-500 hover:text-white',
+    navAccentBar:  'bg-green-500',
+    navActiveBg:   'bg-green-600',
+    navActiveText: 'text-white',
   },
 };
 
@@ -89,24 +107,48 @@ const Programs = () => {
 
   const loading = usePageLoading();
   const location = useLocation();
+  const [activeSection, setActiveSection] = React.useState<string>('d3');
 
+  // Total height of stacked sticky bars: main navbar (64px) + quick-nav bar (~48px) + 16px breathing room
+  const SCROLL_OFFSET = 128;
+
+  const scrollToSection = React.useCallback((id: string) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const top = el.getBoundingClientRect().top + window.scrollY - SCROLL_OFFSET;
+    window.scrollTo({ top, behavior: 'smooth' });
+  }, []);
+
+  // Handle URL hash on page load / navigation
   useEffect(() => {
     if (location.hash) {
-      const id = location.hash.replace("#", "");
-
-      const scrollToEl = () => {
-        const el = document.getElementById(id);
-        if (el) {
-          el.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-      };
-
-      scrollToEl();
-      const t = setTimeout(scrollToEl, 300);
-
+      const id = location.hash.replace('#', '');
+      // Wait one frame for layout, then scroll with offset
+      const t = setTimeout(() => scrollToSection(id), 100);
       return () => clearTimeout(t);
     }
-  }, [location]);
+  }, [location, scrollToSection]);
+
+  // Scroll-spy: highlight nav item whose section top is nearest below the offset
+  useEffect(() => {
+    const programIds = ['d3', 'voa', 'seminarix', 'motivminds', 'hed'];
+
+    const onScroll = () => {
+      // Find the last section whose top edge has passed our offset line
+      let current = programIds[0];
+      for (const id of programIds) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const top = el.getBoundingClientRect().top;
+        if (top <= SCROLL_OFFSET + 32) current = id;
+      }
+      setActiveSection(current);
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll(); // run once on mount to set initial state
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   const programs = [
     {
@@ -237,31 +279,102 @@ const Programs = () => {
         </section>
       </AnimatedCard>
 
-      {/* Quick-Nav Pill Strip */}
-      <AnimatedCard animation="slideDown">
-        <div className="sticky top-16 z-20 bg-white/90 backdrop-blur-sm border-b border-gray-100 shadow-sm">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
-            <div className="flex gap-2 flex-wrap justify-center sm:justify-start overflow-x-auto">
-              {programs.map((program) => {
+      {/* Quick-Nav — Premium Initiative Navigator */}
+      <div className="sticky top-16 z-20">
+        {/* Gradient bridge: blends hero bottom into nav bar */}
+        <div className="h-6 bg-gradient-to-b from-purple-600/20 via-blue-100/30 to-transparent absolute inset-x-0 -top-6 pointer-events-none" />
+
+        <div className="bg-white/95 backdrop-blur-md border-b border-gray-200/80 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.08)]">
+          {/* Slim gradient rule at very top of bar — echoes hero palette */}
+          <div className="h-0.5 bg-gradient-to-r from-blue-600 via-purple-500 to-blue-400" />
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center gap-1 overflow-x-auto scrollbar-hide py-2.5">
+
+              {/* Left label */}
+              <span className="flex-shrink-0 text-xs font-semibold uppercase tracking-widest text-gray-400 mr-3 hidden sm:block">
+                Jump to
+              </span>
+
+              {programs.map((program, idx) => {
                 const c = colorMap[program.color];
+                const isActive = activeSection === program.id;
+                const Icon = program.icon;
+
                 return (
-                  <a
+                  <button
                     key={program.id}
-                    href={`#${program.id}`}
+                    type="button"
+                    onClick={() => {
+                      setActiveSection(program.id);
+                      scrollToSection(program.id);
+                    }}
                     className={`
-                      flex-shrink-0 px-4 py-1.5 rounded-full text-sm font-semibold
-                      border-2 transition-all duration-200
-                      ${c.navPillBorder} ${c.navPillText} ${c.navPillHover}
+                      group relative flex-shrink-0 flex items-center gap-2
+                      px-4 py-2 rounded-lg text-sm font-semibold
+                      transition-all duration-300 ease-out
+                      ${isActive
+                        ? `${c.navActiveBg} ${c.navActiveText} shadow-md scale-[1.03]`
+                        : `text-gray-500 hover:text-gray-800 hover:bg-gray-50`
+                      }
                     `}
+                    aria-current={isActive ? 'true' : undefined}
                   >
+                    {/* Icon — visible only on active or hover */}
+                    <span className={`
+                      transition-all duration-300
+                      ${isActive ? 'opacity-100 w-4' : 'opacity-0 w-0 overflow-hidden group-hover:opacity-60 group-hover:w-4'}
+                    `}>
+                      <Icon className="h-4 w-4 flex-shrink-0" />
+                    </span>
+
                     {program.name}
-                  </a>
+
+                    {/* Active underline accent bar */}
+                    {isActive && (
+                      <span className="absolute bottom-0 left-3 right-3 h-0.5 rounded-full bg-white/40" />
+                    )}
+
+                    {/* Sequence number badge — subtle, only on inactive */}
+                    {!isActive && (
+                      <span className="ml-0.5 text-[10px] font-bold text-gray-300 group-hover:text-gray-400 transition-colors">
+                        {String(idx + 1).padStart(2, '0')}
+                      </span>
+                    )}
+                  </button>
                 );
               })}
+
+              {/* Progress dots — visual indicator of position */}
+              <div className="flex-1 hidden sm:flex items-center justify-end gap-1.5 min-w-0 pl-4">
+                {programs.map((program) => {
+                  const c = colorMap[program.color];
+                  const isActive = activeSection === program.id;
+                  return (
+                    <button
+                      key={`dot-${program.id}`}
+                      type="button"
+                      onClick={() => {
+                        setActiveSection(program.id);
+                        scrollToSection(program.id);
+                      }}
+                      aria-label={`Go to ${program.name}`}
+                      className={`
+                        rounded-full transition-all duration-300
+                        ${isActive
+                          ? `w-5 h-2 ${c.navAccentBar}`
+                          : 'w-2 h-2 bg-gray-200 hover:bg-gray-300'
+                        }
+                      `}
+                    />
+                  );
+                })}
+              </div>
+
             </div>
           </div>
         </div>
-      </AnimatedCard>
+      </div>
 
       {/* Programs Overview */}
       <section className="py-20">
@@ -289,7 +402,7 @@ const Programs = () => {
                   <div
                     id={program.id}
                     className={`
-                      flex flex-col gap-10 items-center
+                      flex flex-col gap-10 items-center scroll-mt-32
                       ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'}
                     `}
                   >
