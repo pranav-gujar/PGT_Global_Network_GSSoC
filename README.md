@@ -16,9 +16,45 @@ All changes made here will be reviewed before being integrated into the official
 
 A modern, responsive website for PGT Global Network built with React, TypeScript, and Tailwind CSS. This platform showcases our programs, impact, and mission to transform lives through purpose-driven growth.
 
+## ⭐ Key Highlights
+
+- 🌍 Global mentorship and growth-focused platform
+- 💼 Career opportunities and internship portal
+- 📰 Interactive blogging and storytelling system
+- 📱 Fully responsive modern UI experience
+- 🤝 Open-source collaboration under GSSoC
+
+---
+
 ## 🌐 Live Demo
 
-**Production Site:** [https://www.pgtglobalnetwork.com/](https://www.pgtglobalnetwork.com/)
+**Production Site:** [PGT Global Network](https://www.pgtglobalnetwork.com/)
+
+---
+
+## 📚 Table of Contents
+
+- 🌐 Live Demo
+- 🚀 Features
+- 🛠️ Tech Stack
+- 📸 Project Screenshots
+- 📱 Mobile Experience
+- 📁 Project Structure
+- 🚀 Getting Started
+- 🗄️ Database Schema
+- 🔐 Authentication System
+- 📱 Responsive Design
+- 🔧 API Integration
+- 🧪 Testing
+- 📊 Analytics & Monitoring
+- 🤝 Contribution Guidelines
+- 📝 License
+- 📞 Support
+- 🔄 Changelog
+- 🚀 Roadmap
+- 📈 Project Statistics
+
+---
 
 ## 🚀 Features
 
@@ -47,6 +83,8 @@ A modern, responsive website for PGT Global Network built with React, TypeScript
 - **ESLint & Prettier** - Code quality and formatting
 - **Responsive Images** - Optimized loading with Pexels integration
 
+---
+
 ## 🛠️ Tech Stack
 
 ### Frontend
@@ -69,6 +107,40 @@ A modern, responsive website for PGT Global Network built with React, TypeScript
 
 ### Deployment
 - **Vercel** - Hosting of Frontend + Backend
+
+---
+
+## 📸 Project Screenshots
+
+### 🏠 Homepage & ℹ️ About
+
+<p align="center">
+  <img src="public/screenshots/homepage.png" width="45%" height="450">
+  <img src="public/screenshots/about.png" width="45%" height="450">
+</p>
+
+### 🎯 Programs & 🖼️ Gallery
+
+<p align="center">
+  <img src="public/screenshots/programs.png" width="45%" height="450">
+  <img src="public/screenshots/gallery.png" width="45%" height="450">
+</p>
+
+### 💼 Careers & 🔐 Authentication
+
+<p align="center">
+  <img src="public/screenshots/careers.png" width="45%" height="450">
+  <img src="public/screenshots/auth.png" width="45%" height="450">
+</p>
+
+## 📱 Mobile Experience
+
+<p align="center">
+  <img src="public/screenshots/mobile-home.png" width="250" height="450">
+  <img src="public/screenshots/mobile-navbar.png" width="250" height="450">
+</p>
+
+---
 
 ## 📁 Project Structure
 
@@ -118,6 +190,8 @@ src/
 └── index.css            # Global styles
 ```
 
+---
+
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -158,6 +232,7 @@ Navigate to `http://localhost:5173`
 npm run build
 npm run preview
 ```
+---
 
 ## 🗄️ Database Schema
 
@@ -228,6 +303,8 @@ CREATE TABLE user_activities (
 
 ### Row Level Security (RLS)
 All tables have RLS enabled with appropriate policies for user data protection.
+
+---
 
 ## 🎨 Styling & Animations
 
@@ -338,6 +415,8 @@ export const useCountUp = ({ end, duration = 2000, start = 0, decimals = 0 }) =>
 };
 ```
 
+---
+
 ## 🔐 Authentication System
 
 ### Auth Context
@@ -419,6 +498,8 @@ const ProtectedAction: React.FC<ProtectedActionProps> = ({
 };
 ```
 
+---
+
 ## 📱 Responsive Design
 
 ### Breakpoints
@@ -460,6 +541,8 @@ const Navbar = () => {
   );
 };
 ```
+
+---
 
 ## 🔧 API Integration
 
@@ -527,6 +610,7 @@ const handleLike = async (blogId: string) => {
 };
 ```
 
+---
 
 ## 🧪 Testing
 
@@ -564,6 +648,8 @@ npm install -D @playwright/test
 # Run tests
 npx playwright test
 ```
+
+---
 
 ## 📊 Analytics & Monitoring
 
@@ -651,6 +737,8 @@ When reporting issues, please include:
 - ✅ Contact forms
 - ✅ Program information
 
+---
+
 ## 🚀 Roadmap
 
 ### Upcoming Features
@@ -673,17 +761,8 @@ When reporting issues, please include:
 
 ---
 
-## 📈 Project Statistics
-
-- **Lines of Code**: ~15,000+
-- **Components**: 25+
-- **Pages**: 15+
-- **Database Tables**: 5
-- **API Endpoints**: 20+
-- **Test Coverage**: 85%+
-
----
-
 **Built with ❤️ by the PGT Global Network Team**
 
 For more information, visit our [official website](https://www.pgtglobalnetwork.com/) or contact us at [office@pgtglobalnetwork.com](office@pgtglobalnetwork.com).
+
+---
