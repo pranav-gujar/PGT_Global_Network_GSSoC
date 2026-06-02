@@ -57,6 +57,8 @@ const Home = () => {
       icon: Target,
       iconBg: 'bg-indigo-50 border border-indigo-100/50 text-indigo-650 dark:bg-indigo-900/40 dark:text-indigo-400',
       btnHover: 'hover:bg-indigo-600 hover:text-white hover:border-indigo-600 hover:shadow-lg hover:shadow-indigo-600/25'
+      description: 'A flagship daily inspiration series delivering knowledge, awareness, and impactful stories to students.',
+      image: D3
     },
     {
       id: 'voa',
@@ -68,6 +70,8 @@ const Home = () => {
       icon: Users,
       iconBg: 'bg-amber-50 border border-amber-100/50 text-amber-650 dark:bg-amber-900/40 dark:text-amber-400',
       btnHover: 'hover:bg-amber-600 hover:text-white hover:border-amber-600 hover:shadow-lg hover:shadow-amber-600/25'
+      description: 'A storytelling series highlighting individuals who turned challenges into change and built impact.',
+      image: VoA
     },
     {
       id: 'seminarix',
@@ -79,6 +83,8 @@ const Home = () => {
       icon: GraduationCap,
       iconBg: 'bg-violet-50 border border-violet-100/50 text-violet-650 dark:bg-violet-900/40 dark:text-violet-400',
       btnHover: 'hover:bg-violet-600 hover:text-white hover:border-violet-600 hover:shadow-lg hover:shadow-violet-600/25'
+      description: 'On-ground seminar sessions empowering students with academics, motivation, and wellness tools',
+      image: Seminarix
     }
   ];
 
@@ -231,6 +237,14 @@ const Home = () => {
                 Our Global Impact
               </h2>
               <p className="text-lg md:text-xl text-white/80 max-w-3xl mx-auto font-light">
+        <section className="relative py-20 bg-blue-600 text-white overflow-hidden">
+          <Background />
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                Our Global Impact
+              </h2>
+              <p className="text-xl text-blue-100 max-w-3xl mx-auto">
                 Six years of dedication, innovation, and transformation
               </p>
             </div>
@@ -243,6 +257,10 @@ const Home = () => {
                       <stat.icon className="h-8 w-8 text-white" />
                     </div>
                     <div className="text-3xl md:text-5xl font-black text-white mb-2 tracking-tight">
+                    <div className="w-16 h-16 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-4">
+                      <stat.icon className="h-8 w-8 text-white" />
+                    </div>
+                    <div className="text-3xl md:text-4xl font-bold text-white mb-2">
                       <CountUpNumber
                         end={stat.number}
                         suffix={stat.suffix || ''}
@@ -250,6 +268,7 @@ const Home = () => {
                       />
                     </div>
                     <div className="text-blue-200 text-sm font-semibold tracking-wider uppercase">{stat.label}</div>
+                    <div className="text-blue-100 font-medium">{stat.label}</div>
                   </div>
                 </AnimatedCard>
               ))}
@@ -275,7 +294,6 @@ const Home = () => {
               Designed with precision to offer robust learning, resilient community building, and impactful growth.
             </p>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
             {programs.map((program, index) => (
               <AnimatedCard key={index} animation="slideUp" delay={index * 150}>
@@ -301,6 +319,27 @@ const Home = () => {
                       </span>
                     </div>
                   </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {programs.map((program, index) => (
+              <AnimatedCard key={index} animation="slideUp" delay={index * 200}>
+                <div className="bg-white rounded-xl shadow-md border border-gray-100/55 overflow-hidden hover:shadow-lg transition-all duration-300">
+                  <img
+                    src={program.image}
+                    alt={program.name}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-48 object-cover"
+                  />
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold text-gray-900 mb-3">{program.name}</h3>
+                    <p className="text-gray-600 mb-4">{program.description}</p>
+                    <Link
+                      to={`/programs/${program.id}`}  // direct to ProgramDetail
+                      className="text-blue-600 font-medium hover:text-blue-800 inline-flex items-center"
+                    >
+                      Learn More
+                      <ArrowRight className="ml-1 h-4 w-4" />
+                    </Link>
 
                   {/* Body content */}
                   <div className="p-6 lg:p-8 flex flex-col flex-grow justify-between bg-white">
@@ -334,6 +373,7 @@ const Home = () => {
           </div>
 
           <div className="text-center mt-16">
+          <div className="text-center mt-12">
             <Link
               to="/programs"
               className="group relative inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white transition-all duration-300 bg-blue-600 hover:bg-blue-700 rounded-xl hover:shadow-xl hover:shadow-blue-500/20 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600"

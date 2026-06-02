@@ -28,6 +28,53 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [session, setSession] = useState<Session | null>(null)
   const [loading, setLoading] = useState(true)
 
+  // Handle profile row initialization safely without deadlocking the client
+  useEffect(() => {
+    const initializeProfile = async () => {
+      if (!user) return
+
+      try {
+        // Check if profile already exists to avoid overwriting existing data
+        const { data: existingProfile, error: fetchError } = await supabase
+          .from('profiles')
+          .select('id')
+          .eq('id', user.id)
+          .maybeSingle()
+
+        if (fetchError) {
+          console.error('Error checking profile existence:', fetchError)
+          return
+        }
+
+        if (!existingProfile) {
+          // Create the profile row only if it doesn't already exist
+          const { error: insertError } = await supabase
+            .from('profiles')
+            .insert({
+              id: user.id,
+              email: user.email!,
+              full_name: user.user_metadata?.full_name || '',
+              bio: '',
+              location: '',
+              website: '',
+              avatar_url: '',
+              updated_at: new Date().toISOString(),
+            })
+
+          if (insertError) {
+            console.error('Error initializing profile:', insertError)
+          } else {
+            console.log('Profile row successfully initialized for new user')
+          }
+        }
+      } catch (err) {
+        console.error('Unexpected error during profile initialization:', err)
+      }
+    }
+
+    initializeProfile()
+  }, [user])
+
   useEffect(() => {
     // Get initial session
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -36,33 +83,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setLoading(false)
     })
 
-    // Listen for auth changes
+    // Listen for auth changes synchronously to avoid auth client deadlocks
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange(async (event, session) => {
+    } = supabase.auth.onAuthStateChange((event, session) => {
       setSession(session)
       setUser(session?.user ?? null)
       setLoading(false)
-
-      if (event === 'SIGNED_IN' && session?.user) {
-        // Create or update profile with all fields initialized
-        const { error } = await supabase
-          .from('profiles')
-          .upsert({
-            id: session.user.id,
-            email: session.user.email!,
-            full_name: session.user.user_metadata?.full_name || '',
-            bio: '',
-            location: '',
-            website: '',
-            avatar_url: '',
-            updated_at: new Date().toISOString(),
-          })
-
-        if (error) {
-          console.error('Error creating or updating profile:', error)
-        }
-      }
     })
 
     // Cleanup subscription
@@ -114,6 +141,34 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const updateProfile = async (data: any) => {
     if (!user) throw new Error('No user logged in')
+
+    // Double check that the profile exists before we update it, in case initialization failed
+    const { data: existingProfile, error: checkError } = await supabase
+      .from('profiles')
+      .select('id')
+      .eq('id', user.id)
+      .maybeSingle()
+
+    if (checkError) {
+      console.error('Error checking profile during update:', checkError)
+    } else if (!existingProfile) {
+      // Create profile row first if it doesn't exist
+      const { error: insertError } = await supabase
+        .from('profiles')
+        .insert({
+          id: user.id,
+          email: user.email!,
+          full_name: user.user_metadata?.full_name || '',
+          bio: '',
+          location: '',
+          website: '',
+          avatar_url: '',
+          updated_at: new Date().toISOString(),
+        })
+      if (insertError) {
+        throw insertError
+      }
+    }
 
     const cleanData = Object.fromEntries(
       Object.entries(data).filter(([_, v]) => v !== undefined && v !== null)
