@@ -25,6 +25,8 @@ import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
 import Dashboard from './pages/Dashboard';
 import Footer from './components/Footer';
+import Profile from './pages/Profile';
+import Network from './pages/Network';
 
 const AppContent = () => {
   useScrollToTop();
@@ -50,6 +52,8 @@ const AppContent = () => {
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/network" element={<Network />} />
+        <Route path="/profile/:userId" element={<Profile />} />
       </Routes>
       <Footer />
       <ScrollToTop />
