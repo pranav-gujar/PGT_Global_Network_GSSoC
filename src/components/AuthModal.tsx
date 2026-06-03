@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
-import { X, Mail, Lock, User } from 'lucide-react'
+import { X, Mail, Lock, User,Eye, EyeOff } from 'lucide-react'
 import { useAuth } from '../contexts/AuthContext'
 
 interface AuthModalProps {
@@ -17,7 +17,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTab = 'si
   const [loading, setLoading] = useState(false)
   const [showVerificationScreen, setShowVerificationScreen] = useState(false)
   const { signIn, signUp } = useAuth()
-
+  const [showPassword, setShowPassword] = useState(false);
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -161,9 +161,8 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTab = 'si
                       autoComplete="name"
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
-                      className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       placeholder="Enter your full name"
-                      required
                     />
                   </div>
                 </div>
@@ -205,23 +204,35 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTab = 'si
                 <div className="relative">
                   <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
 
-                  <input
-                    id={activeTab === 'signin' ? 'signin-password' : 'signup-password'}
-                    name="password"
-                    type="password"
-                    autoComplete={
-                      activeTab === 'signin'
-                        ? 'current-password'
-                        : 'new-password'
-                    }
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    placeholder="Enter your password"
-                    required
-                    minLength={6}
-                  />
-                </div>
+                 <input
+                  id={activeTab === 'signin' ? 'signin-password' : 'signup-password'}
+                  name="password"
+                  type={showPassword ? 'text' : 'password'}
+                  autoComplete={
+                    activeTab === 'signin'
+                      ? 'current-password'
+                      : 'new-password'
+                  }
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  placeholder="Enter your password"
+                  required
+                  minLength={6}
+                />
+
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                >
+                  {showPassword ? (
+                    <EyeOff className="h-5 w-5" />
+                  ) : (
+                    <Eye className="h-5 w-5" />
+                  )}
+                </button>
+                                </div>
               </div>
 
               <button
