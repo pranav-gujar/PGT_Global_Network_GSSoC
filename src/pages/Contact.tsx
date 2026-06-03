@@ -23,7 +23,7 @@ const Contact = () => {
       title: 'Call Us',
       details: '+91 8999902805',
       description: 'Speak directly with our team during business hours',
-      action: 'tel:+15551234567'
+      action: 'tel:+918999902805'
     },
     // {
     //   icon: MapPin,
@@ -105,7 +105,9 @@ const Contact = () => {
               <info.icon className="h-8 w-8 text-blue-600" />
             </div>
             <h3 className="text-xl font-bold text-gray-900 mb-2">{info.title}</h3>
-            <p className="text-lg font-semibold text-blue-600 mb-2">{info.details}</p>
+           <a href={info.action} className="text-lg font-semibold text-blue-600 mb-2 hover:underline block">
+              {info.details}
+           </a>
             <p className="text-gray-600 text-sm mb-4">{info.description}</p>
           </div>
         </AnimatedCard>
