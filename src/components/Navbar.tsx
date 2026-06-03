@@ -18,14 +18,32 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     try {
-       await signOut();
-       navigate('/'); // 👈 send user back to home after logout
-      } catch (error) {
-        console.error('Error signing out:', error);
+      await signOut();
+      navigate('/'); // 👈 send user back to home after logout
+    } catch (error) {
+      console.error('Error signing out:', error);
     }
   };
 
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
 
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [isOpen]);
+
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    document.body.style.overflow = 'auto';
+  }, [location.pathname]);
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 10;
@@ -36,7 +54,13 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close dropdowns when clicking outside or scrolling
+  useEffect(() => {
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, []);
+
+  // Close dropdowns when clicking outside
   useEffect(() => {
     const handleClickOutside = () => {
       setDropdownOpen(false);
@@ -50,11 +74,23 @@ const Navbar = () => {
 
     document.addEventListener('click', handleClickOutside);
     window.addEventListener('scroll', handleScroll);
-    
+
     return () => {
       document.removeEventListener('click', handleClickOutside);
       window.removeEventListener('scroll', handleScroll);
     };
+  }, []);
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsOpen(false);
+        setDropdownOpen(false);
+        setUserDropdownOpen(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
   const navItems = [
@@ -82,31 +118,27 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={`fixed w-full top-0 z-50 transition-all duration-300 ${
-      scrolled 
-        ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-100' 
-        : 'bg-white shadow-lg'
-    }`}>
+    <nav className={`fixed w-full top-0 z-50 transition-all duration-300 ${scrolled
+      ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-100'
+      : 'bg-white shadow-lg'
+      }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className={`flex justify-between items-center transition-all duration-300 ${
-          scrolled ? 'h-14' : 'h-16'
-        }`}>
+        <div className={`flex justify-between items-center transition-all duration-300 ${scrolled ? 'h-14' : 'h-16'
+          }`}>
           {/* Logo */}
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2">
-              <img 
-                src="/PGT New Logo Transparent.png" 
-                alt="PGT Logo" 
-                className={`transition-all duration-300 filter drop-shadow-md ${
-                  scrolled ? 'w-8 h-8' : 'w-10 h-10'
-                }`}
+              <img
+                src="/PGT New Logo Transparent.png"
+                alt="PGT Logo"
+                className={`transition-all duration-300 filter drop-shadow-md ${scrolled ? 'w-8 h-8' : 'w-10 h-10'
+                  }`}
                 style={{
                   filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))'
                 }}
               />
-              <span className={`font-bold text-gray-900 transition-all duration-300 ${
-                scrolled ? 'text-lg' : 'text-xl'
-              }`}>
+              <span className={`font-bold text-gray-900 transition-all duration-300 ${scrolled ? 'text-lg' : 'text-xl'
+                }`}>
                 <span className="hidden sm:inline">PGT Global Network</span>
                 <span className="sm:hidden">PGT</span>
               </span>
@@ -120,18 +152,16 @@ const Navbar = () => {
                 <Link
                   key={item.name}
                   to={item.path}
-                  className={`px-3 py-2 rounded-md font-medium transition-all duration-200 hover:scale-105 ${
-                    scrolled ? 'text-xs' : 'text-sm'
-                  } ${
-                    isActive(item.path)
+                  className={`px-3 py-2 rounded-md font-medium transition-all duration-200 hover:scale-105 ${scrolled ? 'text-xs' : 'text-sm'
+                    } ${isActive(item.path)
                       ? 'text-blue-600 bg-blue-50'
                       : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
-                  }`}
+                    }`}
                 >
                   {item.name}
                 </Link>
               ))}
-              
+
               {/* More Dropdown */}
               <div className="relative">
                 <button
@@ -140,21 +170,20 @@ const Navbar = () => {
                     e.stopPropagation();
                     setDropdownOpen(!dropdownOpen);
                   }}
-                  className={`flex items-center px-3 py-2 rounded-md font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-all duration-200 ${
-                    scrolled ? 'text-xs' : 'text-sm'
-                  }`}
+                  className={`flex items-center px-3 py-2 rounded-md font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-all duration-200 ${scrolled ? 'text-xs' : 'text-sm'
+                    }`}
                 >
                   More
                   <ChevronDown className="ml-1 h-4 w-4" />
                 </button>
-                
+
                 {dropdownOpen && (
                   <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200">
                     {moreItems.map((item) => (
                       <Link
                         key={item.name}
                         to={item.path}
-                        className={`block px-4 py-2 text-sm hover:bg-gray-50 ${isActive(item.path) ? 'text-blue-600 bg-blue-50' : 'text-gray-700'}`}
+                        className={`block px-4 py-3 text-sm hover:bg-gray-50 ${isActive(item.path) ? 'text-blue-600 bg-blue-50' : 'text-gray-700'}`}
                         onClick={() => setDropdownOpen(false)}
                       >
                         {item.name}
@@ -172,20 +201,19 @@ const Navbar = () => {
                       e.stopPropagation();
                       setUserDropdownOpen(!userDropdownOpen);
                     }}
-                    className={`flex items-center px-3 py-2 rounded-md font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-all duration-200 ${
-                      scrolled ? 'text-xs' : 'text-sm'
-                    }`}
+                    className={`flex items-center px-3 py-2 rounded-md font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-all duration-200 ${scrolled ? 'text-xs' : 'text-sm'
+                      }`}
                   >
                     <User className="h-4 w-4 mr-1" />
                     Account
                     <ChevronDown className="ml-1 h-4 w-4" />
                   </button>
-                  
+
                   {userDropdownOpen && (
                     <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200">
                       <Link
                         to="/dashboard"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                        className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50"
                         onClick={() => setUserDropdownOpen(false)}
                       >
                         Dashboard
@@ -195,7 +223,7 @@ const Navbar = () => {
                           handleLogout();
                           setUserDropdownOpen(false);
                         }}
-                        className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center"
+                        className="w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 flex items-center"
                       >
                         <LogOut className="h-4 w-4 mr-2" />
                         Sign Out
@@ -206,9 +234,8 @@ const Navbar = () => {
               ) : (
                 <button
                   onClick={() => setShowAuthModal(true)}
-                  className={`bg-blue-600 text-white px-4 py-2 rounded-md font-medium hover:bg-blue-700 transition-all duration-200 hover:scale-105 ${
-                    scrolled ? 'text-xs' : 'text-sm'
-                  }`}
+                  className={`bg-blue-600 text-white px-4 py-2 rounded-md font-medium hover:bg-blue-700 transition-all duration-200 hover:scale-105 ${scrolled ? 'text-xs' : 'text-sm'
+                    }`}
                 >
                   Sign In
                 </button>
@@ -220,6 +247,7 @@ const Navbar = () => {
           <div className="lg:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
+              aria-label="Toggle navigation menu"
               className="text-gray-700 hover:text-blue-600 focus:outline-none transition-colors duration-200"
             >
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -229,72 +257,75 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Navigation */}
-      {isOpen && (
-        <div className="lg:hidden">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white/95 backdrop-blur-md border-t border-gray-100 shadow-lg">
-            {navItems.map((item) => (
-              <Link
-                key={item.name}
-                to={item.path}
-                className={`block px-3 py-2 rounded-md text-base font-medium transition-all duration-200 ${
-                  isActive(item.path)
-                    ? 'text-blue-600 bg-blue-50'
-                    : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
+      <div className={`lg:hidden fixed left-0 right-0 top-16 bg-white/95 backdrop-blur-md border-t border-gray-100 shadow-lg transition-transform duration-300 transform-gpu ${isOpen ? 'translate-y-0' : '-translate-y-full'}`}>
+        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+          {navItems.map((item) => (
+            <Link
+              key={item.name}
+              to={item.path}
+              className={`block px-4 py-3 rounded-md text-base font-medium transition-all duration-200 ${isActive(item.path)
+                ? 'text-blue-600 bg-blue-50'
+                : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
                 }`}
-                onClick={() => setIsOpen(false)}
-              >
-                {item.name}
-              </Link>
-            ))}
-            {moreItems.map((item) => (
+              onClick={() => setIsOpen(false)}
+            >
+              {item.name}
+            </Link>
+          ))}
+          <div className="my-2 border-t border-gray-100" />
+          {moreItems.map((item) => (
+            <Link
+              key={item.name}
+              to={item.path}
+              className={`block px-4 py-3 rounded-md text-base font-medium transition-all duration-200 ${isActive(item.path)
+                  ? 'text-blue-600 bg-blue-50'
+                  : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
+                }`}
+              onClick={() => setIsOpen(false)}
+            >
+              {item.name}
+            </Link>
+          ))}
+          <div className="my-2 border-t border-gray-100" />
+
+          {/* Mobile Auth */}
+          {user ? (
+            <>
               <Link
-                key={item.name}
-                to={item.path}
-                className={`block px-3 py-2 rounded-md text-base font-medium hover:text-blue-600 hover:bg-gray-50 transition-all duration-200 ${isActive(item.path) ? 'text-blue-600 bg-blue-50' : 'text-gray-700'}`}
+                to="/dashboard"
+                className="block px-4 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-all duration-200"
                 onClick={() => setIsOpen(false)}
               >
-                {item.name}
+                Dashboard
               </Link>
-            ))}
-            
-            {/* Mobile Auth */}
-            {user ? (
-              <>
-                <Link
-                  to="/dashboard"
-                  className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-all duration-200"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Dashboard
-                </Link>
-                <button
-                  onClick={() => {
-                    handleLogout();
-                    setIsOpen(false);
-                  }}
-                  className="w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-all duration-200"
-                >
-                  Sign Out
-                </button>
-              </>
-            ) : (
               <button
                 onClick={() => {
-                  setShowAuthModal(true);
+                  handleLogout();
                   setIsOpen(false);
                 }}
-                className="w-full text-left px-3 py-2 rounded-md text-base font-medium bg-blue-600 text-white hover:bg-blue-700 transition-all duration-200"
+                className="w-full text-left px-4 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-all duration-200"
               >
-                Sign In
+                Sign Out
               </button>
-            )}
-          </div>
+            </>
+          ) : (
+            <button
+              onClick={() => {
+                setShowAuthModal(true);
+                setIsOpen(false);
+              }}
+              className="w-full text-left px-4 py-3 rounded-md text-base font-medium bg-blue-600 text-white hover:bg-blue-700 transition-all duration-200"
+            >
+              Sign In
+            </button>
+          )}
         </div>
-      )}
-      
-      <AuthModal 
-        isOpen={showAuthModal} 
-        onClose={() => setShowAuthModal(false)} 
+
+      </div>
+
+      <AuthModal
+        isOpen={showAuthModal}
+        onClose={() => setShowAuthModal(false)}
       />
     </nav>
   );
