@@ -21,6 +21,7 @@ const Dashboard = () => {
   const [allProfiles, setAllProfiles] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [editMode, setEditMode] = useState(false)
+  const [saving, setSaving] = useState(false)
   const [showImageModal, setShowImageModal] = useState(false)
   const [profileImage, setProfileImage] = useState<string>('')
   
@@ -332,7 +333,11 @@ const Dashboard = () => {
                       className="text-green-600 hover:text-green-800 p-1.5 hover:bg-green-50 rounded-lg transition-colors"
                       title="Save Profile"
                     >
-                      <Save className="h-5 w-5" />
+                      {saving ? (
+                        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-green-600" />
+                      ) : (
+                        <Save className="h-5 w-5" />
+                      )}
                     </button>
                     <button
                       onClick={() => setEditMode(false)}
@@ -364,7 +369,8 @@ const Dashboard = () => {
                   </div>
                   <button
                     onClick={() => setShowImageModal(true)}
-                    className="absolute -bottom-1 -right-1 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors shadow-lg"
+                    disabled={saving}
+                    className="absolute -bottom-1 -right-1 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
                     title="Change profile photo"
                   >
                     <Camera className="h-4 w-4" />

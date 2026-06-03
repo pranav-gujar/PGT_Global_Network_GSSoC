@@ -14,8 +14,96 @@ import VoA from '../assets/programs/VoA.png';
 import HED from '../assets/programs/HED.png';
 import MotivMinds from '../assets/programs/MotiVMinds.png';
 
-import LoadingSpinner from '../components/LoadingSpinner'; 
+import LoadingSpinner from '../components/LoadingSpinner';
 import { usePageLoading } from '../hooks/usePageLoading';
+
+interface ColorClasses {
+  badge: string;
+  iconBg: string;
+  iconText: string;
+  button: string;
+  imageOverlay: string;
+  impactChip: string;
+  navPillBorder: string;
+  navPillText: string;
+  navPillHover: string;
+  navAccentBar: string;
+  navActiveBg: string;
+  navActiveText: string;
+}
+
+const colorMap: Record<string, ColorClasses> = {
+  blue: {
+    badge:         'bg-blue-100 text-blue-700 border border-blue-200',
+    iconBg:        'bg-blue-100',
+    iconText:      'text-blue-600',
+    button:        'bg-blue-600 hover:bg-blue-700',
+    imageOverlay:  'from-blue-600/70',
+    impactChip:    'bg-blue-50 border-blue-200 text-blue-800',
+    navPillBorder: 'border-blue-500',
+    navPillText:   'text-blue-700',
+    navPillHover:  'hover:bg-blue-500 hover:text-white',
+    navAccentBar:  'bg-blue-500',
+    navActiveBg:   'bg-blue-600',
+    navActiveText: 'text-white',
+  },
+  purple: {
+    badge:         'bg-purple-100 text-purple-700 border border-purple-200',
+    iconBg:        'bg-purple-100',
+    iconText:      'text-purple-600',
+    button:        'bg-purple-600 hover:bg-purple-700',
+    imageOverlay:  'from-purple-600/70',
+    impactChip:    'bg-purple-50 border-purple-200 text-purple-800',
+    navPillBorder: 'border-purple-500',
+    navPillText:   'text-purple-700',
+    navPillHover:  'hover:bg-purple-500 hover:text-white',
+    navAccentBar:  'bg-purple-500',
+    navActiveBg:   'bg-purple-600',
+    navActiveText: 'text-white',
+  },
+  emerald: {
+    badge:         'bg-emerald-100 text-emerald-700 border border-emerald-200',
+    iconBg:        'bg-emerald-100',
+    iconText:      'text-emerald-600',
+    button:        'bg-emerald-600 hover:bg-emerald-700',
+    imageOverlay:  'from-emerald-600/70',
+    impactChip:    'bg-emerald-50 border-emerald-200 text-emerald-800',
+    navPillBorder: 'border-emerald-500',
+    navPillText:   'text-emerald-700',
+    navPillHover:  'hover:bg-emerald-500 hover:text-white',
+    navAccentBar:  'bg-emerald-500',
+    navActiveBg:   'bg-emerald-600',
+    navActiveText: 'text-white',
+  },
+  orange: {
+    badge:         'bg-orange-100 text-orange-700 border border-orange-200',
+    iconBg:        'bg-orange-100',
+    iconText:      'text-orange-600',
+    button:        'bg-orange-600 hover:bg-orange-700',
+    imageOverlay:  'from-orange-600/70',
+    impactChip:    'bg-orange-50 border-orange-200 text-orange-800',
+    navPillBorder: 'border-orange-500',
+    navPillText:   'text-orange-700',
+    navPillHover:  'hover:bg-orange-500 hover:text-white',
+    navAccentBar:  'bg-orange-500',
+    navActiveBg:   'bg-orange-600',
+    navActiveText: 'text-white',
+  },
+  green: {
+    badge:         'bg-green-100 text-green-700 border border-green-200',
+    iconBg:        'bg-green-100',
+    iconText:      'text-green-600',
+    button:        'bg-green-600 hover:bg-green-700',
+    imageOverlay:  'from-green-600/70',
+    impactChip:    'bg-green-50 border-green-200 text-green-800',
+    navPillBorder: 'border-green-500',
+    navPillText:   'text-green-700',
+    navPillHover:  'hover:bg-green-500 hover:text-white',
+    navAccentBar:  'bg-green-500',
+    navActiveBg:   'bg-green-600',
+    navActiveText: 'text-white',
+  },
+};
 
 const Programs = () => {
   const loading = usePageLoading();

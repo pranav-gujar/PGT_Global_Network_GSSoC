@@ -166,8 +166,11 @@ const FAQ = () => {
               {filteredFAQs.map((item) => (
                 <div key={item.id} className="bg-white border border-gray-200 rounded-lg shadow-sm">
                   <button
+                    id={`faq-btn-${item.id}`}
                     onClick={() => toggleItem(item.id)}
-                    className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors"
+                    aria-expanded={openItem === item.id}
+                    aria-controls={`faq-panel-${item.id}`}
+                    className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-inset rounded-t-lg"
                   >
                     <h3 className="text-lg font-semibold text-gray-900 pr-4">
                       {item.question}
