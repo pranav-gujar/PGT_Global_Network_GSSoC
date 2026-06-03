@@ -38,12 +38,8 @@ const Dashboard = () => {
     }
   }, [user])
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setLoading(false)
-    }, 8000)
-    return () => clearTimeout(timeout)
-  }, [])
+  // Loading is controlled by fetchUserData's finally block.
+  // setLoading(false) is called as soon as data fetching completes.
 
   const fetchUserData = async () => {
     if (!user) return;
