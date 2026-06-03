@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, ChevronDown, User, LogOut } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
@@ -6,7 +6,9 @@ import AuthModal from '../components/AuthModal';
 
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const moreDropdownRef = useRef<HTMLDivElement>(null);
+  const userDropdownRef = useRef<HTMLDivElement>(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
@@ -62,9 +64,31 @@ const Navbar = () => {
 
   // Close dropdowns when clicking outside
   useEffect(() => {
-    const handleClickOutside = () => {
-      setDropdownOpen(false);
-      setUserDropdownOpen(false);
+    setIsMobileMenuOpen(false);
+    setDropdownOpen(false);
+    setUserDropdownOpen(false);
+  },[location.pathname]);
+
+  useEffect(() => {
+    if(isMobileMenuOpen){
+      document.body.style.overflow = 'hidden';
+    }
+    else{
+      document.body.style.overflow ='';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  },[isMobileMenuOpen]);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (moreDropdownRef.current && !moreDropdownRef.current.contains(e.target as Node)) {
+        setDropdownOpen(false);
+      }
+      if (userDropdownRef.current && !userDropdownRef.current.contains(e.target as Node)) {
+        setUserDropdownOpen(false);
+      }
     };
 
     const handleScroll = () => {
@@ -72,11 +96,11 @@ const Navbar = () => {
       setUserDropdownOpen(false);
     };
 
-    document.addEventListener('click', handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
     window.addEventListener('scroll', handleScroll);
 
     return () => {
-      document.removeEventListener('click', handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
@@ -163,7 +187,7 @@ const Navbar = () => {
               ))}
 
               {/* More Dropdown */}
-              <div className="relative">
+              <div className="relative" ref={moreDropdownRef}>
                 <button
                   // onClick={() => setDropdownOpen(!dropdownOpen)}
                   onClick={(e) => {
@@ -174,7 +198,7 @@ const Navbar = () => {
                     }`}
                 >
                   More
-                  <ChevronDown className="ml-1 h-4 w-4" />
+                  <ChevronDown className={`ml-1 h-4 w-4 transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`} />
                 </button>
 
                 {dropdownOpen && (
@@ -206,7 +230,7 @@ const Navbar = () => {
                   >
                     <User className="h-4 w-4 mr-1" />
                     Account
-                    <ChevronDown className="ml-1 h-4 w-4" />
+                    <ChevronDown className={`ml-1 h-4 w-4 transition-transform duration-200 ${userDropdownOpen ? 'rotate-180' : ''}`} />
                   </button>
 
                   {userDropdownOpen && (
@@ -250,7 +274,14 @@ const Navbar = () => {
               aria-label="Toggle navigation menu"
               className="text-gray-700 hover:text-blue-600 focus:outline-none transition-colors duration-200"
             >
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              <span className="sr-only">
+                {isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+              </span>
+              {isMobileMenuOpen ? (
+                <X className="h-6 w-6" aria-hidden="true" />
+              ) : (
+                <Menu className="h-6 w-6" aria-hidden="true" />
+              )}
             </button>
           </div>
         </div>
