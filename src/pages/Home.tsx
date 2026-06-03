@@ -57,6 +57,8 @@ const Home = () => {
       icon: Target,
       iconBg: 'bg-indigo-50 border border-indigo-100/50 text-indigo-650 dark:bg-indigo-900/40 dark:text-indigo-400',
       btnHover: 'hover:bg-indigo-600 hover:text-white hover:border-indigo-600 hover:shadow-lg hover:shadow-indigo-600/25'
+      description: 'A flagship daily inspiration series delivering knowledge, awareness, and impactful stories to students.',
+      image: D3
     },
     {
       id: 'voa',
@@ -68,6 +70,8 @@ const Home = () => {
       icon: Users,
       iconBg: 'bg-amber-50 border border-amber-100/50 text-amber-650 dark:bg-amber-900/40 dark:text-amber-400',
       btnHover: 'hover:bg-amber-600 hover:text-white hover:border-amber-600 hover:shadow-lg hover:shadow-amber-600/25'
+      description: 'A storytelling series highlighting individuals who turned challenges into change and built impact.',
+      image: VoA
     },
     {
       id: 'seminarix',
@@ -79,6 +83,8 @@ const Home = () => {
       icon: GraduationCap,
       iconBg: 'bg-violet-50 border border-violet-100/50 text-violet-650 dark:bg-violet-900/40 dark:text-violet-400',
       btnHover: 'hover:bg-violet-600 hover:text-white hover:border-violet-600 hover:shadow-lg hover:shadow-violet-600/25'
+      description: 'On-ground seminar sessions empowering students with academics, motivation, and wellness tools',
+      image: Seminarix
     }
   ];
 
@@ -231,6 +237,14 @@ const Home = () => {
                 Our Global Impact
               </h2>
               <p className="text-lg md:text-xl text-white/80 max-w-3xl mx-auto font-light">
+        <section className="relative py-20 bg-blue-600 text-white overflow-hidden">
+          <Background />
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                Our Global Impact
+              </h2>
+              <p className="text-xl text-blue-100 max-w-3xl mx-auto">
                 Six years of dedication, innovation, and transformation
               </p>
             </div>
@@ -243,6 +257,10 @@ const Home = () => {
                       <stat.icon className="h-8 w-8 text-white" />
                     </div>
                     <div className="text-3xl md:text-5xl font-black text-white mb-2 tracking-tight">
+                    <div className="w-16 h-16 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-4">
+                      <stat.icon className="h-8 w-8 text-white" />
+                    </div>
+                    <div className="text-3xl md:text-4xl font-bold text-white mb-2">
                       <CountUpNumber
                         end={stat.number}
                         suffix={stat.suffix || ''}
