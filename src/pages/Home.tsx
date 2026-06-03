@@ -45,6 +45,7 @@ const Home = () => {
     { number: 6, label: 'Years of Excellence', icon: Hourglass, suffix: '+' }
   ];
 
+
   const programs = [
     {
       id: 'd3',
@@ -65,6 +66,7 @@ const Home = () => {
       image: Seminarix
     }
   ];
+
 
   if (loading) {
     return <LoadingSpinner />;
@@ -104,35 +106,51 @@ const Home = () => {
           NO CHANGE — already a dark gradient background (blue-600→purple-600→blue-800).
           Text is white throughout. Reads correctly in both modes.           */}
       <AnimatedCard animation="fadeIn">
-        <section className="relative bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 text-white overflow-hidden">
+        <section className="relative bg-gray-950 text-white overflow-hidden min-h-[90vh] flex items-center">
           <HeroBackground />
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-            <div className="text-center relative z-10">
-              <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 relative z-10 w-full">
+            <div className="text-center">
+              
+              {/* Trust Badge */}
+              <div className="animate-fade-in-up flex justify-center mb-8">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md shadow-lg shadow-black/10">
+                  <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+                  <span className="text-sm font-medium text-white/80">Over 10,000+ Lives Impacted Globally</span>
+                </div>
+              </div>
+
+              {/* Headline */}
+              <h1 className="text-5xl md:text-7xl font-extrabold mb-8 tracking-tight leading-tight">
                 Transforming Lives Through
+
                 <span className="block bg-gradient-to-r from-yellow-300 via-amber-400 to-orange-500 bg-clip-text text-transparent font-extrabold mt-3">
                   Positivity, Growth & Transformation
                 </span>
               </h1>
               <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-blue-100">
+
                 Empowering individuals and organizations worldwide through innovative programs,
                 sustainable growth, and purposeful transformation.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+
+              {/* CTAs */}
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <Link
                   to="/programs"
-                  className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center justify-center"
+                  className="group relative inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white transition-all duration-300 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full hover:from-blue-500 hover:to-indigo-500 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-blue-500 shadow-[0_0_25px_rgba(37,99,235,0.45)] hover:shadow-[0_0_35px_rgba(99,102,241,0.6)]"
                 >
                   Explore Programs
-                  <ArrowRight className="ml-2 h-5 w-5" />
+                  <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
                 </Link>
                 <Link
                   to="/about"
-                  className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors inline-flex items-center justify-center"
+                  className="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-gray-300 transition-all duration-300 bg-transparent border border-white/20 rounded-full hover:bg-white/5 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-white/50"
                 >
                   Learn More
                 </Link>
               </div>
+              
+              {/* Trust Indicators (Logos / Stats summary if any) - Left empty as badge handles it primarily */}
             </div>
           </div>
         </section>
@@ -160,8 +178,10 @@ const Home = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {coreValues.map((value, index) => (
               <AnimatedCard key={index} animation="slideUp" delay={index * 200}>
+
                 <div className="bg-white dark:bg-slate-700 p-8 rounded-xl shadow-lg dark:shadow-slate-900/50 border border-transparent dark:border-slate-600 hover:shadow-xl transition-shadow">
                   <div className={`w-16 h-16 rounded-full bg-gray-100 dark:bg-slate-600 flex items-center justify-center mb-6 ${value.color}`}>
+
                     <value.icon className="h-8 w-8" />
                   </div>
                   <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">{value.title}</h3>
@@ -173,9 +193,9 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ── Impact Stats ─────────────────────────────────────────────
-          NO CHANGE — already bg-blue-600 with white text throughout.
-          Reads correctly in both modes.                                      */}
+
+      {/* Impact Stats */}
+
       <AnimatedCard animation="fadeIn">
         <section className="relative py-20 bg-blue-600 text-white overflow-hidden">
           <Background />
@@ -212,15 +232,32 @@ const Home = () => {
         </section>
       </AnimatedCard>
 
-      {/* ── Programs Preview ─────────────────────────────────────────
-          CHANGED: section added explicit dark:bg-slate-900 (was unstyled/transparent,
-                   which would inherit the light AnimatedBackground in dark mode)
-          CHANGED: heading text-gray-900 → dark:text-white
-          CHANGED: subtext text-gray-600 → dark:text-slate-400
-          CHANGED: cards bg-white → dark:bg-slate-800 with dark border + shadow
-          CHANGED: card heading text-gray-900 → dark:text-white
-          CHANGED: card body text-gray-600 → dark:text-slate-300
-          NO CHANGE on "Learn More" link — text-blue-600 readable on both         */}
+
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              {impactStats.map((stat, index) => (
+                <AnimatedCard key={index} animation="zoomIn" delay={index * 150}>
+                  <div className="text-center">
+                    <div className="w-16 h-16 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-4">
+                      <stat.icon className="h-8 w-8 text-white" />
+                    </div>
+                    <div className="text-3xl md:text-4xl font-bold text-white mb-2">
+                      <CountUpNumber
+                        end={stat.number}
+                        suffix={stat.suffix || ''}
+                        duration={2500}
+                      />
+                    </div>
+                    <div className="text-blue-100 font-medium">{stat.label}</div>
+                  </div>
+                </AnimatedCard>
+              ))}
+            </div>
+          </div>
+        </section>
+      </AnimatedCard>
+
+      {/* ── Programs Preview ──*/}
       <section className="py-20 bg-white dark:bg-slate-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -236,21 +273,27 @@ const Home = () => {
             {programs.map((program, index) => (
               <AnimatedCard key={index} animation="slideUp" delay={index * 200}>
                 <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg dark:shadow-slate-900/50 border border-transparent dark:border-slate-700 overflow-hidden hover:shadow-xl transition-shadow">
+
                   <img
                     src={program.image}
                     alt={program.name}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-48 object-cover"
                   />
                   <div className="p-6">
                     <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">{program.name}</h3>
                     <p className="text-gray-600 dark:text-slate-300 mb-4">{program.description}</p>
                     <Link
+
                       to={`/programs/${program.id}`}
+
                       className="text-blue-600 font-medium hover:text-blue-800 inline-flex items-center"
                     >
                       Learn More
                       <ArrowRight className="ml-1 h-4 w-4" />
                     </Link>
+
                   </div>
                 </div>
               </AnimatedCard>
@@ -261,18 +304,17 @@ const Home = () => {
             {/* "View All Programs" button — blue on both modes, no change needed */}
             <Link
               to="/programs"
-              className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors inline-flex items-center"
+              className="group relative inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white transition-all duration-300 bg-blue-600 rounded-full hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-500/25 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600"
             >
               View All Programs
-              <ArrowRight className="ml-2 h-5 w-5" />
+              <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* ── CTA Section ──────────────────────────────────────────────
-          NO CHANGE — already bg-gradient-to-r from-purple-600 to-blue-600
-          with white text. Reads correctly in both modes.                     */}
+      {/* ── CTA Section ─*/}
+                             
       <AnimatedCard animation="fadeIn">
         <section className="relative py-20 bg-gradient-to-r from-purple-600 to-blue-600 text-white overflow-hidden">
           <Background />
@@ -301,6 +343,8 @@ const Home = () => {
           </div>
         </section>
       </AnimatedCard>
+
+    
 
     </div>
   );
