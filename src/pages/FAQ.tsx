@@ -114,19 +114,19 @@ const FAQ = () => {
 
 
       {/* Search and Filter */}
-      <section className="py-12 bg-white sticky top-16 z-40 border-b">
+      <section className="py-12 bg-white dark:bg-slate-900 sticky top-16 z-40 border-b dark:border-slate-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Search Bar */}
           <AnimatedCard animation="slideUp">
             <div className="max-w-2xl mx-auto mb-8">
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400 dark:text-slate-500" />
                 <input
                   type="text"
                   placeholder="Search questions..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-500"
                 />
               </div>
             </div>
@@ -141,7 +141,7 @@ const FAQ = () => {
                   onClick={() => setActiveCategory(category.id)}
                   className={`px-3 sm:px-6 py-1.5 sm:py-2 text-sm sm:text-base rounded-full whitespace-nowrap font-medium transition-all duration-200 flex-shrink-0 ${activeCategory === category.id
                     ? 'bg-blue-600 text-white shadow-md'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    : 'bg-gray-100 dark:bg-slate-700 text-gray-700 dark:text-slate-300 hover:bg-gray-200 dark:hover:bg-slate-600'
                     }`}
                 >
                   {category.name}
@@ -158,24 +158,24 @@ const FAQ = () => {
           {filteredFAQs.length === 0 ? (
             <div className="text-center py-12">
               <HelpCircle className="h-16 w-16 text-gray-300 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">No questions found</h3>
-              <p className="text-gray-600">Try adjusting your search terms or category filter.</p>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">No questions found</h3>
+              <p className="text-gray-600 dark:text-slate-400">Try adjusting your search terms or category filter.</p>
             </div>
           ) : (
             <div className="space-y-4">
               {filteredFAQs.map((item) => (
-                <div key={item.id} className="bg-white border border-gray-200 rounded-lg shadow-sm">
+                <div key={item.id} className="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg shadow-sm">
                   <button
                     onClick={() => toggleItem(item.id)}
-                    className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors"
+                    className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors"
                   >
-                    <h3 className="text-lg font-semibold text-gray-900 pr-4">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white pr-4">
                       {item.question}
                     </h3>
                     {openItem === item.id ? (
-                      <ChevronUp className="h-5 w-5 text-gray-500 flex-shrink-0" />
+                      <ChevronUp className="h-5 w-5 text-gray-500 dark:text-slate-500 flex-shrink-0" />
                     ) : (
-                      <ChevronDown className="h-5 w-5 text-gray-500 flex-shrink-0" />
+                      <ChevronDown className="h-5 w-5 text-gray-500 dark:text-slate-500 flex-shrink-0" />
                     )}
                   </button>
 
@@ -184,8 +184,8 @@ const FAQ = () => {
                       }`}
                   >
                     <div className="px-6 pb-4">
-                      <div className="border-t border-gray-100 pt-4">
-                        <p className="text-gray-700 leading-relaxed">
+                      <div className="border-t border-gray-100 dark:border-slate-700 pt-4">
+                        <p className="text-gray-700 dark:text-slate-300 leading-relaxed">
                           {item.answer}
                         </p>
                       </div>
@@ -199,12 +199,12 @@ const FAQ = () => {
       </section>
 
       {/* Contact CTA */}
-      <section className="py-20 bg-blue-50">
+      <section className="py-20 bg-blue-50 dark:bg-blue-900/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">
             Still Have Questions?
           </h2>
-          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-slate-400 mb-8 max-w-2xl mx-auto">
             Can't find what you're looking for? Our team is here to help you with any questions or concerns.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -215,12 +215,6 @@ const FAQ = () => {
               Contact Us
               <HelpCircle className="ml-2 h-5 w-5" />
             </a>
-            {/* <a
-              href="mailto:office@pgtglobalnetwork.com"
-              className="border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-600 hover:text-white transition-colors inline-flex items-center justify-center"
-            >
-              Email Support
-            </a> */}
           </div>
         </div>
       </section>

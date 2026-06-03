@@ -84,7 +84,7 @@ const Timeline = () => {
     icon: Calendar,
     achievements: [
       'Launched VoA, MotivMinds, D3, and Seminarix as flagship programs',
-      'Seminarix returned to founder’s former school with great success',
+      'Seminarix returned to founder\'s former school with great success',
       'VoA and MotivMinds inspired audiences with real stories',
       'Crossed 10,000 participants milestone in the very first year'
     ],
@@ -104,86 +104,6 @@ const Timeline = () => {
   stats: { participants: 1000, programs: 6, successStories: 200 }
 }
 ];
-  // const timelineEvents = [
-  //   {
-  //     year: '2019',
-  //     title: 'Foundation & Vision',
-  //     description: 'PGT Global Network was founded with a clear mission to transform lives through purpose-driven growth.',
-  //     icon: Target,
-  //     achievements: [
-  //       'Established core values and mission',
-  //       'Launched first pilot program',
-  //       'Reached 100 initial participants',
-  //       'Formed founding team of 5 members'
-  //     ],
-  //     stats: { participants: 100, programs: 1, countries: 2 }
-  //   },
-  //   {
-  //     year: '2020',
-  //     title: 'Digital Transformation',
-  //     description: 'Adapted to global challenges by launching digital programs and expanding our reach through technology.',
-  //     icon: Zap,
-  //     achievements: [
-  //       'Launched D3 Digital Program',
-  //       'Transitioned to virtual delivery',
-  //       'Expanded to 10 countries',
-  //       'Introduced online mentorship'
-  //     ],
-  //     stats: { participants: 500, programs: 2, countries: 10 }
-  //   },
-  //   {
-  //     year: '2021',
-  //     title: 'Community Building',
-  //     description: 'Focused on building strong communities and launching the Voice of Action initiative.',
-  //     icon: Users,
-  //     achievements: [
-  //       'Launched VoA Initiative',
-  //       'Established community chapters',
-  //       'Introduced peer-to-peer learning',
-  //       'Reached 1,000 active participants'
-  //     ],
-  //     stats: { participants: 1500, programs: 3, countries: 20 }
-  //   },
-  //   {
-  //     year: '2022',
-  //     title: 'Educational Excellence',
-  //     description: 'Expanded educational offerings with Seminarix and MotivMinds programs.',
-  //     icon: Award,
-  //     achievements: [
-  //       'Launched Seminarix workshop series',
-  //       'Introduced MotivMinds program',
-  //       'Partnerships with 25 organizations',
-  //       'Won "Innovation in Education" award'
-  //     ],
-  //     stats: { participants: 3500, programs: 4, countries: 30 }
-  //   },
-  //   {
-  //     year: '2023',
-  //     title: 'Higher Education Focus',
-  //     description: 'Launched HED Program to support higher education development and academic excellence.',
-  //     icon: Globe,
-  //     achievements: [
-  //       'Launched HED Program',
-  //       'University partnerships established',
-  //       'Scholarship program initiated',
-  //       'Reached 40 countries'
-  //     ],
-  //     stats: { participants: 6000, programs: 5, countries: 40 }
-  //   },
-  //   {
-  //     year: '2024',
-  //     title: 'Global Impact',
-  //     description: 'Achieved significant milestones and expanded our global footprint.',
-  //     icon: Calendar,
-  //     achievements: [
-  //       'Reached 10,000+ participants',
-  //       'Expanded to 50+ countries',
-  //       'Launched mobile app',
-  //       'Established regional offices'
-  //     ],
-  //     stats: { participants: 10000, programs: 5, countries: 50 }
-  //   }
-  // ];
 
    if (loading) {
     return <LoadingSpinner />;
@@ -210,10 +130,10 @@ const Timeline = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedCard animation="slideUp">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
                 Timeline of Transformation
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              <p className="text-xl text-gray-600 dark:text-slate-400 max-w-3xl mx-auto">
                 Every milestone in our journey represents lives transformed and communities empowered
               </p>
             </div>
@@ -227,46 +147,46 @@ const Timeline = () => {
                 <AnimatedCard key={event.year} animation="slideUp" delay={index * 200}>
                   <div className={`flex flex-col lg:flex-row items-center ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-8`}>
                     <div className="flex-1 lg:max-w-md">
-                      <div className={`bg-white p-8 rounded-xl shadow-lg ${index % 2 === 0 ? 'lg:mr-8' : 'lg:ml-8'}`}>
+                      <div className={`bg-white dark:bg-slate-800 p-8 rounded-xl shadow-lg ${index % 2 === 0 ? 'lg:mr-8' : 'lg:ml-8'}`}>
                         <div className="flex items-center space-x-4 mb-4">
                           <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
                             <event.icon className="h-6 w-6 text-blue-600" />
                           </div>
                           <div>
-                            <h3 className="text-2xl font-bold text-gray-900">{event.year}</h3>
+                            <h3 className="text-2xl font-bold text-gray-900 dark:text-white">{event.year}</h3>
                             <h4 className="text-lg font-semibold text-blue-600">{event.title}</h4>
                           </div>
                         </div>
 
-                        <p className="text-gray-700 mb-6 leading-relaxed">{event.description}</p>
+                        <p className="text-gray-700 dark:text-slate-300 mb-6 leading-relaxed">{event.description}</p>
 
                         <div className="space-y-2 mb-6">
                           {event.achievements.map((achievement, achievementIndex) => (
                             <div key={achievementIndex} className="flex items-start space-x-2">
                               <div className="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                              <span className="text-gray-700 text-sm">{achievement}</span>
+                              <span className="text-gray-700 dark:text-slate-300 text-sm">{achievement}</span>
                             </div>
                           ))}
                         </div>
 
-                        <div className="grid grid-cols-3 gap-4 pt-6 border-t border-gray-200">
+                        <div className="grid grid-cols-3 gap-4 pt-6 border-t border-gray-200 dark:border-slate-700">
                           <div className="text-center">
                             <div className="text-2xl font-bold text-blue-600">
                               <CountUpNumber end={event.stats.participants} suffix="+" duration={2000} />
                             </div>
-                            <div className="text-xs text-gray-500">Participants</div>
+                            <div className="text-xs text-gray-500 dark:text-slate-500">Participants</div>
                           </div>
                           <div className="text-center">
                             <div className="text-2xl font-bold text-green-600">
                               <CountUpNumber end={event.stats.programs} duration={2000} />
                             </div>
-                            <div className="text-xs text-gray-500">Programs</div>
+                            <div className="text-xs text-gray-500 dark:text-slate-500">Programs</div>
                           </div>
                           <div className="text-center">
                             <div className="text-2xl font-bold text-purple-600">
                               <CountUpNumber end={event.stats.successStories} suffix="+" duration={2000} />
                             </div>
-                            <div className="text-xs text-gray-500">Success Stories</div>
+                            <div className="text-xs text-gray-500 dark:text-slate-500">Success Stories</div>
                           </div>
                         </div>
                       </div>

@@ -210,7 +210,7 @@ useEffect(() => {
         </div>
       </div>
       
-      <p className="text-lg text-gray-700 leading-relaxed">
+      <p className="text-lg text-gray-700 dark:text-slate-300 leading-relaxed">
         {program.description}
       </p>
       
@@ -218,12 +218,12 @@ useEffect(() => {
         {program.features.map((feature, featureIndex) => (
           <div key={featureIndex} className="flex items-center space-x-2">
             <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
-            <span className="text-gray-700">{feature}</span>
+            <span className="text-gray-700 dark:text-slate-300">{feature}</span>
           </div>
         ))}
       </div>
       
-      <div className="bg-gray-50 p-6 rounded-xl">
+      <div className="bg-gray-50 dark:bg-slate-800 dark:bg-slate-900 p-6 rounded-xl">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <h4 className="font-semibold text-gray-900 mb-2">Impact</h4>

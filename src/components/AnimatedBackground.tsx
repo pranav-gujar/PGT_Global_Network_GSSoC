@@ -4,7 +4,7 @@ const AnimatedBackground = () => {
   return (
     <div className="fixed inset-0 -z-10 overflow-hidden">
       {/* Subtle animated gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50/30 via-white to-purple-50/30 animate-gradient-shift"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-50/30 via-white to-purple-50/30 dark:from-blue-950/20 dark:via-slate-900 dark:to-purple-950/20 animate-gradient-shift"></div>
       
       {/* Floating particles */}
       <div className="absolute inset-0">

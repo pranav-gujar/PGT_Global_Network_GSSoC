@@ -143,30 +143,30 @@ const Dashboard = () => {
 
   if (loading) {
     return (
-      <div className="pt-16 min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="pt-16 min-h-screen bg-gray-50 dark:bg-slate-900 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading your dashboard...</p>
+          <p className="text-gray-600 dark:text-slate-400">Loading your dashboard...</p>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="pt-16 min-h-screen bg-gray-50">
+    <div className="pt-16 min-h-screen bg-gray-50 dark:bg-slate-900" >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
-          <p className="text-gray-600 mt-2">Welcome back, {profile?.full_name || user.email}</p>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Dashboard</h1>
+          <p className="text-gray-600 dark:text-slate-400 mt-2">Welcome back, {profile?.full_name || user.email}</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Profile Section */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-xl shadow-lg p-6">
+            <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg p-6">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-bold text-gray-900 flex items-center">
+                <h2 className="text-xl font-bold text-gray-900 dark:text-white flex items-center">
                   <User className="h-5 w-5 mr-2" />
                   Profile
                 </h2>
@@ -187,7 +187,7 @@ const Dashboard = () => {
                     </button>
                     <button
                       onClick={() => setEditMode(false)}
-                      className="text-gray-600 hover:text-gray-800"
+                      className="text-gray-600 dark:text-slate-400 hover:text-gray-800"
                     >
                       <X className="h-5 w-5" />
                     </button>
@@ -225,58 +225,58 @@ const Dashboard = () => {
                     type="text"
                     value={editData.full_name}
                     onChange={(e) => setEditData({ ...editData, full_name: e.target.value })}
-                    className="text-xl font-bold text-gray-900 text-center border-b border-gray-300 focus:border-blue-500 outline-none"
+                    className="text-xl font-bold text-gray-900 dark:text-white text-center border-b border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 focus:border-blue-500 outline-none"
                     placeholder="Your full name"
                   />
                 ) : (
-                  <h3 className="text-xl font-bold text-gray-900">{profile?.full_name || 'Add your name'}</h3>
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white">{profile?.full_name || 'Add your name'}</h3>
                 )}
-                <p className="text-gray-600">{user.email}</p>
+                <p className="text-gray-600 dark:text-slate-400">{user.email}</p>
               </div>
 
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Bio</label>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">Bio</label>
                   {editMode ? (
                     <textarea
                       value={editData.bio}
                       onChange={(e) => setEditData({ ...editData, bio: e.target.value })}
-                      className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full p-2 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       rows={3}
                       placeholder="Tell us about yourself..."
                     />
                   ) : (
-                    <p className="text-gray-600 text-sm">{profile?.bio || 'Add a bio to tell others about yourself'}</p>
+                    <p className="text-gray-600 dark:text-slate-400 text-sm">{profile?.bio || 'Add a bio to tell others about yourself'}</p>
                   )}
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Location</label>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">Location</label>
                   {editMode ? (
                     <input
                       type="text"
                       value={editData.location}
                       onChange={(e) => setEditData({ ...editData, location: e.target.value })}
-                      className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full p-2 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       placeholder="Your location"
                     />
                   ) : (
-                    <p className="text-gray-600 text-sm">{profile?.location || 'Add your location'}</p>
+                    <p className="text-gray-600 dark:text-slate-400 text-sm">{profile?.location || 'Add your location'}</p>
                   )}
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Website</label>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">Website</label>
                   {editMode ? (
                     <input
                       type="url"
                       value={editData.website}
                       onChange={(e) => setEditData({ ...editData, website: e.target.value })}
-                      className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full p-2 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       placeholder="https://yourwebsite.com"
                     />
                   ) : (
-                    <p className="text-gray-600 text-sm">
+                    <p className="text-gray-600 dark:text-slate-400 text-sm">
                       {profile?.website ? (
                         <a href={profile.website} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
                           {profile.website}
@@ -294,8 +294,8 @@ const Dashboard = () => {
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-8">
             {/* Applications */}
-            <div className="bg-white rounded-xl shadow-lg p-6">
-              <h2 className="text-xl font-bold text-gray-900 mb-6 flex items-center">
+            <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg p-6">
+              <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
                 <FileText className="h-5 w-5 mr-2" />
                 My Applications ({applications.length})
               </h2>
@@ -303,15 +303,15 @@ const Dashboard = () => {
               {applications.length === 0 ? (
                 <div className="text-center py-8">
                   <FileText className="h-12 w-12 text-gray-300 mx-auto mb-4" />
-                  <p className="text-gray-600">No applications yet</p>
-                  <p className="text-gray-500 text-sm">Apply for positions to see them here</p>
+                  <p className="text-gray-600 dark:text-slate-400">No applications yet</p>
+                  <p className="text-gray-500 dark:text-slate-500 text-sm">Apply for positions to see them here</p>
                 </div>
               ) : (
                 <div className="space-y-4">
                   {applications.map((application) => (
-                    <div key={application.id} className="border border-gray-200 rounded-lg p-4">
+                    <div key={application.id} className="border border-gray-200 dark:border-slate-700 rounded-lg p-4">
                       <div className="flex items-center justify-between mb-2">
-                        <h3 className="font-semibold text-gray-900">{application.position_title}</h3>
+                        <h3 className="font-semibold text-gray-900 dark:text-white">{application.position_title}</h3>
                         <span className={`px-3 py-1 rounded-full text-xs font-medium ${
                           application.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
                           application.status === 'reviewed' ? 'bg-blue-100 text-blue-800' :
@@ -321,10 +321,10 @@ const Dashboard = () => {
                           {application.status.charAt(0).toUpperCase() + application.status.slice(1)}
                         </span>
                       </div>
-                      <p className="text-gray-600 text-sm mb-2">
+                      <p className="text-gray-600 dark:text-slate-400 text-sm mb-2">
                         Type: {application.position_type.charAt(0).toUpperCase() + application.position_type.slice(1)}
                       </p>
-                      <p className="text-gray-500 text-sm">
+                      <p className="text-gray-500 dark:text-slate-500 text-sm">
                         Applied: {new Date(application.created_at).toLocaleDateString()}
                       </p>
                     </div>
@@ -363,8 +363,8 @@ const Dashboard = () => {
             </div> */}
 
             {/* Recent Activities */}
-            <div className="bg-white rounded-xl shadow-lg p-6">
-              <h2 className="text-xl font-bold text-gray-900 mb-6 flex items-center">
+            <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg p-6">
+              <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
                 <Activity className="h-5 w-5 mr-2" />
                 Recent Activities
               </h2>
@@ -372,15 +372,15 @@ const Dashboard = () => {
               {activities.length === 0 ? (
                 <div className="text-center py-8">
                   <Activity className="h-12 w-12 text-gray-300 mx-auto mb-4" />
-                  <p className="text-gray-600">No activities yet</p>
-                  <p className="text-gray-500 text-sm">Your activities will appear here</p>
+                  <p className="text-gray-600 dark:text-slate-400">No activities yet</p>
+                  <p className="text-gray-500 dark:text-slate-500 text-sm">Your activities will appear here</p>
                 </div>
               ) : (
                 <div className="space-y-4">
                   {activities.map((activity) => (
-                    <div key={activity.id} className="border border-gray-200 rounded-lg p-4">
-                      <p className="text-gray-900 font-medium">{activity.activity_type}</p>
-                      <p className="text-gray-500 text-sm">
+                    <div key={activity.id} className="border border-gray-200 dark:border-slate-700 rounded-lg p-4">
+                      <p className="text-gray-900 dark:text-white font-medium">{activity.activity_type}</p>
+                      <p className="text-gray-500 dark:text-slate-500 text-sm">
                         {new Date(activity.created_at).toLocaleDateString()}
                       </p>
                     </div>
