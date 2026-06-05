@@ -13,6 +13,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTab = 'si
   const [activeTab, setActiveTab] = useState(defaultTab)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
   const [fullName, setFullName] = useState('')
   const [loading, setLoading] = useState(false)
   const [showVerificationScreen, setShowVerificationScreen] = useState(false)
@@ -216,7 +217,9 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTab = 'si
                     id={activeTab === 'signin' ? 'signin-password' : 'signup-password'}
                     name="password"
                     type={showPassword ? 'text' : 'password'}
+
                     autoComplete={activeTab === 'signin' ? 'current-password' : 'new-password'}
+
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     className="w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -234,6 +237,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTab = 'si
                       ? <EyeOff className="h-5 w-5" />
                       : <Eye className="h-5 w-5" />
                     }
+
                   </button>
                 </div>
               </div>
