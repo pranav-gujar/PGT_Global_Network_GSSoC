@@ -1,15 +1,10 @@
 import React from 'react';
-import { Target, Eye, Heart, Users, Globe, Award } from 'lucide-react';
+import { Link } from '../components/TransitionLink';
+import { Target, Eye, Heart, Users, Globe, Award, ArrowRight, Sparkles } from 'lucide-react';
 import founderImg from '../assets/founderImg.jpg';
 import AnimatedCard from '../components/AnimatedCard';
 import HeroBackground from '../components/HeroBackground';
-import Background from '..//components/Background';
-import CountUpNumber from '../components/CountUpNumber';
-import SeminarixLogo from '../assets/programs/Seminarix.png';
-import MotiVMindsLogo from '../assets/programs/MotiVMinds.png';
-import D3Logo from '../assets/programs/D3.png';
-import HEDLogo from '../assets/programs/HED.png';
-import VoALogo from '../assets/programs/VoA.png';
+import Background from '../components/Background';
 
 import LoadingSpinner from '../components/LoadingSpinner'; 
 import { usePageLoading } from '../hooks/usePageLoading';
@@ -298,31 +293,74 @@ const About = () => {
         </div>
       </section>
 
-      <AnimatedCard animation="fadeIn">
-  <section className="relative py-24 bg-gradient-to-r from-purple-600 to-blue-600 text-white overflow-hidden">
-    <Background />
-    <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 className="text-3xl md:text-4xl font-bold mb-6">
-        Join Our Mission of Positive Change
-      </h2>
-      <p className="text-xl mb-6 max-w-3xl mx-auto text-blue-100">
-        From our founding vision to today, we continue to empower individuals and communities worldwide.  
-        Discover how you can be part of this transformative journey.
-      </p>
-      <p className="text-lg text-blue-200 max-w-2xl mx-auto mb-10">
-        Learn, grow, and create meaningful impact with us.
-      </p>
-      <div className="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="/programs" className="bg-white text-purple-700 font-semibold px-8 py-3 rounded-full hover:bg-purple-50 transition-colors">
-          View Our Programs
-        </a>
-        <a href="/contact" className="border-2 border-white text-white font-semibold px-8 py-3 rounded-full hover:bg-white/10 transition-colors">
-          Get Involved
-        </a>
-      </div>
-    </div>
-  </section>
-</AnimatedCard>
+      {/* CTA Section */}
+      <section className="py-20 bg-transparent">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <AnimatedCard animation="fadeIn">
+            <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#0a0f1c] via-[#111827] to-[#0f172a] text-white p-8 md:p-16 shadow-2xl shadow-gray-250/20 border border-white/10">
+              
+              {/* Decorative Blur Backgrounds (Mesh Effect) */}
+              <div className="absolute top-0 -left-1/4 w-full h-full bg-blue-650/10 rounded-full blur-[120px] mix-blend-screen pointer-events-none" />
+              <div className="absolute top-0 -right-1/4 w-full h-full bg-purple-600/10 rounded-full blur-[120px] mix-blend-screen pointer-events-none" />
+              <div className="absolute -bottom-1/2 left-1/4 w-full h-full bg-indigo-600/8 rounded-full blur-[120px] mix-blend-screen pointer-events-none" />
+              
+              {/* Grid Pattern Overlay */}
+              <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_50%,#000_20%,transparent_100%)] pointer-events-none" />
+
+              {/* Star particles */}
+              <div className="absolute inset-0 pointer-events-none">
+                {[...Array(6)].map((_, i) => (
+                  <div
+                    key={i}
+                    className="absolute w-1 h-1 bg-white/25 rounded-full animate-pulse shadow-[0_0_4px_rgba(255,255,255,0.4)]"
+                    style={{
+                      left: `${15 + (i * 14.5)}%`,
+                      top: `${20 + ((i % 3) * 25)}%`,
+                      animationDelay: `${i * 0.8}s`,
+                      animationDuration: `${2 + (i % 2)}s`
+                    }}
+                  />
+                ))}
+              </div>
+
+              <div className="relative z-10 text-center max-w-3xl mx-auto space-y-6">
+                <div className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md shadow-sm">
+                  <Sparkles className="w-3.5 h-3.5 text-yellow-300 animate-pulse" />
+                  <span className="text-xs font-black tracking-wider uppercase text-white/95">Our Mission</span>
+                </div>
+                
+                <h2 className="text-3xl md:text-5xl font-black tracking-tight leading-tight">
+                  Join Our Mission of Positive Change
+                </h2>
+                
+                <p className="text-base md:text-lg text-white/85 max-w-2xl mx-auto font-light leading-relaxed">
+                  From our founding vision to today, we continue to empower individuals and communities worldwide. Discover how you can be part of this transformative journey.
+                </p>
+
+                <p className="text-sm font-semibold text-blue-200">
+                  Learn, grow, and create meaningful impact with us.
+                </p>
+
+                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
+                  <Link
+                    to="/contact"
+                    className="group/btn relative w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-650 text-white font-extrabold rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.03] transition-all duration-300 text-sm"
+                  >
+                    <span>Get Involved</span>
+                    <ArrowRight className="ml-2 w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform" />
+                  </Link>
+                  <Link
+                    to="/programs"
+                    className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 bg-white/10 border border-white/25 hover:bg-white/20 backdrop-blur-md text-white font-bold rounded-xl shadow-md hover:shadow-lg hover:scale-[1.03] transition-all duration-300 text-sm"
+                  >
+                    Explore Programs
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </AnimatedCard>
+        </div>
+      </section>
 
 
     </div>

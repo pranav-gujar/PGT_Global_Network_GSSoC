@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, ChevronDown, User, LogOut } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
+import { usePageTransition } from '../contexts/PageTransitionContext';
 import AuthModal from '../components/AuthModal';
-import CommandPalette from './CommandPalette';
+import { Link } from './TransitionLink';
 
 
 const Navbar = () => {
@@ -17,15 +18,16 @@ const Navbar = () => {
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
   const location = useLocation();
   const { user, signOut } = useAuth();
+  const { navigateWithTransition } = usePageTransition();
 
   const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
        await signOut();
-       navigate('/'); // 👈 send user back to home after logout
+       navigateWithTransition('/'); // 👈 send user back to home after logout with smooth transition
       } catch (error) {
-        console.error('Error signing out:', error);
+         console.error('Error signing out:', error);
     }
   };
 
@@ -100,6 +102,7 @@ const Navbar = () => {
     { name: 'Programs', path: '/programs' },
     { name: 'Timeline', path: '/timeline' },
     { name: 'Impact', path: '/impact' },
+    { name: 'Network', path: '/network' },
     { name: 'Gallery', path: '/gallery' },
     { name: 'Blog', path: '/blog' },
     { name: 'Careers', path: '/careers' },
@@ -245,7 +248,7 @@ const Navbar = () => {
               ) : (
                 <button
                   onClick={() => setShowAuthModal(true)}
-                  className={`bg-blue-600 text-white px-4 py-2 rounded-md font-medium hover:bg-blue-700 transition-all duration-200 hover:scale-105 ${
+                  className={`bg-blue-600 text-white px-4 py-2 rounded-md font-medium hover:bg-blue-700 transition-all duration-200 hover:scale-105 whitespace-nowrap shrink-0 ${
                     scrolled ? 'text-xs' : 'text-sm'
                   }`}
                 >

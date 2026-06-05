@@ -23,8 +23,6 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTab = 'si
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
-      setShowVerificationScreen(false)
-      resetForm()
     }
     return () => {
       document.body.style.overflow = '';

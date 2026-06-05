@@ -2,8 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { AuthProvider } from './contexts/AuthContext';
+import { PageTransitionProvider, usePageTransition } from './contexts/PageTransitionContext';
 import { useScrollToTop } from './hooks/useScrollToTop';
-import { usePageLoading } from './hooks/usePageLoading';
 import AnnouncementBar from './components/AnnouncementBar';
 import AnimatedBackground from './components/AnimatedBackground';
 import LoadingSpinner from './components/LoadingSpinner';
@@ -26,14 +26,16 @@ import Terms from './pages/Terms';
 import Dashboard from './pages/Dashboard';
 import NotFound from './pages/NotFound';
 import Footer from './components/Footer';
+import Profile from './pages/Profile';
+import Network from './pages/Network';
 
 const AppContent = () => {
   useScrollToTop();
-  const loading = usePageLoading();
+  const { loading } = usePageTransition();
   
   return (
     <>
-      {loading && <LoadingSpinner />}
+      <LoadingSpinner show={loading} />
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -51,7 +53,8 @@ const AppContent = () => {
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path="/network" element={<Network />} />
+        <Route path="/profile/:userId" element={<Profile />} />
       </Routes>
       <Footer />
       <ScrollToTop />
@@ -64,10 +67,12 @@ function App() {
   return (
     <AuthProvider>
       <Router>
-        <AnimatedBackground />
-        <div className="min-h-screen bg-white">
-          <AppContent />
-        </div>
+        <PageTransitionProvider>
+          <AnimatedBackground />
+          <div className="min-h-screen bg-white">
+            <AppContent />
+          </div>
+        </PageTransitionProvider>
       </Router>
     </AuthProvider>
   );
