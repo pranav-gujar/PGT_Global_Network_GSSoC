@@ -24,6 +24,7 @@ import FAQ from './pages/FAQ';
 import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
 import Dashboard from './pages/Dashboard';
+import NotFound from './pages/NotFound';
 import Footer from './components/Footer';
 import Profile from './pages/Profile';
 import Network from './pages/Network';
