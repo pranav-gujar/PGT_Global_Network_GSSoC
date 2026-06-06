@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ThemeProvider } from './contexts/ThemeContext'; 
 import { Toaster } from 'react-hot-toast';
 import { AuthProvider } from './contexts/AuthContext';
 import { useScrollToTop } from './hooks/useScrollToTop';
@@ -63,12 +64,14 @@ const AppContent = () => {
 function App() {
   return (
     <AuthProvider>
-      <Router>
-        <AnimatedBackground />
-        <div className="min-h-screen bg-white">
-          <AppContent />
-        </div>
-      </Router>
+      <ThemeProvider>                            
+        <Router>
+          <AnimatedBackground />
+          <div className="min-h-screen bg-white dark:bg-slate-900 transition-colors duration-200">
+            <AppContent />                      
+          </div>
+        </Router>
+      </ThemeProvider>                         
     </AuthProvider>
   );
 }

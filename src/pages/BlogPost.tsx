@@ -12,7 +12,7 @@ import {
   Check,
 } from "lucide-react";
 import AnimatedCard from "../components/AnimatedCard";
-import { blogPosts } from "../data/blogPosts"; // import shared blog data
+import { blogPosts } from "../data/blogPosts";
 
 const BlogPost = () => {
   const loading = usePageLoading();
@@ -21,12 +21,11 @@ const BlogPost = () => {
   const [shareDropdownOpen, setShareDropdownOpen] = React.useState(false);
   const [copied, setCopied] = React.useState(false);
 
-  // find blog by slug
   const blogPost = blogPosts.find((post) => post.slug === slug);
 
   if (!blogPost) {
     return (
-      <div className="pt-16 text-center text-gray-600 text-lg">
+      <div className="pt-16 text-center text-gray-600 dark:text-slate-400 text-lg">
         Blog not found 😕
       </div>
     );
@@ -86,7 +85,7 @@ const BlogPost = () => {
       }
 
   return (
-    <div className="pt-16 min-h-screen bg-gray-50">
+    <div className="pt-16 min-h-screen bg-gray-50 dark:bg-slate-900">
       {/* Hero Section */}
       <AnimatedCard animation="fadeIn">
         <section className="relative h-96 bg-gradient-to-r from-blue-600 to-purple-600">
@@ -129,7 +128,7 @@ const BlogPost = () => {
       <section className="py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedCard animation="slideUp" delay={200}>
-            <div className="bg-white rounded-xl shadow-lg p-8 md:p-12">
+            <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg p-8 md:p-12">
               {/* Back Button */}
               <div className="mb-8">
                 <Link
@@ -148,8 +147,8 @@ const BlogPost = () => {
               />
 
               {/* Tags */}
-              <div className="mt-12 pt-8 border-t border-gray-200">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">
+              <div className="mt-12 pt-8 border-t border-gray-200 dark:border-slate-700">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
                   Tags
                 </h3>
                 <div className="flex flex-wrap gap-2">
@@ -165,9 +164,9 @@ const BlogPost = () => {
               </div>
 
               {/* Share */}
-              <div className="mt-8 pt-8 border-t border-gray-200">
+              <div className="mt-8 pt-8 border-t border-gray-200 dark:border-slate-700">
                 <div className="flex items-center justify-between">
-                  <h3 className="text-lg font-semibold text-gray-900">
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                     Share this article
                   </h3>
                   <div className="relative">
@@ -180,10 +179,10 @@ const BlogPost = () => {
                     </button>
 
                     {shareDropdownOpen && (
-                      <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200 z-10">
+                      <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-slate-800 rounded-md shadow-lg border border-gray-200 dark:border-slate-700 z-10">
                         <button
                           onClick={() => handleShare("copy")}
-                          className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center"
+                          className="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-700 flex items-center"
                         >
                           {copied ? (
                             <Check className="h-4 w-4 mr-2 text-green-600" />
@@ -194,25 +193,25 @@ const BlogPost = () => {
                         </button>
                         <button
                           onClick={() => handleShare("twitter")}
-                          className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                          className="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-700"
                         >
                           Share on Twitter
                         </button>
                         <button
                           onClick={() => handleShare("facebook")}
-                          className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                          className="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-700"
                         >
                           Share on Facebook
                         </button>
                         <button
                           onClick={() => handleShare("linkedin")}
-                          className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                          className="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-700"
                         >
                           Share on LinkedIn
                         </button>
                         <button
                           onClick={() => handleShare("whatsapp")}
-                          className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                          className="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-700"
                         >
                           Share on WhatsApp
                         </button>
@@ -227,18 +226,18 @@ const BlogPost = () => {
       </section>
 
       {/* Newsletter */}
-      <section className="py-20 bg-blue-50">
+      <section className="py-20 bg-blue-50 dark:bg-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedCard animation="slideUp">
-            <div className="bg-white rounded-2xl shadow-lg p-8 md:p-12 text-center">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-lg p-8 md:p-12 text-center">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
                 Enjoyed reading?
               </h2>
-              <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+              <p className="text-xl text-gray-600 dark:text-slate-400 mb-8 max-w-2xl mx-auto">
                 Keep exploring more inspiring stories from our community.
               </p>
-              <p className="text-gray-500 text-sm mt-4">
-                Your journey doesn’t end here — more stories await.
+              <p className="text-gray-500 dark:text-slate-500 text-sm mt-4">
+                Your journey doesn't end here — more stories await.
               </p>
             </div>
           </AnimatedCard>

@@ -100,15 +100,14 @@ const Contact = () => {
     <div className="flex flex-wrap justify-center gap-8">
       {contactInfo.map((info, index) => (
         <AnimatedCard key={index} animation="slideUp" delay={index * 150}>
-          <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow text-center w-80">
+          <div className="bg-white dark:bg-slate-800 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow text-center w-80">
             <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
               <info.icon className="h-8 w-8 text-blue-600" />
             </div>
-            <h3 className="text-xl font-bold text-gray-900 mb-2">{info.title}</h3>
-           <a href={info.action} className="text-lg font-semibold text-blue-600 mb-2 hover:underline block">
-              {info.details}
-           </a>
-            <p className="text-gray-600 text-sm mb-4">{info.description}</p>
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{info.title}</h3>
+            <p className="text-lg font-semibold text-blue-600 mb-2">{info.details}</p>
+            <p className="text-gray-600 dark:text-slate-400 text-sm mb-4">{info.description}</p>
+
           </div>
         </AnimatedCard>
       ))}
@@ -274,12 +273,12 @@ const Contact = () => {
       </section> */}
 
       {/* FAQ Preview */}
-      <section className="py-20 bg-blue-50">
+      <section className="py-20 bg-blue-50 dark:bg-blue-900/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">
             Frequently Asked Questions
           </h2>
-          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-slate-400 mb-8 max-w-2xl mx-auto">
             Looking for quick answers? Check out our comprehensive FAQ section.
           </p>
           <a
@@ -297,7 +296,7 @@ const Contact = () => {
     <Background />
     <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <h2 className="text-3xl md:text-4xl font-bold mb-6">
-        We’d Love to Hear From You
+        We'd Love to Hear From You
       </h2>
       <p className="text-xl mb-8 max-w-3xl mx-auto text-blue-100">
         Whether you have questions, ideas, or feedback, your voice matters.  

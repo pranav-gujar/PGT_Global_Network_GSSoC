@@ -61,29 +61,29 @@ const Terms = () => {
     <div className="pt-16">
       {/* Hero Section */}
       <AnimatedCard animation="fadeIn">
-  <section className="relative bg-gradient-to-r from-blue-600 to-purple-600 text-white py-20 overflow-hidden">
-    <HeroBackground />
-    <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h1 className="text-4xl md:text-5xl font-bold mb-6">
-        Terms & Conditions
-      </h1>
-      <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto">
-        Please read these terms carefully before using our services and participating in our programs.
-      </p>
-    </div>
-  </section>
-</AnimatedCard>
+        <section className="relative bg-gradient-to-r from-blue-600 to-purple-600 text-white py-20 overflow-hidden">
+          <HeroBackground />
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">
+              Terms & Conditions
+            </h1>
+            <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto">
+              Please read these terms carefully before using our services and participating in our programs.
+            </p>
+          </div>
+        </section>
+      </AnimatedCard>
 
 
       {/* Last Updated */}
-      <section className="py-8 bg-gray-50">
+      <section className="py-8 bg-gray-50 dark:bg-slate-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedCard animation="slideUp">
             <div className="text-center">
-            <p className="text-gray-600">
-              <strong>Last Updated:</strong> September 15, 2025 | <strong>Effective Date:</strong> September 15, 2025
-            </p>
-          </div>
+              <p className="text-gray-600 dark:text-slate-400">
+                <strong>Last Updated:</strong> September 15, 2025 | <strong>Effective Date:</strong> September 15, 2025
+              </p>
+            </div>
           </AnimatedCard>
         </div>
       </section>
@@ -92,13 +92,13 @@ const Terms = () => {
       <section className="py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="prose prose-lg max-w-none">
-            <p className="text-xl text-gray-700 leading-relaxed mb-8">
+            <p className="text-xl text-gray-700 dark:text-slate-300 leading-relaxed mb-8">
               Welcome to PGT Global Network. These Terms and Conditions ("Terms") govern your use of our 
               website, programs, and services. By accessing or using our services, you agree to be bound 
               by these Terms and our Privacy Policy.
             </p>
             
-            <p className="text-gray-700 leading-relaxed">
+            <p className="text-gray-700 dark:text-slate-300 leading-relaxed">
               If you do not agree with any part of these Terms, please do not use our services. 
               We reserve the right to modify these Terms at any time, and your continued use constitutes 
               acceptance of any changes.
@@ -108,13 +108,13 @@ const Terms = () => {
       </section>
 
       {/* Key Sections Overview */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-gray-50 dark:bg-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
               Key Terms Overview
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-slate-400 max-w-3xl mx-auto">
               Understanding your rights and responsibilities when using our services
             </p>
           </div>
@@ -122,22 +122,22 @@ const Terms = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {sections.map((section, index) => (
               <AnimatedCard key={index} animation="slideUp" delay={index * 150}>
-                <div className="bg-white p-8 rounded-xl shadow-lg">
-                <div className="flex items-center mb-6">
-                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
-                    <section.icon className="h-6 w-6 text-blue-600" />
+                <div className="bg-white dark:bg-slate-800 p-8 rounded-xl shadow-lg">
+                  <div className="flex items-center mb-6">
+                    <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+                      <section.icon className="h-6 w-6 text-blue-600" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white">{section.title}</h3>
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-900">{section.title}</h3>
+                  <ul className="space-y-3">
+                    {section.items.map((item, itemIndex) => (
+                      <li key={itemIndex} className="flex items-start">
+                        <div className="w-2 h-2 bg-blue-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                        <span className="text-gray-700 dark:text-slate-300">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <ul className="space-y-3">
-                  {section.items.map((item, itemIndex) => (
-                    <li key={itemIndex} className="flex items-start">
-                      <div className="w-2 h-2 bg-blue-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                      <span className="text-gray-700">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
               </AnimatedCard>
             ))}
           </div>
@@ -150,11 +150,10 @@ const Terms = () => {
           <div className="space-y-12">
             {/* Acceptance of Terms */}
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-6 flex items-center">
-                {/* <Scale className="h-8 w-8 text-blue-600 mr-3" /> */}
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
                 1. Acceptance of Terms
               </h2>
-              <div className="prose prose-lg max-w-none text-gray-700">
+              <div className="prose prose-lg max-w-none text-gray-700 dark:text-slate-300">
                 <p>
                   By accessing and using PGT Global Network's website, programs, and services, you acknowledge 
                   that you have read, understood, and agree to be bound by these Terms and Conditions, as well 
@@ -170,8 +169,8 @@ const Terms = () => {
 
             {/* Services Description */}
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">2. Description of Services</h2>
-              <div className="prose prose-lg max-w-none text-gray-700">
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">2. Description of Services</h2>
+              <div className="prose prose-lg max-w-none text-gray-700 dark:text-slate-300">
                 <p>PGT Global Network provides:</p>
                 <ul className="list-disc pl-6 space-y-2">
                   <li>Educational programs and workshops (D3, VoA, Seminarix, MotivMinds, HED)</li>
@@ -189,8 +188,8 @@ const Terms = () => {
 
             {/* User Accounts */}
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">3. User Accounts and Registration</h2>
-              <div className="prose prose-lg max-w-none text-gray-700">
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">3. User Accounts and Registration</h2>
+              <div className="prose prose-lg max-w-none text-gray-700 dark:text-slate-300">
                 <p>To access certain services, you may need to create an account. You agree to:</p>
                 <ul className="list-disc pl-6 space-y-2">
                   <li>Provide accurate, current, and complete information during registration</li>
@@ -208,8 +207,8 @@ const Terms = () => {
 
             {/* Program Participation */}
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">4. Program Participation</h2>
-              <div className="prose prose-lg max-w-none text-gray-700">
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">4. Program Participation</h2>
+              <div className="prose prose-lg max-w-none text-gray-700 dark:text-slate-300">
                 <p>Participation in our programs is subject to:</p>
                 <ul className="list-disc pl-6 space-y-2">
                   <li>Meeting eligibility criteria and application requirements</li>
@@ -227,8 +226,8 @@ const Terms = () => {
 
             {/* Content and Conduct */}
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">5. Content and Conduct Guidelines</h2>
-              <div className="prose prose-lg max-w-none text-gray-700">
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">5. Content and Conduct Guidelines</h2>
+              <div className="prose prose-lg max-w-none text-gray-700 dark:text-slate-300">
                 <p>When using our services, you agree not to:</p>
                 <ul className="list-disc pl-6 space-y-2">
                   <li>Post or share content that is illegal, harmful, threatening, or discriminatory</li>
@@ -246,8 +245,8 @@ const Terms = () => {
 
             {/* Privacy and Data Protection */}
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">6. Privacy and Data Protection</h2>
-              <div className="prose prose-lg max-w-none text-gray-700">
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">6. Privacy and Data Protection</h2>
+              <div className="prose prose-lg max-w-none text-gray-700 dark:text-slate-300">
                 <p>
                   Your privacy is important to us. Our collection, use, and protection of your personal 
                   information is governed by our Privacy Policy, which is incorporated into these Terms 
@@ -263,8 +262,8 @@ const Terms = () => {
 
             {/* Disclaimers and Warranties */}
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">7. Disclaimers and Warranties</h2>
-              <div className="prose prose-lg max-w-none text-gray-700">
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">7. Disclaimers and Warranties</h2>
+              <div className="prose prose-lg max-w-none text-gray-700 dark:text-slate-300">
                 <p>
                   Our services are provided "as is" and "as available" without warranties of any kind, 
                   either express or implied. We disclaim all warranties, including but not limited to:
@@ -284,8 +283,8 @@ const Terms = () => {
 
             {/* Termination */}
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">8. Termination</h2>
-              <div className="prose prose-lg max-w-none text-gray-700">
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">8. Termination</h2>
+              <div className="prose prose-lg max-w-none text-gray-700 dark:text-slate-300">
                 <p>
                   Either party may terminate this agreement at any time. We may suspend or terminate 
                   your access to our services immediately, without prior notice, for any reason, including:
@@ -305,8 +304,8 @@ const Terms = () => {
 
             {/* Governing Law */}
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">9. Governing Law and Dispute Resolution</h2>
-              <div className="prose prose-lg max-w-none text-gray-700">
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">9. Governing Law and Dispute Resolution</h2>
+              <div className="prose prose-lg max-w-none text-gray-700 dark:text-slate-300">
                 <p>
                   These Terms are governed by the laws of Canada, without regard to conflict of law principles. 
                   Any disputes arising from these Terms or your use of our services will be resolved through:
@@ -325,8 +324,8 @@ const Terms = () => {
 
             {/* Changes to Terms */}
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">10. Changes to Terms</h2>
-              <div className="prose prose-lg max-w-none text-gray-700">
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">10. Changes to Terms</h2>
+              <div className="prose prose-lg max-w-none text-gray-700 dark:text-slate-300">
                 <p>
                   We reserve the right to modify these Terms at any time. When we make changes, we will:
                 </p>
@@ -346,25 +345,25 @@ const Terms = () => {
       </section>
 
       {/* Contact Information */}
-      <section className="py-16 bg-blue-50">
+      <section className="py-16 bg-blue-50 dark:bg-blue-900/30">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Questions About These Terms?</h2>
-            <p className="text-xl text-gray-600">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Questions About These Terms?</h2>
+            <p className="text-xl text-gray-600 dark:text-slate-400">
               If you have questions about these Terms and Conditions, please contact us:
             </p>
           </div>
           
           <div className="flex justify-center">
-  <div className="bg-white p-6 rounded-lg shadow-md text-center">
-    <h3 className="text-lg font-semibold text-gray-900 mb-4 ">T&C Query</h3>
-    <div className="space-y-2 text-gray-700">
-      <p>Email: office@pgtglobalnetwork.com</p>
-      <p>Phone: +91 8999902805</p>
-      <p>Response Time: Within 5 business days</p>
-    </div>
-  </div>
-</div>
+            <div className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-md text-center">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">T&C Query</h3>
+              <div className="space-y-2 text-gray-700 dark:text-slate-300">
+                <p>Email: office@pgtglobalnetwork.com</p>
+                <p>Phone: +91 8999902805</p>
+                <p>Response Time: Within 5 business days</p>
+              </div>
+            </div>
+          </div>
 
         </div>
       </section>

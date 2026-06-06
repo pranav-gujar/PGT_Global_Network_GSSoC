@@ -109,7 +109,6 @@ const Programs = () => {
   const location = useLocation();
   const [activeSection, setActiveSection] = React.useState<string>('d3');
 
-  // Total height of stacked sticky bars: main navbar (64px) + quick-nav bar (~48px) + 16px breathing room
   const SCROLL_OFFSET = 128;
 
   const scrollToSection = React.useCallback((id: string) => {
@@ -119,22 +118,17 @@ const Programs = () => {
     window.scrollTo({ top, behavior: 'smooth' });
   }, []);
 
-  // Handle URL hash on page load / navigation
   useEffect(() => {
     if (location.hash) {
       const id = location.hash.replace('#', '');
-      // Wait one frame for layout, then scroll with offset
       const t = setTimeout(() => scrollToSection(id), 100);
       return () => clearTimeout(t);
     }
   }, [location, scrollToSection]);
 
-  // Scroll-spy: highlight nav item whose section top is nearest below the offset
   useEffect(() => {
     const programIds = ['d3', 'voa', 'seminarix', 'motivminds', 'hed'];
-
     const onScroll = () => {
-      // Find the last section whose top edge has passed our offset line
       let current = programIds[0];
       for (const id of programIds) {
         const el = document.getElementById(id);
@@ -144,9 +138,8 @@ const Programs = () => {
       }
       setActiveSection(current);
     };
-
     window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll(); // run once on mount to set initial state
+    onScroll();
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
@@ -279,28 +272,20 @@ const Programs = () => {
         </section>
       </AnimatedCard>
 
-      {/* Quick-Nav — Premium Initiative Navigator */}
+      {/* Quick-Nav */}
       <div className="sticky top-16 z-20">
-        {/* Gradient bridge: blends hero bottom into nav bar */}
         <div className="h-6 bg-gradient-to-b from-purple-600/20 via-blue-100/30 to-transparent absolute inset-x-0 -top-6 pointer-events-none" />
-
-        <div className="bg-white/95 backdrop-blur-md border-b border-gray-200/80 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.08)]">
-          {/* Slim gradient rule at very top of bar — echoes hero palette */}
+        <div className="bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-gray-200/80 dark:border-slate-700 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.08)]">
           <div className="h-0.5 bg-gradient-to-r from-blue-600 via-purple-500 to-blue-400" />
-
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center gap-1 overflow-x-auto scrollbar-hide py-2.5">
-
-              {/* Left label */}
-              <span className="flex-shrink-0 text-xs font-semibold uppercase tracking-widest text-gray-400 mr-3 hidden sm:block">
+              <span className="flex-shrink-0 text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-slate-500 mr-3 hidden sm:block">
                 Jump to
               </span>
-
               {programs.map((program, idx) => {
                 const c = colorMap[program.color];
                 const isActive = activeSection === program.id;
                 const Icon = program.icon;
-
                 return (
                   <button
                     key={program.id}
@@ -315,37 +300,29 @@ const Programs = () => {
                       transition-all duration-300 ease-out
                       ${isActive
                         ? `${c.navActiveBg} ${c.navActiveText} shadow-md scale-[1.03]`
-                        : `text-gray-500 hover:text-gray-800 hover:bg-gray-50`
+                        : `text-gray-500 dark:text-slate-400 hover:text-gray-800 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-slate-800`
                       }
                     `}
                     aria-current={isActive ? 'true' : undefined}
                   >
-                    {/* Icon — visible only on active or hover */}
                     <span className={`
                       transition-all duration-300
                       ${isActive ? 'opacity-100 w-4' : 'opacity-0 w-0 overflow-hidden group-hover:opacity-60 group-hover:w-4'}
                     `}>
                       <Icon className="h-4 w-4 flex-shrink-0" />
                     </span>
-
                     {program.name}
-
-                    {/* Active underline accent bar */}
                     {isActive && (
                       <span className="absolute bottom-0 left-3 right-3 h-0.5 rounded-full bg-white/40" />
                     )}
-
-                    {/* Sequence number badge — subtle, only on inactive */}
                     {!isActive && (
-                      <span className="ml-0.5 text-[10px] font-bold text-gray-300 group-hover:text-gray-400 transition-colors">
+                      <span className="ml-0.5 text-[10px] font-bold text-gray-300 dark:text-slate-600 group-hover:text-gray-400 transition-colors">
                         {String(idx + 1).padStart(2, '0')}
                       </span>
                     )}
                   </button>
                 );
               })}
-
-              {/* Progress dots — visual indicator of position */}
               <div className="flex-1 hidden sm:flex items-center justify-end gap-1.5 min-w-0 pl-4">
                 {programs.map((program) => {
                   const c = colorMap[program.color];
@@ -363,113 +340,87 @@ const Programs = () => {
                         rounded-full transition-all duration-300
                         ${isActive
                           ? `w-5 h-2 ${c.navAccentBar}`
-                          : 'w-2 h-2 bg-gray-200 hover:bg-gray-300'
+                          : 'w-2 h-2 bg-gray-200 dark:bg-slate-700 hover:bg-gray-300 dark:hover:bg-slate-600'
                         }
                       `}
                     />
                   );
                 })}
               </div>
-
             </div>
           </div>
         </div>
       </div>
 
-      {/* Programs Overview */}
-      <section className="py-20">
+      {/* Programs List */}
+      <section className="py-20 bg-white dark:bg-slate-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedCard animation="slideUp">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
                 Transformative Programs for Every Journey
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              <p className="text-xl text-gray-600 dark:text-slate-400 max-w-3xl mx-auto">
                 From daily digital inspiration to annual eco-campaigns, each initiative
                 is designed to create measurable, lasting impact.
               </p>
             </div>
           </AnimatedCard>
 
-          <div className="space-y-20">
+          <div className="space-y-16">
             {programs.map((program, index) => {
               const colors = colorMap[program.color];
-              const Icon = program.icon;
-              const isEven = index % 2 === 0;
-
               return (
-                <AnimatedCard key={program.id} animation="slideUp" delay={index * 150}>
+                <AnimatedCard key={program.id} animation="slideUp" delay={index * 200}>
                   <div
                     id={program.id}
-                    className={`
-                      flex flex-col gap-10 items-center scroll-mt-32
-                      ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'}
-                    `}
+                    className={`flex flex-col ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-12 items-center`}
                   >
-
-                    {/* Image Block */}
-                    <div className="flex-1 w-full">
-                      <div className="relative w-full h-80 md:h-96 rounded-2xl overflow-hidden shadow-xl group">
-                        <img
-                          src={program.image}
-                          alt={`${program.name} — ${program.fullName}`}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        />
-                        {/* Color-coded gradient overlay at image bottom */}
-                        <div
-                          className={`absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t ${colors.imageOverlay} to-transparent`}
-                        />
-                        {/* Category badge pinned top-left on the image */}
-                        <span
-                          className={`absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${colors.badge}`}
-                        >
-                          {program.category}
-                        </span>
-                      </div>
+                    {/* Image */}
+                    <div className="flex-1">
+                      <img
+                        src={program.image}
+                        alt={program.name}
+                        className="w-full h-96 object-cover rounded-2xl shadow-lg"
+                      />
                     </div>
 
-                    {/* Content Block */}
-                    <div className="flex-1 space-y-5">
+                    {/* Content */}
+                    <div className="flex-1 space-y-6">
 
-                      {/* Header: icon + name + full name */}
-                      <div className="flex items-start gap-4">
-                        <div className={`w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 ${colors.iconBg}`}>
-                          <Icon className={`h-7 w-7 ${colors.iconText}`} />
+                      {/* Header */}
+                      <div className="flex items-center space-x-4">
+                        <div className={`w-16 h-16 ${colors.iconBg} rounded-full flex items-center justify-center`}>
+                          <program.icon className={`h-8 w-8 ${colors.iconText}`} />
                         </div>
                         <div>
-                          <h3 className="text-2xl md:text-3xl font-bold text-gray-900 leading-tight">
-                            {program.name}
-                          </h3>
-                          <p className="text-base text-gray-500 font-medium mt-0.5">
-                            {program.fullName}
-                          </p>
+                          <h3 className="text-3xl font-bold text-gray-900 dark:text-white">{program.name}</h3>
+                          <p className="text-lg text-gray-600 dark:text-slate-400">{program.fullName}</p>
                         </div>
                       </div>
 
                       {/* Description */}
-                      <p className="text-base md:text-lg text-gray-700 leading-relaxed">
+                      <p className="text-lg text-gray-700 dark:text-slate-300 leading-relaxed">
                         {program.description}
                       </p>
 
-                      {/* Feature pill chips */}
-                      <div className="flex flex-wrap gap-2">
-                        {program.features.map((feature) => (
-                          <span
-                            key={feature}
-                            className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full border border-gray-200 font-medium"
-                          >
-                            {feature}
-                          </span>
+                      {/* Features grid */}
+                      <div className="grid grid-cols-2 gap-4">
+                        {program.features.map((feature, featureIndex) => (
+                          <div key={featureIndex} className="flex items-center space-x-2">
+                            <div className="w-2 h-2 bg-blue-600 rounded-full flex-shrink-0"></div>
+                            <span className="text-gray-700 dark:text-slate-300 text-sm">{feature}</span>
+                          </div>
                         ))}
                       </div>
 
-                      {/* Impact chip + Duration badge */}
+                      {/* Impact + Duration chips */}
                       <div className="flex flex-wrap gap-3 items-center pt-1">
                         <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg border text-sm font-medium ${colors.impactChip}`}>
                           <TrendingUp className="h-4 w-4 flex-shrink-0" />
                           <span>{program.impact}</span>
                         </div>
-                        <span className="inline-flex items-center gap-1.5 px-3 py-2 bg-gray-100 text-gray-600 text-sm rounded-lg border border-gray-200">
+                        <span className="inline-flex items-center gap-1.5 px-3 py-2 bg-gray-100 dark:bg-slate-700 text-gray-600 dark:text-slate-300 text-sm rounded-lg border border-gray-200 dark:border-slate-600">
                           <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                               d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -478,10 +429,10 @@ const Programs = () => {
                         </span>
                       </div>
 
-                      {/* CTA — Link styled as button; no wrapping <button> element */}
+                      {/* CTA */}
                       <Link
                         to={`/programs/${program.id}`}
-                        aria-label={`Learn more about ${program.name} — ${program.fullName}`}
+                        aria-label={`Learn more about ${program.name}`}
                         className={`
                           inline-flex items-center gap-2 px-7 py-3 rounded-lg
                           font-semibold text-white transition-all duration-200

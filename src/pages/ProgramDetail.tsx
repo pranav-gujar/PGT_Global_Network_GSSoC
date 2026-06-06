@@ -286,7 +286,7 @@ const ProgramDetail = () => {
 
   if (!program) {
     return (
-      <div className="pt-16 min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="pt-16 min-h-screen bg-gray-50 dark:bg-slate-800 flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-900 mb-4">Program Not Found</h1>
           <Link to="/programs" className="text-blue-600 hover:text-blue-800">
@@ -302,7 +302,7 @@ const ProgramDetail = () => {
     }
 
   return (
-    <div className="pt-16 min-h-screen bg-gray-50">
+    <div className="pt-16 min-h-screen bg-gray-50 dark:bg-slate-800">
       {/* Hero Section */}
       <AnimatedCard animation="fadeIn">
         <section className="relative h-96 bg-gradient-to-r from-blue-600 to-purple-600">
@@ -410,7 +410,7 @@ const ProgramDetail = () => {
             <AnimatedCard animation="slideLeft">
               <div>
                 <h2 className="text-3xl font-bold text-gray-900 mb-6">Program Overview</h2>
-                <p className="text-lg text-gray-700 leading-relaxed mb-8">
+                <p className="text-lg text-gray-700 dark:text-slate-300 leading-relaxed mb-8">
                   {program.overview}
                 </p>
                 
@@ -419,7 +419,7 @@ const ProgramDetail = () => {
                   {program.objectives.map((objective: string, index: number) => (
                     <li key={index} className="flex items-start space-x-3">
                       <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-700">{objective}</span>
+                      <span className="text-gray-700 dark:text-slate-300">{objective}</span>
                     </li>
                   ))}
                 </ul>
@@ -433,7 +433,7 @@ const ProgramDetail = () => {
                   {program.requirements.map((requirement: string, index: number) => (
                     <li key={index} className="flex items-start space-x-3">
                       <div className="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                      <span className="text-gray-700">{requirement}</span>
+                      <span className="text-gray-700 dark:text-slate-300">{requirement}</span>
                     </li>
                   ))}
                 </ul>
@@ -443,7 +443,7 @@ const ProgramDetail = () => {
                   {program.outcomes.map((outcome: string, index: number) => (
                     <li key={index} className="flex items-start space-x-3">
                       <Star className="h-5 w-5 text-yellow-500 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-700">{outcome}</span>
+                      <span className="text-gray-700 dark:text-slate-300">{outcome}</span>
                     </li>
                   ))}
                 </ul>
@@ -466,14 +466,14 @@ const ProgramDetail = () => {
           <div className="space-y-6">
             {program.curriculum.map((module: any, index: number) => (
               <AnimatedCard key={index} animation="slideUp" delay={index * 150}>
-                <div className="bg-gray-50 rounded-xl p-6">
+                <div className="bg-gray-50 dark:bg-slate-800 rounded-xl p-6">
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
                     <h3 className="text-xl font-bold text-gray-900">{module.module}</h3>
                     <span className="text-blue-600 font-medium">{module.duration}</span>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
                     {module.topics.map((topic: string, topicIndex: number) => (
-                      <div key={topicIndex} className="bg-white px-3 py-2 rounded-lg text-sm text-gray-700">
+                      <div key={topicIndex} className="bg-white dark:bg-slate-800 px-3 py-2 rounded-lg text-sm text-gray-700 dark:text-gray-300">
                         {topic}
                       </div>
                     ))}

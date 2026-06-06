@@ -107,7 +107,6 @@ const About = () => {
 </AnimatedCard>
 
 
-      {/* Mission & Vision */}
      {/* Mission & Vision */}
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -121,24 +120,28 @@ const About = () => {
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
             <AnimatedCard animation="slideLeft">
-              <div className="bg-blue-50 border border-blue-100 p-10 rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300 h-full">
-                <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center mb-6">
+
+              <div className="bg-blue-50 dark:bg-slate-800 p-8 rounded-xl border border-blue-100 dark:border-slate-700">
+                <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mb-6">
                   <Target className="h-8 w-8 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Mission</h3>
-                <p className="text-gray-700 text-lg leading-relaxed">
+                <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Our Mission</h2>
+                <p className="text-gray-700 dark:text-slate-300 text-lg leading-relaxed">
+
                   To empower students, individuals, and organizations worldwide through innovative programs, leadership-driven growth, and purposeful action that creates lasting community impact.
                 </p>
               </div>
             </AnimatedCard>
             
             <AnimatedCard animation="slideRight">
-              <div className="bg-purple-50 border border-purple-100 p-10 rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300 h-full">
-                <div className="w-16 h-16 bg-purple-600 rounded-2xl flex items-center justify-center mb-6">
+
+              <div className="bg-purple-50 dark:bg-slate-800 p-8 rounded-xl border border-purple-100 dark:border-slate-700">
+                <div className="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center mb-6">
                   <Eye className="h-8 w-8 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Vision</h3>
-                <p className="text-gray-700 text-lg leading-relaxed">
+                <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Our Vision</h2>
+                <p className="text-gray-700 dark:text-slate-300 text-lg leading-relaxed">
+
                   To be a global network where purpose-driven growth transforms lives, enabling every individual and organization to unlock their true potential and contribute meaningfully to society.
                 </p>
               </div>
@@ -148,25 +151,25 @@ const About = () => {
       </section>
 
       {/* Core Values */}
-      <section className="py-20 bg-blue-50">
+      <section className="py-20 bg-blue-50 dark:bg-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
               Our Core Values
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-slate-400 max-w-3xl mx-auto">
               The fundamental principles that guide our work and define who we are
             </p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <AnimatedCard animation="slideUp" delay={0}>
-              <div className="bg-white p-8 rounded-xl shadow-lg text-center">
+              <div className="bg-white dark:bg-slate-800 p-8 rounded-xl shadow-lg text-center">
                 <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
                   <Target className="h-8 w-8 text-blue-600" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Positivity</h3>
-                <p className="text-gray-600 leading-relaxed">
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Positivity</h3>
+                <p className="text-gray-600 dark:text-slate-400 leading-relaxed">
                   We believe that meaningful work begins with a clear purpose. Every initiative 
                   we undertake is driven by the intention to create positive, lasting impact.
                 </p>
@@ -174,7 +177,7 @@ const About = () => {
             </AnimatedCard>
             
             <AnimatedCard animation="slideUp" delay={200}>
-              <div className="bg-white p-8 rounded-xl shadow-lg text-center">
+              <div className="bg-white dark:bg-slate-800 p-8 rounded-xl shadow-lg text-center">
                 <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
                   <div className="h-8 w-8 text-green-600 flex items-center justify-center">
                     <svg viewBox="0 0 24 24" fill="currentColor" className="h-8 w-8">
@@ -182,8 +185,8 @@ const About = () => {
                     </svg>
                   </div>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Growth</h3>
-                <p className="text-gray-600 leading-relaxed">
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Growth</h3>
+                <p className="text-gray-600 dark:text-slate-400 leading-relaxed">
                   We foster continuous learning and development, believing that growth is 
                   essential for both personal fulfillment and organizational success.
                 </p>
@@ -191,12 +194,12 @@ const About = () => {
             </AnimatedCard>
             
             <AnimatedCard animation="slideUp" delay={400}>
-              <div className="bg-white p-8 rounded-xl shadow-lg text-center">
+              <div className="bg-white dark:bg-slate-800 p-8 rounded-xl shadow-lg text-center">
                 <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
                   <Heart className="h-8 w-8 text-purple-600" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Transformation</h3>
-                <p className="text-gray-600 leading-relaxed">
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Transformation</h3>
+                <p className="text-gray-600 dark:text-slate-400 leading-relaxed">
                   We catalyze positive change that transforms lives, communities, and organizations, 
                   creating ripple effects that extend far beyond our direct reach.
                 </p>
@@ -211,52 +214,44 @@ const About = () => {
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedCard animation="fadeIn">
-            <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-              <div className="flex flex-col lg:flex-row">
 
-                <div className="lg:w-2/5 bg-gradient-to-br from-blue-600 to-purple-700 p-10 flex flex-col items-center justify-center text-center">
-                  <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-white/30 shadow-2xl mb-6">
-                    <img
-                      src={founderImg}
-                      alt="Pranav Gujar — Founder & CEO, PGT Global Network"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <h3 className="text-2xl font-bold text-white mb-1">Pranav Gujar</h3>
-                  <p className="text-blue-100 font-medium mb-6">Founder & CEO, PGT Global Network</p>
-                  <div className="flex flex-col gap-2 text-sm text-blue-100">
-                    <span className="flex items-center justify-center gap-2">
-                      <Globe className="h-4 w-4" aria-hidden="true" /> Social Impact Leader
-                    </span>
-                    <span className="flex items-center justify-center gap-2">
-                      <Award className="h-4 w-4" aria-hidden="true" /> Purpose-Driven Entrepreneur
-                    </span>
-                    <span className="flex items-center justify-center gap-2">
-                      <Users className="h-4 w-4" aria-hidden="true" /> Community Builder
-                    </span>
-                  </div>
+            <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-8 md:p-12">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                  A Note from Our Founder
+                </h2>
+                <div className="w-32 h-32 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mx-auto mb-6 flex items-center justify-center overflow-hidden">
+                  <img
+                   src={founderImg}
+                   alt="Profile"
+                   className="w-full h-full object-cover"
+                   />
                 </div>
+                <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-2">Pranav Gujar</h3>
+                <p className="text-gray-600 dark:text-slate-400 font-medium">Founder & CEO, PGT Global Network</p>
+              </div>
+              
+              <div className="max-w-4xl mx-auto">
+                <blockquote className="text-lg md:text-xl text-gray-700 dark:text-slate-300 leading-relaxed text-center italic">
+                  When I founded PGT Global Network, the vision was simple yet powerful: to build a space where purpose turns into action, where growth is cultivated through real-world learning, and where transformation becomes a shared journey.
+                </blockquote>
+                
+                <p className="text-lg text-gray-700 dark:text-slate-300 leading-relaxed mt-6">
+                  What began as a small student-led initiative has now grown into a global network that has touched lives across 50+ countries. Along the way, we've learned, adapted, and stayed true to our core belief — that real change starts with empowering people.
+                </p>
+                
+                <p className="text-lg text-gray-700 dark:text-slate-300 leading-relaxed mt-6">
+                  Today, PGT continues to stand for empowerment, awareness, and action. Every program we launch, every partnership we form, and every step we take brings us closer to a world where purposeful growth is not an exception, but a way of life.
+                </p>
+                
+                <p className="text-lg text-gray-700 dark:text-slate-300 leading-relaxed mt-6">
+                  Thank you for being part of this journey. Together, we're not just changing lives — we're transforming the world, one purpose at a time.
+                </p>
+                
+                <div className="mt-8 text-center">
+                  <p className="text-gray-600 dark:text-slate-400 font-medium">With gratitude and excitement for what's ahead,</p>
+                  <p className="text-2xl font-bold text-gray-900 dark:text-white mt-2">Pranav Gujar</p>
 
-                <div className="lg:w-3/5 p-8 md:p-12 flex flex-col justify-center">
-                  <h2 className="text-3xl font-bold text-gray-900 mb-6">A Note from Our Founder</h2>
-                  <blockquote className="border-l-4 border-blue-600 pl-6 mb-6">
-                    <p className="text-lg md:text-xl text-gray-700 leading-relaxed italic">
-                      "When I founded PGT Global Network, the vision was simple yet powerful: to build a space where purpose turns into action, where growth is cultivated through real-world learning, and where transformation becomes a shared journey."
-                    </p>
-                  </blockquote>
-                  <p className="text-gray-600 leading-relaxed mb-4">
-                    What began as a small student-led initiative has now grown into a global network that has touched lives across 50+ countries. Along the way, we've learned, adapted, and stayed true to our core belief — that real change starts with empowering people.
-                  </p>
-                  <p className="text-gray-600 leading-relaxed mb-4">
-                    Today, PGT continues to stand for empowerment, awareness, and action. Every program we launch, every partnership we form, and every step we take brings us closer to a world where purposeful growth is not an exception, but a way of life.
-                  </p>
-                  <p className="text-gray-600 leading-relaxed mb-6">
-                    Thank you for being part of this journey. Together, we're not just changing lives — we're transforming the world, one purpose at a time.
-                  </p>
-                  <div>
-                    <p className="text-gray-500 text-sm">With gratitude and excitement for what's ahead,</p>
-                    <p className="text-xl font-bold text-gray-900 mt-1">Pranav Gujar</p>
-                  </div>
                 </div>
 
               </div>
@@ -267,13 +262,13 @@ const About = () => {
 
 
       {/* Founding Principles */}
-      <section className="py-20 bg-blue-50">
+      <section className="py-20 bg-blue-50 dark:bg-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
               Our Founding Principles
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-slate-400 max-w-3xl mx-auto">
               The core beliefs that have guided us from day one
             </p>
           </div>
@@ -281,14 +276,14 @@ const About = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {foundingPrinciples.map((principle, index) => (
               <AnimatedCard key={index} animation="slideUp" delay={index * 200}>
-                <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+                <div className="bg-white dark:bg-slate-800 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
                   <div className="flex items-start space-x-4">
                     <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
                       <principle.icon className="h-6 w-6 text-blue-600" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-gray-900 mb-3">{principle.title}</h3>
-                      <p className="text-gray-600 leading-relaxed">{principle.description}</p>
+                      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">{principle.title}</h3>
+                      <p className="text-gray-600 dark:text-slate-400 leading-relaxed">{principle.description}</p>
                     </div>
                   </div>
                 </div>

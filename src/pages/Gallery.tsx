@@ -36,7 +36,7 @@ const Gallery = () => {
       thumbnail: one,
       title: 'Initiatives Discussion',
       category: 'achievements',
-      date: '2025-08-21', // YYYY-MM-DD
+      date: '2025-08-21',
       location: 'Sangli, India',
       description: 'Founder presented authored books to Sangli Sub-Collector, also sharing initiatives.'
     },
@@ -138,7 +138,7 @@ const Gallery = () => {
       category: 'community',
       date: '2025-05-17',
       location: 'Sangli, India',
-      description: 'Gifting Dr. B. R. Ambedkar books to Boys Hostel Sangli during PGT’s 6th Anniversary celebration for spreading knowledge and awareness.'
+      description: 'Gifting Dr. B. R. Ambedkar books to Boys Hostel Sangli during PGT\'s 6th Anniversary celebration for spreading knowledge and awareness.'
     },
     {
       type: 'image',
@@ -148,7 +148,7 @@ const Gallery = () => {
       category: 'achievements',
       date: '2025-05-17',
       location: 'Sangli, India',
-      description: 'Founder published second authored book and celebrated PGT’s 6th Anniversary with WCE Registrar and CAS Cell Member Secretary.'
+      description: 'Founder published second authored book and celebrated PGT\'s 6th Anniversary with WCE Registrar and CAS Cell Member Secretary.'
     },
     {
       type: 'image',
@@ -170,17 +170,6 @@ const Gallery = () => {
       location: 'Daryapur, India',
       description: 'Conducted first-ever Seminarix seminar at Ratnabai Rathi Highschool, Daryapur, marking the beginning of this impactful program.'
     },
-    // {
-    //   type: 'video',
-    //   src: 'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=800',
-    //   thumbnail: 'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=400',
-    //   title: 'Partnership Announcement',
-    //   category: 'events',
-    //   date: '2024-06-20',
-    //   location: 'São Paulo, Brazil',
-    //   description: 'Announcement of new strategic partnerships with educational institutions'
-    // },
-   
   ];
 
   const tabs = [
@@ -204,39 +193,39 @@ const Gallery = () => {
     <div className="pt-16">
       {/* Hero Section */}
       <AnimatedCard animation="fadeIn">
-  <section className="relative bg-gradient-to-r from-blue-600 to-purple-600 text-white py-20 overflow-hidden">
-    <HeroBackground />
-    <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h1 className="text-4xl md:text-5xl font-bold mb-6">
-        Gallery
-      </h1>
-      <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto">
-        Capturing moments of transformation, growth, and community across our global network
-      </p>
-    </div>
-  </section>
-</AnimatedCard>
+        <section className="relative bg-gradient-to-r from-blue-600 to-purple-600 text-white py-20 overflow-hidden">
+          <HeroBackground />
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">
+              Gallery
+            </h1>
+            <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto">
+              Capturing moments of transformation, growth, and community across our global network
+            </p>
+          </div>
+        </section>
+      </AnimatedCard>
 
 
       {/* Filter Tabs */}
-      <section className="py-12 bg-white sticky top-16 z-40 border-b">
+      <section className="py-12 bg-white dark:bg-slate-900 sticky top-16 z-40 border-b dark:border-slate-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedCard animation="slideUp">
             <div className="flex flex-wrap justify-center gap-2">
-            {tabs.map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`px-6 py-3 rounded-full font-medium transition-colors ${
-                  activeTab === tab.id
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
-              >
-                {tab.label} ({tab.count})
-              </button>
-            ))}
-          </div>
+              {tabs.map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`px-6 py-3 rounded-full font-medium transition-colors ${
+                    activeTab === tab.id
+                      ? 'bg-blue-600 text-white'
+                      : 'bg-gray-100 dark:bg-slate-700 text-gray-700 dark:text-slate-300 hover:bg-gray-200 dark:hover:bg-slate-600'
+                  }`}
+                >
+                  {tab.label} ({tab.count})
+                </button>
+              ))}
+            </div>
           </AnimatedCard>
         </div>
       </section>
@@ -252,76 +241,76 @@ const Gallery = () => {
                 delay={index * 100}
               >
                 <div
-                  className="relative bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow cursor-pointer group"
+                  className="relative bg-white dark:bg-slate-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow cursor-pointer group"
                   onClick={() => setSelectedMedia(item)}
                 >
-                <div className="aspect-square relative overflow-hidden">
-                  <img
-                    src={item.thumbnail}
-                    alt={item.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  
-                  {/* Overlay */}
-                  <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    {item.type === 'video' ? (
-                      <Play className="h-12 w-12 text-white" />
-                    ) : (
-                      <Image className="h-12 w-12 text-white" />
-                    )}
+                  <div className="aspect-square relative overflow-hidden">
+                    <img
+                      src={item.thumbnail}
+                      alt={item.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    
+                    {/* Overlay */}
+                    <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                      {item.type === 'video' ? (
+                        <Play className="h-12 w-12 text-white" />
+                      ) : (
+                        <Image className="h-12 w-12 text-white" />
+                      )}
+                    </div>
+                    
+                    {/* Type Badge */}
+                    <div className="absolute top-2 right-2">
+                      {item.type === 'video' ? (
+                        <div className="bg-red-600 text-white px-2 py-1 rounded text-xs font-medium">
+                          Video
+                        </div>
+                      ) : (
+                        <div className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-medium">
+                          Photo
+                        </div>
+                      )}
+                    </div>
                   </div>
                   
-                  {/* Type Badge */}
-                  <div className="absolute top-2 right-2">
-                    {item.type === 'video' ? (
-                      <div className="bg-red-600 text-white px-2 py-1 rounded text-xs font-medium">
-                        Video
-                      </div>
-                    ) : (
-                      <div className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-medium">
-                        Photo
-                      </div>
-                    )}
+                  <div className="p-4">
+                    <h3 className="font-semibold text-gray-900 dark:text-white mb-2 line-clamp-2">
+                      {item.title}
+                    </h3>
+                    <div className="flex items-center text-gray-500 dark:text-slate-500 text-sm mb-1">
+                      <Calendar className="h-4 w-4 mr-1" />
+                      {new Date(item.date).toLocaleDateString()}
+                    </div>
+                    <div className="flex items-center text-gray-500 dark:text-slate-500 text-sm">
+                      <MapPin className="h-4 w-4 mr-1" />
+                      {item.location}
+                    </div>
                   </div>
                 </div>
-                
-                <div className="p-4">
-                  <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2">
-                    {item.title}
-                  </h3>
-                  <div className="flex items-center text-gray-500 text-sm mb-1">
-                    <Calendar className="h-4 w-4 mr-1" />
-                    {new Date(item.date).toLocaleDateString()}
-                  </div>
-                  <div className="flex items-center text-gray-500 text-sm">
-                    <MapPin className="h-4 w-4 mr-1" />
-                    {item.location}
-                  </div>
-                </div>
-              </div>
               </AnimatedCard>
             ))}
           </div>
         </div>
       </section>
 
-  <AnimatedCard animation="fadeIn">
-  <section className="relative py-20 bg-gradient-to-r from-blue-600 to-purple-600 text-white overflow-hidden">
-    <Background />
-    <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 className="text-3xl md:text-4xl font-bold mb-6">
-        Celebrating Moments of Transformation
-      </h2>
-      <p className="text-xl mb-8 max-w-3xl mx-auto text-blue-100">
-        Our gallery captures the stories, growth, and impact of individuals and communities we've touched.  
-        Every image tells a journey of learning, connection, and meaningful change.
-      </p>
-      <p className="text-lg text-blue-200 max-w-2xl mx-auto">
-        Scroll through to relive these moments and be inspired to create your own.
-      </p>
-    </div>
-  </section>
-</AnimatedCard>
+      <AnimatedCard animation="fadeIn">
+        <section className="relative py-20 bg-gradient-to-r from-blue-600 to-purple-600 text-white overflow-hidden">
+          <Background />
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              Celebrating Moments of Transformation
+            </h2>
+            <p className="text-xl mb-8 max-w-3xl mx-auto text-blue-100">
+              Our gallery captures the stories, growth, and impact of individuals and communities we've touched.  
+              Every image tells a journey of learning, connection, and meaningful change.
+            </p>
+            <p className="text-lg text-blue-200 max-w-2xl mx-auto">
+              Scroll through to relive these moments and be inspired to create your own.
+            </p>
+          </div>
+        </section>
+      </AnimatedCard>
 
 
 
@@ -336,7 +325,7 @@ const Gallery = () => {
               <X className="h-8 w-8" />
             </button>
             
-            <div className="bg-white rounded-lg overflow-hidden">
+            <div className="bg-white dark:bg-slate-800 rounded-lg overflow-hidden">
               <img
                 src={selectedMedia.src}
                 alt={selectedMedia.title}
@@ -344,12 +333,12 @@ const Gallery = () => {
               />
               
               <div className="p-6">
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
                   {selectedMedia.title}
                 </h3>
-                <p className="text-gray-600 mb-4">{selectedMedia.description}</p>
+                <p className="text-gray-600 dark:text-slate-400 mb-4">{selectedMedia.description}</p>
                 
-                <div className="flex items-center space-x-6 text-sm text-gray-500">
+                <div className="flex items-center space-x-6 text-sm text-gray-500 dark:text-slate-500">
                   <div className="flex items-center">
                     <Calendar className="h-4 w-4 mr-1" />
                     {new Date(selectedMedia.date).toLocaleDateString()}
