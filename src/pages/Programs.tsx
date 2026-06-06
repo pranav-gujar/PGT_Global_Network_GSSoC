@@ -1,14 +1,6 @@
-
-import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowRight, Users, Target, Zap, Brain, GraduationCap, Award, Clock, Sparkles, Check, Filter } from 'lucide-react';
-import { useEffect } from "react";
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ArrowRight, Users, Target, Zap, Brain, GraduationCap, TrendingUp } from 'lucide-react';
+import { ArrowRight, Users, Target, Zap, Brain, GraduationCap, Award, Clock, Sparkles, Check, Filter } from 'lucide-react';
 import AnimatedCard from '../components/AnimatedCard';
 import HeroBackground from '../components/HeroBackground';
 import Background from '../components/Background';
@@ -19,96 +11,8 @@ import VoA from '../assets/programs/VoA.png';
 import HED from '../assets/programs/HED.png';
 import MotivMinds from '../assets/programs/MotiVMinds.png';
 
-import LoadingSpinner from '../components/LoadingSpinner';
+import LoadingSpinner from '../components/LoadingSpinner'; 
 import { usePageLoading } from '../hooks/usePageLoading';
-
-interface ColorClasses {
-  badge: string;
-  iconBg: string;
-  iconText: string;
-  button: string;
-  imageOverlay: string;
-  impactChip: string;
-  navPillBorder: string;
-  navPillText: string;
-  navPillHover: string;
-  navAccentBar: string;
-  navActiveBg: string;
-  navActiveText: string;
-}
-
-const colorMap: Record<string, ColorClasses> = {
-  blue: {
-    badge:         'bg-blue-100 text-blue-700 border border-blue-200',
-    iconBg:        'bg-blue-100',
-    iconText:      'text-blue-600',
-    button:        'bg-blue-600 hover:bg-blue-700',
-    imageOverlay:  'from-blue-600/70',
-    impactChip:    'bg-blue-50 border-blue-200 text-blue-800',
-    navPillBorder: 'border-blue-500',
-    navPillText:   'text-blue-700',
-    navPillHover:  'hover:bg-blue-500 hover:text-white',
-    navAccentBar:  'bg-blue-500',
-    navActiveBg:   'bg-blue-600',
-    navActiveText: 'text-white',
-  },
-  purple: {
-    badge:         'bg-purple-100 text-purple-700 border border-purple-200',
-    iconBg:        'bg-purple-100',
-    iconText:      'text-purple-600',
-    button:        'bg-purple-600 hover:bg-purple-700',
-    imageOverlay:  'from-purple-600/70',
-    impactChip:    'bg-purple-50 border-purple-200 text-purple-800',
-    navPillBorder: 'border-purple-500',
-    navPillText:   'text-purple-700',
-    navPillHover:  'hover:bg-purple-500 hover:text-white',
-    navAccentBar:  'bg-purple-500',
-    navActiveBg:   'bg-purple-600',
-    navActiveText: 'text-white',
-  },
-  emerald: {
-    badge:         'bg-emerald-100 text-emerald-700 border border-emerald-200',
-    iconBg:        'bg-emerald-100',
-    iconText:      'text-emerald-600',
-    button:        'bg-emerald-600 hover:bg-emerald-700',
-    imageOverlay:  'from-emerald-600/70',
-    impactChip:    'bg-emerald-50 border-emerald-200 text-emerald-800',
-    navPillBorder: 'border-emerald-500',
-    navPillText:   'text-emerald-700',
-    navPillHover:  'hover:bg-emerald-500 hover:text-white',
-    navAccentBar:  'bg-emerald-500',
-    navActiveBg:   'bg-emerald-600',
-    navActiveText: 'text-white',
-  },
-  orange: {
-    badge:         'bg-orange-100 text-orange-700 border border-orange-200',
-    iconBg:        'bg-orange-100',
-    iconText:      'text-orange-600',
-    button:        'bg-orange-600 hover:bg-orange-700',
-    imageOverlay:  'from-orange-600/70',
-    impactChip:    'bg-orange-50 border-orange-200 text-orange-800',
-    navPillBorder: 'border-orange-500',
-    navPillText:   'text-orange-700',
-    navPillHover:  'hover:bg-orange-500 hover:text-white',
-    navAccentBar:  'bg-orange-500',
-    navActiveBg:   'bg-orange-600',
-    navActiveText: 'text-white',
-  },
-  green: {
-    badge:         'bg-green-100 text-green-700 border border-green-200',
-    iconBg:        'bg-green-100',
-    iconText:      'text-green-600',
-    button:        'bg-green-600 hover:bg-green-700',
-    imageOverlay:  'from-green-600/70',
-    impactChip:    'bg-green-50 border-green-200 text-green-800',
-    navPillBorder: 'border-green-500',
-    navPillText:   'text-green-700',
-    navPillHover:  'hover:bg-green-500 hover:text-white',
-    navAccentBar:  'bg-green-500',
-    navActiveBg:   'bg-green-600',
-    navActiveText: 'text-white',
-  },
-};
 
 const Programs = () => {
   const loading = usePageLoading();
@@ -139,51 +43,6 @@ const Programs = () => {
     { id: 'growth', name: 'Growth & Wellness', count: 1 }
   ];
 
-  const loading = usePageLoading();
-  const location = useLocation();
-  const [activeSection, setActiveSection] = React.useState<string>('d3');
-
-  // Total height of stacked sticky bars: main navbar (64px) + quick-nav bar (~48px) + 16px breathing room
-  const SCROLL_OFFSET = 128;
-
-  const scrollToSection = React.useCallback((id: string) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    const top = el.getBoundingClientRect().top + window.scrollY - SCROLL_OFFSET;
-    window.scrollTo({ top, behavior: 'smooth' });
-  }, []);
-
-  // Handle URL hash on page load / navigation
-  useEffect(() => {
-    if (location.hash) {
-      const id = location.hash.replace('#', '');
-      // Wait one frame for layout, then scroll with offset
-      const t = setTimeout(() => scrollToSection(id), 100);
-      return () => clearTimeout(t);
-    }
-  }, [location, scrollToSection]);
-
-  // Scroll-spy: highlight nav item whose section top is nearest below the offset
-  useEffect(() => {
-    const programIds = ['d3', 'voa', 'seminarix', 'motivminds', 'hed'];
-
-    const onScroll = () => {
-      // Find the last section whose top edge has passed our offset line
-      let current = programIds[0];
-      for (const id of programIds) {
-        const el = document.getElementById(id);
-        if (!el) continue;
-        const top = el.getBoundingClientRect().top;
-        if (top <= SCROLL_OFFSET + 32) current = id;
-      }
-      setActiveSection(current);
-    };
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll(); // run once on mount to set initial state
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
   const programs = [
     {
       id: 'd3',
@@ -192,12 +51,6 @@ const Programs = () => {
       icon: Target,
       category: 'learning',
       description: 'A flagship daily inspiration series delivering knowledge, awareness, and impactful stories to students through visual storytelling.',
-      color: 'blue',
-      category: 'Daily Awareness',
-      name: 'D3 Program',
-      fullName: 'Daily Discovery Digest',
-      icon: Target,
-      description: 'A flagship daily inspiration series delivering knowledge, awareness, and impactful stories to students.',
       features: [
         'Daily Instagram & Facebook Stories',
         'National & International Day Highlights',
@@ -225,22 +78,6 @@ const Programs = () => {
       icon: Users,
       category: 'community',
       description: 'A storytelling series highlighting individuals who turned challenges into change and built impact, cultivating community empathy.',
-        "Great Personalities' Anniversaries",
-        'Real-Life Impact Stories',
-        'Discover the Extraordinary Everyday',
-      ],
-      impact: '10,000+ daily story viewers and learners engaged',
-      duration: 'Continuous daily program',
-      image: D3,
-    },
-    {
-      id: 'voa',
-      color: 'purple',
-      category: 'Storytelling',
-      name: 'VoA Initiative',
-      fullName: 'Voices of Ability',
-      icon: Users,
-      description: 'A storytelling series highlighting individuals who turned challenges into change and built impact.',
       features: [
         'Life Journey Recordings',
         'Empathy Building Stories',
@@ -268,20 +105,6 @@ const Programs = () => {
       icon: GraduationCap,
       category: 'growth',
       description: 'On-ground seminar sessions empowering students with academic performance keys, robust motivation, and mental wellness tools.',
-        'Inspiration for Social Change',
-      ],
-      impact: 'Dozens of powerful journeys shared and celebrated',
-      duration: 'Continuous storytelling initiative',
-      image: VoA,
-    },
-    {
-      id: 'seminarix',
-      color: 'emerald',
-      category: 'On-Ground Seminars',
-      name: 'Seminarix',
-      fullName: 'Seminar Series for Students',
-      icon: GraduationCap,
-      description: 'On-ground seminar sessions empowering students with academics, motivation, and wellness tools.',
       features: [
         'Motivational Talks',
         'Academic Strategies',
@@ -309,20 +132,6 @@ const Programs = () => {
       icon: Brain,
       category: 'learning',
       description: 'A video series sharing short and inspiring one-minute messages of motivation, life hacks, and real-world wisdom.',
-        'Real-Life Stories Sharing',
-      ],
-      impact: 'Hundreds of students guided through school and hostel sessions',
-      duration: 'Continuous seminar series',
-      image: Seminarix,
-    },
-    {
-      id: 'motivminds',
-      color: 'orange',
-      category: 'Video Content',
-      name: 'MotivMinds',
-      fullName: 'One-Minute Empowerment',
-      icon: Brain,
-      description: 'A video series sharing short and inspiring one-minute messages of motivation and real-world wisdom.',
       features: [
         'One-Minute Videos',
         'Personal Growth Insights',
@@ -350,20 +159,6 @@ const Programs = () => {
       icon: Zap,
       category: 'community',
       description: 'The longest-running campaign promoting eco-friendly Diwali celebrations through innovative awareness and green initiatives.',
-        'Available on YouTube & Social Media',
-      ],
-      impact: 'Thousands inspired through one-minute empowerment content',
-      duration: 'Continuous program',
-      image: MotivMinds,
-    },
-    {
-      id: 'hed',
-      color: 'green',
-      category: 'Annual Campaign',
-      name: 'HED Program',
-      fullName: 'Happy Eco Diwali',
-      icon: Zap,
-      description: 'The longest-running campaign promoting eco-friendly Diwali celebrations through awareness and innovation.',
       features: [
         'Eco-Friendly Celebrations',
         'Awareness Campaigns',
@@ -410,124 +205,10 @@ const Programs = () => {
             </h1>
             <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto font-light leading-relaxed">
               Purposely engineered initiatives empowering students and communities to lead, grow, and inspire sustainable global impact.
-  return (
-    <div className="pt-16">
-
-      {/* Hero Section */}
-      <AnimatedCard animation="fadeIn">
-        <section className="relative bg-gradient-to-r from-blue-600 to-purple-600 text-white py-20 overflow-hidden">
-          <HeroBackground />
-          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <span className="inline-block mb-4 px-4 py-1 rounded-full bg-white/20 text-white text-sm font-semibold tracking-wide border border-white/30">
-              5 Active Initiatives
-            </span>
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Our Programs &amp; Initiatives
-            </h1>
-            <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto">
-              An ecosystem of five purpose-driven programs transforming lives through
-              awareness, storytelling, education, and community action.
             </p>
           </div>
         </section>
       </AnimatedCard>
-
-      {/* Quick-Nav — Premium Initiative Navigator */}
-      <div className="sticky top-16 z-20">
-        {/* Gradient bridge: blends hero bottom into nav bar */}
-        <div className="h-6 bg-gradient-to-b from-purple-600/20 via-blue-100/30 to-transparent absolute inset-x-0 -top-6 pointer-events-none" />
-
-        <div className="bg-white/95 backdrop-blur-md border-b border-gray-200/80 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.08)]">
-          {/* Slim gradient rule at very top of bar — echoes hero palette */}
-          <div className="h-0.5 bg-gradient-to-r from-blue-600 via-purple-500 to-blue-400" />
-
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center gap-1 overflow-x-auto scrollbar-hide py-2.5">
-
-              {/* Left label */}
-              <span className="flex-shrink-0 text-xs font-semibold uppercase tracking-widest text-gray-400 mr-3 hidden sm:block">
-                Jump to
-              </span>
-
-              {programs.map((program, idx) => {
-                const c = colorMap[program.color];
-                const isActive = activeSection === program.id;
-                const Icon = program.icon;
-
-                return (
-                  <button
-                    key={program.id}
-                    type="button"
-                    onClick={() => {
-                      setActiveSection(program.id);
-                      scrollToSection(program.id);
-                    }}
-                    className={`
-                      group relative flex-shrink-0 flex items-center gap-2
-                      px-4 py-2 rounded-lg text-sm font-semibold
-                      transition-all duration-300 ease-out
-                      ${isActive
-                        ? `${c.navActiveBg} ${c.navActiveText} shadow-md scale-[1.03]`
-                        : `text-gray-500 hover:text-gray-800 hover:bg-gray-50`
-                      }
-                    `}
-                    aria-current={isActive ? 'true' : undefined}
-                  >
-                    {/* Icon — visible only on active or hover */}
-                    <span className={`
-                      transition-all duration-300
-                      ${isActive ? 'opacity-100 w-4' : 'opacity-0 w-0 overflow-hidden group-hover:opacity-60 group-hover:w-4'}
-                    `}>
-                      <Icon className="h-4 w-4 flex-shrink-0" />
-                    </span>
-
-                    {program.name}
-
-                    {/* Active underline accent bar */}
-                    {isActive && (
-                      <span className="absolute bottom-0 left-3 right-3 h-0.5 rounded-full bg-white/40" />
-                    )}
-
-                    {/* Sequence number badge — subtle, only on inactive */}
-                    {!isActive && (
-                      <span className="ml-0.5 text-[10px] font-bold text-gray-300 group-hover:text-gray-400 transition-colors">
-                        {String(idx + 1).padStart(2, '0')}
-                      </span>
-                    )}
-                  </button>
-                );
-              })}
-
-              {/* Progress dots — visual indicator of position */}
-              <div className="flex-1 hidden sm:flex items-center justify-end gap-1.5 min-w-0 pl-4">
-                {programs.map((program) => {
-                  const c = colorMap[program.color];
-                  const isActive = activeSection === program.id;
-                  return (
-                    <button
-                      key={`dot-${program.id}`}
-                      type="button"
-                      onClick={() => {
-                        setActiveSection(program.id);
-                        scrollToSection(program.id);
-                      }}
-                      aria-label={`Go to ${program.name}`}
-                      className={`
-                        rounded-full transition-all duration-300
-                        ${isActive
-                          ? `w-5 h-2 ${c.navAccentBar}`
-                          : 'w-2 h-2 bg-gray-200 hover:bg-gray-300'
-                        }
-                      `}
-                    />
-                  );
-                })}
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
 
       {/* Programs Hub Section */}
       <section className="py-20">
@@ -535,124 +216,204 @@ const Programs = () => {
           
           {/* Glassmorphic Overview Hub Card */}
           <AnimatedCard animation="slideUp">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                Transformative Programs for Every Journey
+            <div className="bg-white/80 border border-gray-200/50 backdrop-blur-xl rounded-3xl p-8 lg:p-12 shadow-xl shadow-gray-150/10 text-center mb-16 max-w-5xl mx-auto">
+              <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4 tracking-tight">
+                Transformative Journeys Built on Excellence
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                From daily digital inspiration to annual eco-campaigns, each initiative
-                is designed to create measurable, lasting impact.
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                We believe in structured, purposeful programs designed to target real challenges. Explore our five unique initiatives categorized across our core values of awareness, learning, and environmental preservation.
               </p>
+              
+              {/* Category Grid Indicator */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-10 text-left">
+                <div className="p-5 bg-indigo-50/30 border border-indigo-100/50 rounded-2xl">
+                  <div className="w-10 h-10 rounded-xl bg-indigo-100 flex items-center justify-center mb-3">
+                    <Target className="w-5 h-5 text-indigo-600" />
+                  </div>
+                  <h4 className="font-bold text-gray-900">Daily Learning</h4>
+                  <p className="text-xs text-gray-500 mt-1">High-frequency awareness digests and short wisdom clips (D3, MotivMinds).</p>
+                </div>
+                <div className="p-5 bg-amber-50/30 border border-amber-100/50 rounded-2xl">
+                  <div className="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center mb-3">
+                    <Users className="w-5 h-5 text-amber-600" />
+                  </div>
+                  <h4 className="font-bold text-gray-900">Community Impact</h4>
+                  <p className="text-xs text-gray-500 mt-1">Resilience campaigns, eco-festivals, and empathy platforms (VoA, HED).</p>
+                </div>
+                <div className="p-5 bg-violet-50/30 border border-violet-100/50 rounded-2xl">
+                  <div className="w-10 h-10 rounded-xl bg-violet-100 flex items-center justify-center mb-3">
+                    <GraduationCap className="w-5 h-5 text-violet-600" />
+                  </div>
+                  <h4 className="font-bold text-gray-900">Growth & Wellness</h4>
+                  <p className="text-xs text-gray-500 mt-1">On-ground board exam workshops, hostel wellness, and strategies (Seminarix).</p>
+                </div>
+              </div>
             </div>
           </AnimatedCard>
 
-          <div className="space-y-20">
-            {programs.map((program, index) => {
-              const colors = colorMap[program.color];
-              const Icon = program.icon;
-              const isEven = index % 2 === 0;
+          {/* Interactive Navigation / Filters */}
+          <div className="mb-16">
+            <div className="flex items-center justify-center gap-2 mb-6 text-gray-500 text-sm font-semibold tracking-wider uppercase">
+              <Filter className="w-4 h-4" />
+              <span>Browse Ecosystem</span>
+            </div>
+            
+            <div className="flex flex-wrap justify-center items-center gap-3 max-w-4xl mx-auto p-2 bg-white border border-gray-200/80 rounded-2xl shadow-md">
+              {categories.map((category) => (
+                <button
+                  key={category.id}
+                  onClick={() => setActiveCategory(category.id)}
+                  className={`flex items-center space-x-2.5 px-6 py-3 rounded-xl text-sm font-bold transition-all duration-300 ${
+                    activeCategory === category.id
+                      ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20 scale-[1.03]'
+                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                  }`}
+                  aria-label={`Filter by ${category.name}`}
+                >
+                  <span>{category.name}</span>
+                  <span className={`text-xs px-2.5 py-0.5 rounded-full font-bold transition-all duration-300 ${
+                    activeCategory === category.id
+                      ? 'bg-white/20 text-white'
+                      : 'bg-gray-100 text-gray-600'
+                  }`}>
+                    {category.count}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
 
-              return (
-                <AnimatedCard key={program.id} animation="slideUp" delay={index * 150}>
+          {/* Initiative Cards Grid (Alternating split) */}
+          <div className="space-y-24">
+            {filteredPrograms.length > 0 ? (
+              filteredPrograms.map((program, index) => (
+                <AnimatedCard key={program.id} animation="slideUp" delay={index * 100}>
                   <div
                     id={program.id}
-                    className={`
-                      flex flex-col gap-10 items-center scroll-mt-32
-                      ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'}
-                    `}
+                    className={`group/card relative flex flex-col ${
+                      index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'
+                    } gap-12 lg:gap-16 items-center bg-white rounded-3xl p-6 lg:p-10 border border-gray-200/60 shadow-xl shadow-gray-200/15 hover:shadow-2xl hover:shadow-gray-200/30 hover:border-gray-300 transition-all duration-500`}
                   >
+                    {/* Floating Glow Spot */}
+                    <div className={`absolute -inset-[1px] bg-gradient-to-r ${program.bgGradient} rounded-3xl opacity-0 group-hover/card:opacity-[0.03] transition-opacity duration-500 pointer-events-none`} />
 
-                    {/* Image Block */}
-                    <div className="flex-1 w-full">
-                      <div className="relative w-full h-80 md:h-96 rounded-2xl overflow-hidden shadow-xl group">
+                    {/* Image Column */}
+                    <div className="relative flex-1 w-full overflow-hidden rounded-2xl group-hover/card:scale-[1.01] transition-transform duration-500">
+                      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-gray-100 border border-gray-200/80 shadow-md">
                         <img
                           src={program.image}
-                          alt={`${program.name} — ${program.fullName}`}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          alt={program.name}
+                          className="w-full h-full object-cover transform group-hover/card:scale-105 transition-transform duration-700 ease-out"
+                          loading="lazy"
                         />
-                        {/* Color-coded gradient overlay at image bottom */}
-                        <div
-                          className={`absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t ${colors.imageOverlay} to-transparent`}
-                        />
-                        {/* Category badge pinned top-left on the image */}
-                        <span
-                          className={`absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${colors.badge}`}
-                        >
-                          {program.category}
-                        </span>
+                        
+                        {/* Floating Badges */}
+                        <div className="absolute top-4 left-4 flex flex-col gap-2">
+                          <span className={`px-4 py-1.5 rounded-full text-[10px] font-black tracking-widest uppercase shadow-md border backdrop-blur-md ${program.accentBg}`}>
+                            {categories.find(c => c.id === program.category)?.name}
+                          </span>
+                        </div>
+                        <div className="absolute bottom-4 right-4">
+                          <span className="bg-black/60 text-white backdrop-blur-md px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-lg border border-white/10">
+                            <Sparkles className="w-3.5 h-3.5 text-yellow-400" />
+                            {program.impactShort}
+                          </span>
+                        </div>
                       </div>
                     </div>
 
-                    {/* Content Block */}
-                    <div className="flex-1 space-y-5">
-
-                      {/* Header: icon + name + full name */}
-                      <div className="flex items-start gap-4">
-                        <div className={`w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 ${colors.iconBg}`}>
-                          <Icon className={`h-7 w-7 ${colors.iconText}`} />
+                    {/* Content Column */}
+                    <div className="flex-1 space-y-6 w-full">
+                      {/* Header */}
+                      <div className="flex items-center space-x-5">
+                        <div className={`w-16 h-16 rounded-2xl flex items-center justify-center transition-transform group-hover/card:scale-110 duration-300 ${program.iconBg}`}>
+                          <program.icon className="h-8 w-8" />
                         </div>
                         <div>
-                          <h3 className="text-2xl md:text-3xl font-bold text-gray-900 leading-tight">
+                          <h3 className="text-3xl font-extrabold text-gray-900 tracking-tight leading-tight">
                             {program.name}
                           </h3>
-                          <p className="text-base text-gray-500 font-medium mt-0.5">
+                          <p className="text-xs font-bold tracking-widest text-gray-400 uppercase mt-0.5">
                             {program.fullName}
                           </p>
                         </div>
                       </div>
 
                       {/* Description */}
-                      <p className="text-base md:text-lg text-gray-700 leading-relaxed">
+                      <p className="text-gray-600 text-lg leading-relaxed font-normal">
                         {program.description}
                       </p>
 
-                      {/* Feature pill chips */}
-                      <div className="flex flex-wrap gap-2">
-                        {program.features.map((feature) => (
-                          <span
-                            key={feature}
-                            className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full border border-gray-200 font-medium"
-                          >
-                            {feature}
-                          </span>
+                      {/* Features */}
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-3 pt-2">
+                        {program.features.map((feature, featureIndex) => (
+                          <div key={featureIndex} className="flex items-start space-x-2.5 group/item">
+                            <div className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 transition-colors group-hover/card:scale-105 ${program.iconBg}`}>
+                              <Check className="w-3 h-3" />
+                            </div>
+                            <span className="text-gray-700 text-sm font-medium leading-tight group-hover/item:text-gray-900 transition-colors">
+                              {feature}
+                            </span>
+                          </div>
                         ))}
                       </div>
 
-                      {/* Impact chip + Duration badge */}
-                      <div className="flex flex-wrap gap-3 items-center pt-1">
-                        <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg border text-sm font-medium ${colors.impactChip}`}>
-                          <TrendingUp className="h-4 w-4 flex-shrink-0" />
-                          <span>{program.impact}</span>
+                      {/* Logistics Info Box */}
+                      <div className={`grid grid-cols-2 gap-4 p-5 rounded-2xl border transition-all duration-300 ${program.accentBg}`}>
+                        <div className="space-y-1">
+                          <div className="flex items-center space-x-1.5 text-gray-500">
+                            <Award className="w-4 h-4 flex-shrink-0" />
+                            <span className="text-[10px] font-bold uppercase tracking-widest">Impact Scale</span>
+                          </div>
+                          <p className="text-gray-950 text-sm font-extrabold leading-snug">
+                            {program.impact}
+                          </p>
                         </div>
-                        <span className="inline-flex items-center gap-1.5 px-3 py-2 bg-gray-100 text-gray-600 text-sm rounded-lg border border-gray-200">
-                          <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                          </svg>
-                          {program.duration}
-                        </span>
+                        <div className="space-y-1 border-l border-gray-300/40 pl-4">
+                          <div className="flex items-center space-x-1.5 text-gray-500">
+                            <Clock className="w-4 h-4 flex-shrink-0" />
+                            <span className="text-[10px] font-bold uppercase tracking-widest">Duration</span>
+                          </div>
+                          <p className="text-gray-950 text-sm font-extrabold leading-snug">
+                            {program.duration}
+                          </p>
+                        </div>
                       </div>
 
-                      {/* CTA — Link styled as button; no wrapping <button> element */}
-                      <Link
-                        to={`/programs/${program.id}`}
-                        aria-label={`Learn more about ${program.name} — ${program.fullName}`}
-                        className={`
-                          inline-flex items-center gap-2 px-7 py-3 rounded-lg
-                          font-semibold text-white transition-all duration-200
-                          shadow-md hover:shadow-lg hover:-translate-y-0.5
-                          ${colors.button}
-                        `}
-                      >
-                        Learn More
-                        <ArrowRight className="h-5 w-5" />
-                      </Link>
-
+                      {/* CTAs */}
+                      <div className="flex flex-wrap items-center gap-4 pt-2">
+                        <Link
+                          to={`/programs/${program.id}`}
+                          className={`inline-flex items-center justify-center px-8 py-3.5 rounded-xl font-bold transition-all duration-300 ${program.btnBg}`}
+                          aria-label={`Learn more about ${program.name}`}
+                        >
+                          Learn More
+                          <ArrowRight className="ml-2 h-5 w-5 transform group-hover/card:translate-x-1 transition-transform" />
+                        </Link>
+                        
+                        <a
+                          href="/contact"
+                          className="inline-flex items-center justify-center px-6 py-3.5 rounded-xl font-bold text-gray-600 hover:text-gray-900 hover:bg-gray-150/40 border border-gray-200 hover:border-gray-300 transition-all duration-300 text-sm bg-white"
+                          aria-label={`Get involved in ${program.name}`}
+                        >
+                          Get Involved
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </AnimatedCard>
-              );
-            })}
+              ))
+            ) : (
+              <div className="text-center py-20 bg-white rounded-3xl border border-gray-200 max-w-xl mx-auto shadow-md">
+                <p className="text-gray-500 text-lg font-medium">No initiatives found in this category.</p>
+                <button
+                  onClick={() => setActiveCategory('all')}
+                  className="mt-4 px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-sm transition-colors"
+                >
+                  Show All Initiatives
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -686,36 +447,6 @@ const Programs = () => {
                   />
                 ))}
               </div>
-      <AnimatedCard animation="fadeIn">
-        <section className="relative py-20 bg-gradient-to-r from-green-600 to-blue-600 text-white overflow-hidden">
-          <Background />
-          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Ready to Join a Program?
-            </h2>
-            <p className="text-xl mb-8 max-w-2xl mx-auto text-green-100">
-              Take the next step in your transformation journey. Our programs are designed to support you every step of the way.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="/contact"
-                className="bg-white text-green-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center justify-center"
-              >
-                Join Now
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </a>
-              <a
-                href="https://topmate.io/pranav_gujar/1355631?utm_source=public_profile&utm_campaign=pranav_gujar"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-green-600 transition-colors inline-flex items-center justify-center"
-              >
-                Start a Conversation
-              </a>
-            </div>
-          </div>
-        </section>
-      </AnimatedCard>
 
               <div className="relative z-10 text-center max-w-3xl mx-auto space-y-6">
                 <div className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md shadow-sm">
@@ -756,4 +487,5 @@ const Programs = () => {
     </div>
   );
 };
+
 export default Programs;
