@@ -114,7 +114,7 @@ const FAQ = () => {
 
 
       {/* Search and Filter */}
-      <section className="py-12 bg-white sticky top-16 z-40 border-b">
+      <section className="py-12 bg-white sticky top-14 z-40 border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Search Bar */}
           <AnimatedCard animation="slideUp">
