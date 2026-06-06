@@ -13,6 +13,22 @@ import Seminarix from '../assets/programs/Seminarix.png';
 import D3 from '../assets/programs/D3.png';
 import VoA from '../assets/programs/VoA.png';
 
+/* ─── Marquee keyframes injected once, safely outside JSX ───────────  */
+if (typeof document !== 'undefined' && !document.getElementById('marquee-style')) {
+  const style = document.createElement('style');
+  style.id = 'marquee-style';
+  style.textContent = [
+    '@keyframes marquee {',
+    '  0%   { transform: translateX(100%); }',
+    '  100% { transform: translateX(-100%); }',
+    '}',
+    '.animate-marquee {',
+    '  display: inline-flex;',
+    '  animation: marquee 12s linear infinite;',
+    '}',
+  ].join('\n');
+  document.head.appendChild(style);
+}
 
 const Home = () => {
   const loading = usePageLoading();
@@ -22,27 +38,27 @@ const Home = () => {
       icon: Target,
       title: 'Positivity',
       description: 'Every initiative starts with a clear purpose and a passionate drive to create meaningful change.',
-      color: 'text-blue-600'
+      color: 'text-blue-600',
     },
     {
       icon: TrendingUp,
       title: 'Growth',
       description: 'We nurture continuous learning and leadership, helping individuals and organizations reach their potential.',
-      color: 'text-green-600'
+      color: 'text-green-600',
     },
     {
       icon: Zap,
       title: 'Transformation',
       description: 'We inspire positive change that uplifts lives, strengthens communities, and shapes a better world.',
-      color: 'text-purple-600'
-    }
+      color: 'text-purple-600',
+    },
   ];
 
   const impactStats = [
-    { number: 10000, label: 'Lives Impacted', icon: Users, suffix: '+' },
-    { number: 200, label: 'Success Stories', icon: Star, suffix: '+' },
-    { number: 8, label: 'Programs & Campaigns', icon: BookOpen, suffix: '+' },
-    { number: 6, label: 'Years of Excellence', icon: Hourglass, suffix: '+' }
+    { number: 10000, label: 'Lives Impacted',       icon: Users,    suffix: '+' },
+    { number: 200,   label: 'Success Stories',      icon: Star,     suffix: '+' },
+    { number: 8,     label: 'Programs & Campaigns', icon: BookOpen, suffix: '+' },
+    { number: 6,     label: 'Years of Excellence',  icon: Hourglass, suffix: '+' },
   ];
 
   const programs = [
@@ -50,20 +66,20 @@ const Home = () => {
       id: 'd3',
       name: 'D3 Program',
       description: 'A flagship daily inspiration series delivering knowledge, awareness, and impactful stories to students.',
-      image: D3
+      image: D3,
     },
     {
       id: 'voa',
       name: 'VoA Initiative',
       description: 'A storytelling series highlighting individuals who turned challenges into change and built impact.',
-      image: VoA
+      image: VoA,
     },
     {
       id: 'seminarix',
       name: 'Seminarix',
-      description: 'On-ground seminar sessions empowering students with academics, motivation, and wellness tools',
-      image: Seminarix
-    }
+      description: 'On-ground seminar sessions empowering students with academics, motivation, and wellness tools.',
+      image: Seminarix,
+    },
   ];
 
   if (loading) {
@@ -73,36 +89,19 @@ const Home = () => {
   return (
     <div className="pt-16">
 
-      {/* ── Announcement Bar ──────────────────────────────────────────
-          CHANGED: added dark:bg-blue-950 dark:text-blue-300 dark:border-blue-900
-          Light blue bar was unreadable against dark page background        */}
+      {/* ── Announcement Bar ──────────────────────────────────────── */}
       <div className="bg-blue-100 dark:bg-blue-950 text-blue-800 dark:text-blue-300 py-2 overflow-hidden whitespace-nowrap border-b border-blue-200 dark:border-blue-900">
         <div className="flex space-x-12 animate-marquee hover:[animation-play-state:paused]">
           <Link to="/blog" className="hover:underline">
-            📢 New Blog Posted — Read Now! Click here →
+            New Blog Posted &mdash; Read Now! Click here &rarr;
           </Link>
           <Link to="/careers" className="hover:underline">
-            🚀 Recruitment Drive Live — Apply Now! Click here →
+            Recruitment Drive Live &mdash; Apply Now! Click here &rarr;
           </Link>
         </div>
       </div>
 
-      <style>
-        {`
-          @keyframes marquee {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-          }
-          .animate-marquee {
-            display: inline-flex;
-            animation: marquee 12s linear infinite;
-          }
-        `}
-      </style>
-
-      {/* ── Hero Section ─────────────────────────────────────────────
-          NO CHANGE — already a dark gradient background (blue-600→purple-600→blue-800).
-          Text is white throughout. Reads correctly in both modes.           */}
+      {/* ── Hero Section ─────────────────────────────────────────── */}
       <AnimatedCard animation="fadeIn">
         <section className="relative bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 text-white overflow-hidden">
           <HeroBackground />
@@ -111,7 +110,7 @@ const Home = () => {
               <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
                 Transforming Lives Through
                 <span className="block bg-gradient-to-r from-yellow-300 via-amber-400 to-orange-500 bg-clip-text text-transparent font-extrabold mt-3">
-                  Positivity, Growth & Transformation
+                  Positivity, Growth &amp; Transformation
                 </span>
               </h1>
               <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-blue-100">
@@ -138,14 +137,7 @@ const Home = () => {
         </section>
       </AnimatedCard>
 
-      {/* ── Core Values ──────────────────────────────────────────────
-          CHANGED: section bg-gray-50 → dark:bg-slate-800
-          CHANGED: heading text-gray-900 → dark:text-white
-          CHANGED: subtext text-gray-600 → dark:text-slate-400
-          CHANGED: cards bg-white → dark:bg-slate-700 with dark border + shadow
-          CHANGED: icon circle bg-gray-100 → dark:bg-slate-600
-          CHANGED: card heading text-gray-900 → dark:text-white
-          CHANGED: card body text-gray-600 → dark:text-slate-300                */}
+      {/* ── Core Values ─────────────────────────────────────────── */}
       <section className="py-20 bg-gray-50 dark:bg-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -173,9 +165,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ── Impact Stats ─────────────────────────────────────────────
-          NO CHANGE — already bg-blue-600 with white text throughout.
-          Reads correctly in both modes.                                      */}
+      {/* ── Impact Stats ─────────────────────────────────────────── */}
       <AnimatedCard animation="fadeIn">
         <section className="relative py-20 bg-blue-600 text-white overflow-hidden">
           <Background />
@@ -212,15 +202,7 @@ const Home = () => {
         </section>
       </AnimatedCard>
 
-      {/* ── Programs Preview ─────────────────────────────────────────
-          CHANGED: section added explicit dark:bg-slate-900 (was unstyled/transparent,
-                   which would inherit the light AnimatedBackground in dark mode)
-          CHANGED: heading text-gray-900 → dark:text-white
-          CHANGED: subtext text-gray-600 → dark:text-slate-400
-          CHANGED: cards bg-white → dark:bg-slate-800 with dark border + shadow
-          CHANGED: card heading text-gray-900 → dark:text-white
-          CHANGED: card body text-gray-600 → dark:text-slate-300
-          NO CHANGE on "Learn More" link — text-blue-600 readable on both         */}
+      {/* ── Programs Preview ─────────────────────────────────────── */}
       <section className="py-20 bg-white dark:bg-slate-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -258,7 +240,6 @@ const Home = () => {
           </div>
 
           <div className="text-center mt-12">
-            {/* "View All Programs" button — blue on both modes, no change needed */}
             <Link
               to="/programs"
               className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors inline-flex items-center"
@@ -270,9 +251,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ── CTA Section ──────────────────────────────────────────────
-          NO CHANGE — already bg-gradient-to-r from-purple-600 to-blue-600
-          with white text. Reads correctly in both modes.                     */}
+      {/* ── CTA Section ──────────────────────────────────────────── */}
       <AnimatedCard animation="fadeIn">
         <section className="relative py-20 bg-gradient-to-r from-purple-600 to-blue-600 text-white overflow-hidden">
           <Background />
