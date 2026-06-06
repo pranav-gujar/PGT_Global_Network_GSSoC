@@ -288,71 +288,73 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Navigation */}
-      <div className={`lg:hidden fixed left-0 right-0 top-16 bg-white/95 backdrop-blur-md border-t border-gray-100 shadow-lg transition-transform duration-300 transform-gpu ${isOpen ? 'translate-y-0' : '-translate-y-full'}`}>
-        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-          {navItems.map((item) => (
-            <Link
-              key={item.name}
-              to={item.path}
-              className={`block px-4 py-3 rounded-md text-base font-medium transition-all duration-200 ${isActive(item.path)
-                ? 'text-blue-600 bg-blue-50'
-                : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
-                }`}
-              onClick={() => setIsOpen(false)}
-            >
-              {item.name}
-            </Link>
-          ))}
-          <div className="my-2 border-t border-gray-100" />
-          {moreItems.map((item) => (
-            <Link
-              key={item.name}
-              to={item.path}
-              className={`block px-4 py-3 rounded-md text-base font-medium transition-all duration-200 ${isActive(item.path)
+      {isOpen && (
+        <div className="lg:hidden">
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            {navItems.map((item) => (
+              <Link
+                key={item.name}
+                to={item.path}
+                className={`block px-4 py-3 rounded-md text-base font-medium transition-all duration-200 ${isActive(item.path)
                   ? 'text-blue-600 bg-blue-50'
                   : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
-                }`}
-              onClick={() => setIsOpen(false)}
-            >
-              {item.name}
-            </Link>
-          ))}
-          <div className="my-2 border-t border-gray-100" />
-
-          {/* Mobile Auth */}
-          {user ? (
-            <>
-              <Link
-                to="/dashboard"
-                className="block px-4 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-all duration-200"
+                  }`}
                 onClick={() => setIsOpen(false)}
               >
-                Dashboard
+                {item.name}
               </Link>
+            ))}
+            <div className="my-2 border-t border-gray-100" />
+            {moreItems.map((item) => (
+              <Link
+                key={item.name}
+                to={item.path}
+                className={`block px-4 py-3 rounded-md text-base font-medium transition-all duration-200 ${isActive(item.path)
+                  ? 'text-blue-600 bg-blue-50'
+                  : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
+                  }`}
+                onClick={() => setIsOpen(false)}
+              >
+                {item.name}
+              </Link>
+            ))}
+            <div className="my-2 border-t border-gray-100" />
+
+            {/* Mobile Auth */}
+            {user ? (
+              <>
+                <Link
+                  to="/dashboard"
+                  className="block px-4 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-all duration-200"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Dashboard
+                </Link>
+                <button
+                  onClick={() => {
+                    handleLogout();
+                    setIsOpen(false);
+                  }}
+                  className="w-full text-left px-4 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-all duration-200"
+                >
+                  Sign Out
+                </button>
+              </>
+            ) : (
               <button
                 onClick={() => {
-                  handleLogout();
+                  setShowAuthModal(true);
                   setIsOpen(false);
                 }}
-                className="w-full text-left px-4 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-all duration-200"
+                className="w-full text-left px-4 py-3 rounded-md text-base font-medium bg-blue-600 text-white hover:bg-blue-700 transition-all duration-200"
               >
-                Sign Out
+                Sign In
               </button>
-            </>
-          ) : (
-            <button
-              onClick={() => {
-                setShowAuthModal(true);
-                setIsOpen(false);
-              }}
-              className="w-full text-left px-4 py-3 rounded-md text-base font-medium bg-blue-600 text-white hover:bg-blue-700 transition-all duration-200"
-            >
-              Sign In
-            </button>
-          )}
-        </div>
+            )}
+          </div>
 
-      </div>
+        </div>
+      )}
 
       <AuthModal
         isOpen={showAuthModal}
