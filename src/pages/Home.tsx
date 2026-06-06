@@ -185,13 +185,9 @@ const Home = () => {
         </div>
       </section>
 
-<<<<<<< HEAD
-      {/* ── Impact Stats ─────────────────────────────────────────── */}
-=======
 
       {/* Impact Stats */}
 
->>>>>>> 82f0fdca27bd91ae1928ba3c99525b4b42e913b3
       <AnimatedCard animation="fadeIn">
         <section className="relative py-20 bg-blue-600 text-white overflow-hidden">
           <Background />
@@ -228,36 +224,9 @@ const Home = () => {
         </section>
       </AnimatedCard>
 
-<<<<<<< HEAD
+
       {/* ── Programs Preview ─────────────────────────────────────── */}
-=======
 
-
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              {impactStats.map((stat, index) => (
-                <AnimatedCard key={index} animation="zoomIn" delay={index * 150}>
-                  <div className="text-center">
-                    <div className="w-16 h-16 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-4">
-                      <stat.icon className="h-8 w-8 text-white" />
-                    </div>
-                    <div className="text-3xl md:text-4xl font-bold text-white mb-2">
-                      <CountUpNumber
-                        end={stat.number}
-                        suffix={stat.suffix || ''}
-                        duration={2500}
-                      />
-                    </div>
-                    <div className="text-blue-100 font-medium">{stat.label}</div>
-                  </div>
-                </AnimatedCard>
-              ))}
-            </div>
-          </div>
-        </section>
-      </AnimatedCard>
-
-      {/* ── Programs Preview ──*/}
->>>>>>> 82f0fdca27bd91ae1928ba3c99525b4b42e913b3
       <section className="py-20 bg-white dark:bg-slate-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -312,12 +281,9 @@ const Home = () => {
         </div>
       </section>
 
-<<<<<<< HEAD
-      {/* ── CTA Section ──────────────────────────────────────────── */}
-=======
+
       {/* ── CTA Section ─*/}
-                             
->>>>>>> 82f0fdca27bd91ae1928ba3c99525b4b42e913b3
+
       <AnimatedCard animation="fadeIn">
         <section className="relative py-20 bg-gradient-to-r from-purple-600 to-blue-600 text-white overflow-hidden">
           <Background />
