@@ -14,7 +14,7 @@ const Navbar = () => {
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const { user, signOut } = useAuth();
 
@@ -22,14 +22,32 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     try {
-       await signOut();
-       navigate('/'); // 👈 send user back to home after logout
-      } catch (error) {
-        console.error('Error signing out:', error);
+      await signOut();
+      navigate('/'); // 👈 send user back to home after logout
+    } catch (error) {
+      console.error('Error signing out:', error);
     }
   };
 
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
 
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [isOpen]);
+
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    document.body.style.overflow = 'auto';
+  }, [location.pathname]);
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 10;
@@ -40,7 +58,13 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close dropdowns when clicking outside or scrolling
+  useEffect(() => {
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, []);
+
+  // Close dropdowns when clicking outside
   useEffect(() => {
     setIsMobileMenuOpen(false);
     setDropdownOpen(false);
@@ -76,11 +100,23 @@ const Navbar = () => {
 
     document.addEventListener('mousedown', handleClickOutside);
     window.addEventListener('scroll', handleScroll);
-    
+
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
       window.removeEventListener('scroll', handleScroll);
     };
+  }, []);
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsOpen(false);
+        setDropdownOpen(false);
+        setUserDropdownOpen(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
   useEffect(() => {
@@ -121,31 +157,27 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={`fixed w-full top-0 z-50 transition-all duration-300 ${
-      scrolled 
-        ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-100' 
-        : 'bg-white shadow-lg'
-    }`}>
+    <nav className={`fixed w-full top-0 z-50 transition-all duration-300 ${scrolled
+      ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-100'
+      : 'bg-white shadow-lg'
+      }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className={`flex justify-between items-center transition-all duration-300 ${
-          scrolled ? 'h-14' : 'h-16'
-        }`}>
+        <div className={`flex justify-between items-center transition-all duration-300 ${scrolled ? 'h-14' : 'h-16'
+          }`}>
           {/* Logo */}
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2">
-              <img 
-                src="/PGT New Logo Transparent.png" 
-                alt="PGT Logo" 
-                className={`transition-all duration-300 filter drop-shadow-md ${
-                  scrolled ? 'w-8 h-8' : 'w-10 h-10'
-                }`}
+              <img
+                src="/PGT New Logo Transparent.png"
+                alt="PGT Logo"
+                className={`transition-all duration-300 filter drop-shadow-md ${scrolled ? 'w-8 h-8' : 'w-10 h-10'
+                  }`}
                 style={{
                   filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))'
                 }}
               />
-              <span className={`font-bold text-gray-900 transition-all duration-300 ${
-                scrolled ? 'text-lg' : 'text-xl'
-              }`}>
+              <span className={`font-bold text-gray-900 transition-all duration-300 ${scrolled ? 'text-lg' : 'text-xl'
+                }`}>
                 <span className="hidden sm:inline">PGT Global Network</span>
                 <span className="sm:hidden">PGT</span>
               </span>
@@ -159,18 +191,16 @@ const Navbar = () => {
                 <Link
                   key={item.name}
                   to={item.path}
-                  className={`px-3 py-2 rounded-md font-medium transition-all duration-200 hover:scale-105 ${
-                    scrolled ? 'text-xs' : 'text-sm'
-                  } ${
-                    isActive(item.path)
+                  className={`px-3 py-2 rounded-md font-medium transition-all duration-200 hover:scale-105 ${scrolled ? 'text-xs' : 'text-sm'
+                    } ${isActive(item.path)
                       ? 'text-blue-600 bg-blue-50'
                       : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
-                  }`}
+                    }`}
                 >
                   {item.name}
                 </Link>
               ))}
-              
+
               {/* More Dropdown */}
               <div className="relative" ref={moreDropdownRef}>
                 <button
@@ -179,21 +209,20 @@ const Navbar = () => {
                     e.stopPropagation();
                     setDropdownOpen(!dropdownOpen);
                   }}
-                  className={`flex items-center px-3 py-2 rounded-md font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-all duration-200 ${
-                    scrolled ? 'text-xs' : 'text-sm'
-                  }`}
+                  className={`flex items-center px-3 py-2 rounded-md font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-all duration-200 ${scrolled ? 'text-xs' : 'text-sm'
+                    }`}
                 >
                   More
                   <ChevronDown className={`ml-1 h-4 w-4 transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`} />
                 </button>
-                
+
                 {dropdownOpen && (
                   <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200">
                     {moreItems.map((item) => (
                       <Link
                         key={item.name}
                         to={item.path}
-                        className={`block px-4 py-2 text-sm hover:bg-gray-50 ${isActive(item.path) ? 'text-blue-600 bg-blue-50' : 'text-gray-700'}`}
+                        className={`block px-4 py-3 text-sm hover:bg-gray-50 ${isActive(item.path) ? 'text-blue-600 bg-blue-50' : 'text-gray-700'}`}
                         onClick={() => setDropdownOpen(false)}
                       >
                         {item.name}
@@ -211,20 +240,19 @@ const Navbar = () => {
                       e.stopPropagation();
                       setUserDropdownOpen(!userDropdownOpen);
                     }}
-                    className={`flex items-center px-3 py-2 rounded-md font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-all duration-200 ${
-                      scrolled ? 'text-xs' : 'text-sm'
-                    }`}
+                    className={`flex items-center px-3 py-2 rounded-md font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-all duration-200 ${scrolled ? 'text-xs' : 'text-sm'
+                      }`}
                   >
                     <User className="h-4 w-4 mr-1" />
                     Account
                     <ChevronDown className={`ml-1 h-4 w-4 transition-transform duration-200 ${userDropdownOpen ? 'rotate-180' : ''}`} />
                   </button>
-                  
+
                   {userDropdownOpen && (
                     <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200">
                       <Link
                         to="/dashboard"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                        className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50"
                         onClick={() => setUserDropdownOpen(false)}
                       >
                         Dashboard
@@ -234,7 +262,7 @@ const Navbar = () => {
                           handleLogout();
                           setUserDropdownOpen(false);
                         }}
-                        className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center"
+                        className="w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 flex items-center"
                       >
                         <LogOut className="h-4 w-4 mr-2" />
                         Sign Out
@@ -245,9 +273,8 @@ const Navbar = () => {
               ) : (
                 <button
                   onClick={() => setShowAuthModal(true)}
-                  className={`bg-blue-600 text-white px-4 py-2 rounded-md font-medium hover:bg-blue-700 transition-all duration-200 hover:scale-105 ${
-                    scrolled ? 'text-xs' : 'text-sm'
-                  }`}
+                  className={`bg-blue-600 text-white px-4 py-2 rounded-md font-medium hover:bg-blue-700 transition-all duration-200 hover:scale-105 ${scrolled ? 'text-xs' : 'text-sm'
+                    }`}
                 >
                   Sign In
                 </button>
@@ -258,13 +285,9 @@ const Navbar = () => {
           {/* Mobile menu button */}
           <div className="lg:hidden">
             <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              aria-expanded={isMobileMenuOpen}
-              aria-controls="mobile-menu"
-              aria-label={isMobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
-              className = "inline-flex items-center justify-center p-2 min-h-[44px] min-w-[44px] rounded-md
-                text-gray-700 hover:text-blue-600 hover:bg-gray-100
-                focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors duration-200"
+              onClick={() => setIsOpen(!isOpen)}
+              aria-label="Toggle navigation menu"
+              className="text-gray-700 hover:text-blue-600 focus:outline-none transition-colors duration-200"
             >
               <span className="sr-only">
                 {isMobileMenuOpen ? 'Close menu' : 'Open menu'}
@@ -280,62 +303,54 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Navigation */}
-
-        <div id="mobile-menu"
-          role="navigation"
-          aria-label="Mobile navigation"
-          className={`lg:hidden overflow-y-auto transition-all duration-300 ease-in-out ${isMobileMenuOpen ? 'max-h-[calc(100vh-4rem)] opacity-100'
-            : 'max-h-0 opacity-0 pointer-events-none'
-          }`} 
-          style ={{ WebkitOverflowScrolling: 'touch' }}>
-          
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white/95 backdrop-blur-md border-t border-gray-100 shadow-lg">
+      {isOpen && (
+        <div className="lg:hidden">
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {navItems.map((item) => (
               <Link
                 key={item.name}
                 to={item.path}
-                className={`flex items-center px-4 py-3 rounded-lg text-base font-medium transition-all duration-200 min-h-[44px] ${
-                  isActive(item.path)
-                    ? 'text-blue-600 bg-blue-50'
-                    : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
-                }`}
-                onClick={() => setIsMobileMenuOpen(false)}
+                className={`block px-4 py-3 rounded-md text-base font-medium transition-all duration-200 ${isActive(item.path)
+                  ? 'text-blue-600 bg-blue-50'
+                  : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
+                  }`}
+                onClick={() => setIsOpen(false)}
               >
                 {item.name}
               </Link>
             ))}
-            <div className="border-t border-gray-100 my-2" />
+            <div className="my-2 border-t border-gray-100" />
             {moreItems.map((item) => (
               <Link
                 key={item.name}
                 to={item.path}
-                className={`flex items-center px-4 py-3 rounded-lg text-base font-medium transition-all duration-200 min-h-[44px] ${
-                  isActive(item.path) 
-                  ? 'text-blue-600 bg-blue-50' : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'}`}
-
-                onClick={() => setIsMobileMenuOpen(false)}
+                className={`block px-4 py-3 rounded-md text-base font-medium transition-all duration-200 ${isActive(item.path)
+                  ? 'text-blue-600 bg-blue-50'
+                  : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
+                  }`}
+                onClick={() => setIsOpen(false)}
               >
                 {item.name}
               </Link>
             ))}
-            <div className="border-t border-gray-100 my-2" />
+            <div className="my-2 border-t border-gray-100" />
 
             {/* Mobile Auth */}
             {user ? (
               <>
                 <Link
                   to="/dashboard"
-                  className="flex items-center px-4 py-3 rounded-lg text-base font=medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-all duration-200 min-h-[44px]"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block px-4 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-all duration-200"
+                  onClick={() => setIsOpen(false)}
                 >
                   Dashboard
                 </Link>
                 <button
                   onClick={() => {
                     handleLogout();
-                    setIsMobileMenuOpen(false);
+                    setIsOpen(false);
                   }}
-                  className="flex w-full items-center text-left px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:text-red-600 hover:bg-red-50 active:bg-red-100 transition-all duration-200 min-h-[44px]"
+                  className="w-full text-left px-4 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-all duration-200"
                 >
                   Sign Out
                 </button>
@@ -344,20 +359,21 @@ const Navbar = () => {
               <button
                 onClick={() => {
                   setShowAuthModal(true);
-                  setIsMobileMenuOpen(false);
+                  setIsOpen(false);
                 }}
-                className="flex w-full items-center justify-center px-4 py-3 rounded-lg text-base font-medium bg-blue-600 text-white hover:bg-blue-700 transition-all duration-200 min-h-[44px] mt-2"
+                className="w-full text-left px-4 py-3 rounded-md text-base font-medium bg-blue-600 text-white hover:bg-blue-700 transition-all duration-200"
               >
                 Sign In
               </button>
             )}
           </div>
+
         </div>
-      
-      
-      <AuthModal 
-        isOpen={showAuthModal} 
-        onClose={() => setShowAuthModal(false)} 
+      )}
+
+      <AuthModal
+        isOpen={showAuthModal}
+        onClose={() => setShowAuthModal(false)}
       />
       <CommandPalette
         isOpen={isCommandPaletteOpen}
