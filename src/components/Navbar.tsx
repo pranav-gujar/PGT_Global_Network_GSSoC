@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, ChevronDown, User, LogOut } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import AuthModal from '../components/AuthModal';
+import CommandPalette from './CommandPalette';
 
 
 const Navbar = () => {
@@ -118,6 +119,17 @@ const Navbar = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        setIsCommandPaletteOpen(prev => !prev);
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   const navItems = [
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
@@ -135,6 +147,8 @@ const Navbar = () => {
     { name: 'Privacy Policy', path: '/privacy' },
     { name: 'Terms & Conditions', path: '/terms' },
   ];
+
+  const commandItems = [...navItems, ...moreItems];
 
   const isActive = (path: string) => {
     if (path === location.pathname) return true;
@@ -360,6 +374,12 @@ const Navbar = () => {
       <AuthModal
         isOpen={showAuthModal}
         onClose={() => setShowAuthModal(false)}
+      />
+      <CommandPalette
+        isOpen={isCommandPaletteOpen}
+        onClose={() => setIsCommandPaletteOpen(false)}
+        items={commandItems}
+        onNavigate={(path) => navigate(path)}
       />
     </nav>
   );
