@@ -4,6 +4,12 @@ import founderImg from '../assets/founderImg.jpg';
 import AnimatedCard from '../components/AnimatedCard';
 import HeroBackground from '../components/HeroBackground';
 import Background from '..//components/Background';
+import CountUpNumber from '../components/CountUpNumber';
+import SeminarixLogo from '../assets/programs/Seminarix.png';
+import MotiVMindsLogo from '../assets/programs/MotiVMinds.png';
+import D3Logo from '../assets/programs/D3.png';
+import HEDLogo from '../assets/programs/HED.png';
+import VoALogo from '../assets/programs/VoA.png';
 
 import LoadingSpinner from '../components/LoadingSpinner'; 
 import { usePageLoading } from '../hooks/usePageLoading';
@@ -34,6 +40,46 @@ const About = () => {
     }
   ];
 
+  const impactMetrics = [
+    { value: 50, suffix: '+', label: 'Countries Reached', icon: Globe },
+    { value: 10000, suffix: '+', label: 'Lives Impacted', icon: Users },
+    { value: 5, suffix: '+', label: 'Active Programs', icon: Award },
+    { value: 6, suffix: '+', label: 'Years of Impact', icon: Heart },
+  ];
+
+  const initiatives = [
+    { name: 'Seminarix',
+      logo: SeminarixLogo,
+      description: 'Knowledge-sharing seminars for students and professionals.'},
+
+    { name: 'MotiVMinds',
+      logo: MotiVMindsLogo,
+      description: 'Mental wellness and motivational support programs.'},
+
+      { name: 'D3',
+      logo: D3Logo,
+      description: 'Data-drivern development for community leaders.'},
+
+      { name: 'HED',
+      logo: HEDLogo,
+      description: 'Higher education development initiatives.'},
+
+      { name: 'VoA',
+      logo: VoALogo,
+      description: 'Voice of Action - advocacy and awareness campaigns.'},
+      
+  ];
+
+  const milestones = [
+
+    { year: '2019', title: 'PGT Founded', description: 'Pranav Gujar establishes PGT Global Network with a vision to empower purpose-driven growth.' },
+    { year: '2020',    title: 'First Programs Launched', description: 'Seminarix and MotiVMinds go live, reaching students across India.' },
+    { year: '2021',    title: 'Global Expansion',      description: 'PGT programs reach participants across 20+ countries.' },
+    { year: '2022',    title: 'Community Milestone',   description: 'Network surpasses 5,000 active members.' },
+    { year: '2023',    title: 'New Verticals',         description: 'D3, HED, and VoA programs launched, expanding PGT\'s impact ecosystem.' },
+    { year: '2024–25', title: '50+ Countries',         description: 'PGT touches lives in over 50 countries with 10,000+ individuals impacted.' },
+
+  ];
    if (loading) {
     return <LoadingSpinner />;
   }
@@ -42,14 +88,17 @@ const About = () => {
     <div className="pt-16">
       {/* Hero Section */}
       <AnimatedCard animation="fadeIn">
-  <section className="relative bg-gradient-to-r from-blue-600 to-purple-600 text-white py-20 overflow-hidden">
+  <section className="relative bg-gradient-to-r from-blue-600 to-purple-600 text-white py-28 overflow-hidden">
     <HeroBackground />
     <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="text-center">
-        <h1 className="text-4xl md:text-5xl font-bold mb-6">
+        <span className="inline-block bg-white/20 backdrop-blur-sm text-white text-sm font-semibold px-4 py-1.5 rounded-full mb-6 border border-white/30 tracking-wide">
+          Est. 2019 · Purpose. Growth. Transformation.
+        </span>
+        <h1 className="text-4xl md:text-6xl font-bold mb-5 leading-tight">
           About PGT Global Network
         </h1>
-        <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto">
+        <p className="text-lg md:text-xl text-blue-100 max-w-2xl mx-auto">
           Transforming lives through purpose, growth, and meaningful change since 2019
         </p>
       </div>
@@ -57,29 +106,42 @@ const About = () => {
   </section>
 </AnimatedCard>
 
-      {/* Mission & Vision */}
-      <section className="py-20">
+
+     {/* Mission & Vision */}
+      <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="text-center mb-14">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Mission & Vision
+            </h2>
+            <p className="text-xl text-gray-500 max-w-2xl mx-auto">
+              The north star that guides everything we do
+            </p>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
             <AnimatedCard animation="slideLeft">
+
               <div className="bg-blue-50 dark:bg-slate-800 p-8 rounded-xl border border-blue-100 dark:border-slate-700">
                 <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mb-6">
                   <Target className="h-8 w-8 text-white" />
                 </div>
                 <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Our Mission</h2>
                 <p className="text-gray-700 dark:text-slate-300 text-lg leading-relaxed">
+
                   To empower students, individuals, and organizations worldwide through innovative programs, leadership-driven growth, and purposeful action that creates lasting community impact.
                 </p>
               </div>
             </AnimatedCard>
             
             <AnimatedCard animation="slideRight">
+
               <div className="bg-purple-50 dark:bg-slate-800 p-8 rounded-xl border border-purple-100 dark:border-slate-700">
                 <div className="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center mb-6">
                   <Eye className="h-8 w-8 text-white" />
                 </div>
                 <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Our Vision</h2>
                 <p className="text-gray-700 dark:text-slate-300 text-lg leading-relaxed">
+
                   To be a global network where purpose-driven growth transforms lives, enabling every individual and organization to unlock their true potential and contribute meaningfully to society.
                 </p>
               </div>
@@ -147,10 +209,12 @@ const About = () => {
         </div>
       </section>
 
+
       {/* Founder's Note */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedCard animation="fadeIn">
+
             <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-8 md:p-12">
               <div className="text-center mb-12">
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
@@ -187,12 +251,15 @@ const About = () => {
                 <div className="mt-8 text-center">
                   <p className="text-gray-600 dark:text-slate-400 font-medium">With gratitude and excitement for what's ahead,</p>
                   <p className="text-2xl font-bold text-gray-900 dark:text-white mt-2">Pranav Gujar</p>
+
                 </div>
+
               </div>
             </div>
           </AnimatedCard>
         </div>
       </section>
+
 
       {/* Founding Principles */}
       <section className="py-20 bg-blue-50 dark:bg-slate-800">
@@ -227,22 +294,31 @@ const About = () => {
       </section>
 
       <AnimatedCard animation="fadeIn">
-  <section className="relative py-20 bg-gradient-to-r from-purple-600 to-blue-600 text-white overflow-hidden">
+  <section className="relative py-24 bg-gradient-to-r from-purple-600 to-blue-600 text-white overflow-hidden">
     <Background />
     <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <h2 className="text-3xl md:text-4xl font-bold mb-6">
         Join Our Mission of Positive Change
       </h2>
-      <p className="text-xl mb-8 max-w-3xl mx-auto text-blue-100">
+      <p className="text-xl mb-6 max-w-3xl mx-auto text-blue-100">
         From our founding vision to today, we continue to empower individuals and communities worldwide.  
         Discover how you can be part of this transformative journey.
       </p>
-      <p className="text-lg text-blue-200 max-w-2xl mx-auto">
+      <p className="text-lg text-blue-200 max-w-2xl mx-auto mb-10">
         Learn, grow, and create meaningful impact with us.
       </p>
+      <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/programs" className="bg-white text-purple-700 font-semibold px-8 py-3 rounded-full hover:bg-purple-50 transition-colors">
+          View Our Programs
+        </a>
+        <a href="/contact" className="border-2 border-white text-white font-semibold px-8 py-3 rounded-full hover:bg-white/10 transition-colors">
+          Get Involved
+        </a>
+      </div>
     </div>
   </section>
 </AnimatedCard>
+
 
     </div>
   );
