@@ -57,8 +57,6 @@ const Home = () => {
       icon: Target,
       iconBg: 'bg-indigo-50 border border-indigo-100/50 text-indigo-650 dark:bg-indigo-900/40 dark:text-indigo-400',
       btnHover: 'hover:bg-indigo-600 hover:text-white hover:border-indigo-600 hover:shadow-lg hover:shadow-indigo-600/25'
-      description: 'A flagship daily inspiration series delivering knowledge, awareness, and impactful stories to students.',
-      image: D3
     },
     {
       id: 'voa',
@@ -70,8 +68,6 @@ const Home = () => {
       icon: Users,
       iconBg: 'bg-amber-50 border border-amber-100/50 text-amber-650 dark:bg-amber-900/40 dark:text-amber-400',
       btnHover: 'hover:bg-amber-600 hover:text-white hover:border-amber-600 hover:shadow-lg hover:shadow-amber-600/25'
-      description: 'A storytelling series highlighting individuals who turned challenges into change and built impact.',
-      image: VoA
     },
     {
       id: 'seminarix',
@@ -83,8 +79,6 @@ const Home = () => {
       icon: GraduationCap,
       iconBg: 'bg-violet-50 border border-violet-100/50 text-violet-650 dark:bg-violet-900/40 dark:text-violet-400',
       btnHover: 'hover:bg-violet-600 hover:text-white hover:border-violet-600 hover:shadow-lg hover:shadow-violet-600/25'
-      description: 'On-ground seminar sessions empowering students with academics, motivation, and wellness tools',
-      image: Seminarix
     }
   ];
 
@@ -138,10 +132,7 @@ const Home = () => {
               {/* Headline */}
               <h1 className="text-5xl md:text-7xl font-extrabold mb-8 tracking-tight leading-tight">
                 Transforming Lives Through
-               <span className="block bg-gradient-to-r from-blue-400 to-indigo-200 bg-clip-text text-transparent mt-2 pb-2 drop-shadow-sm">
-                 Positivity, Growth & Transformation
-               </span>
-                <span className="block bg-gradient-to-r from-yellow-300 via-amber-400 to-orange-500 bg-clip-text text-transparent font-extrabold mt-3">
+                <span className="block bg-gradient-to-r from-blue-400 to-indigo-200 bg-clip-text text-transparent mt-2 pb-2 drop-shadow-sm">
                   Positivity, Growth & Transformation
                 </span>
               </h1>
@@ -156,7 +147,7 @@ const Home = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <Link
                   to="/programs"
-                  className="group relative inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white transition-all duration-300 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full hover:from-blue-500 hover:to-indigo-500 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-blue-500 shadow-[0_0_25px_rgba(37,99,235,0.45)] hover:shadow-[0_0_35px_rgba(99,102,241,0.6)]"
+                  className="group relative inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white transition-all duration-300 bg-gradient-to-r from-blue-600 to-indigo-650 rounded-full hover:from-blue-500 hover:to-indigo-500 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-blue-500 shadow-[0_0_25px_rgba(37,99,235,0.45)] hover:shadow-[0_0_35px_rgba(99,102,241,0.6)]"
                 >
                   Explore Programs
                   <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
@@ -237,14 +228,6 @@ const Home = () => {
                 Our Global Impact
               </h2>
               <p className="text-lg md:text-xl text-white/80 max-w-3xl mx-auto font-light">
-        <section className="relative py-20 bg-blue-600 text-white overflow-hidden">
-          <Background />
-          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                Our Global Impact
-              </h2>
-              <p className="text-xl text-blue-100 max-w-3xl mx-auto">
                 Six years of dedication, innovation, and transformation
               </p>
             </div>
@@ -257,10 +240,6 @@ const Home = () => {
                       <stat.icon className="h-8 w-8 text-white" />
                     </div>
                     <div className="text-3xl md:text-5xl font-black text-white mb-2 tracking-tight">
-                    <div className="w-16 h-16 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-4">
-                      <stat.icon className="h-8 w-8 text-white" />
-                    </div>
-                    <div className="text-3xl md:text-4xl font-bold text-white mb-2">
                       <CountUpNumber
                         end={stat.number}
                         suffix={stat.suffix || ''}
@@ -275,8 +254,6 @@ const Home = () => {
           </div>
         </section>
       </AnimatedCard>
-
-
 
       {/* Programs Preview */}
       <section className="py-24 bg-gray-50/50">
@@ -354,7 +331,7 @@ const Home = () => {
           <div className="text-center mt-16">
             <Link
               to="/programs"
-              className="group relative inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white transition-all duration-300 bg-blue-600 hover:bg-blue-700 rounded-xl hover:shadow-xl hover:shadow-blue-500/20 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600"
+              className="group relative inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white transition-all duration-300 bg-blue-650 hover:bg-blue-700 rounded-xl hover:shadow-xl hover:shadow-blue-500/20 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600"
             >
               View All Programs
               <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
@@ -364,62 +341,6 @@ const Home = () => {
       </section>
 
       {/* CTA Section */}
-   <AnimatedCard animation="fadeIn">
-  <section className="relative py-20 bg-gradient-to-r from-purple-600 to-blue-600 text-white overflow-hidden">
-    <Background />
-    <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 className="text-3xl md:text-4xl font-bold mb-6">
-        Ready to Transform Your Future?
-      </h2>
-      <p className="text-xl mb-8 max-w-2xl mx-auto text-purple-100">
-        Join thousands of individuals and organizations who have experienced growth through our programs.
-      </p>
-      <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-        <Link
-          to="/careers"
-          className="group relative inline-flex items-center justify-center px-8 py-4 text-base font-bold text-purple-600 transition-all duration-300 bg-white rounded-full hover:bg-gray-50 hover:shadow-lg hover:shadow-purple-500/10 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-purple-600 focus:ring-white"
-        >
-          Join Our Team
-          <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
-        </Link>
-        <Link
-          to="/contact"
-          className="inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white transition-all duration-300 bg-white/10 border border-white/20 rounded-full hover:bg-white/20 hover:border-white/30 backdrop-blur-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-purple-600 focus:ring-white/50"
-        >
-          Get In Touch
-        </Link>
-      </div>
-    </div>
-  </section>
-</AnimatedCard>
-      <AnimatedCard animation="fadeIn">
-        <section className="relative py-20 bg-gradient-to-r from-purple-600 to-blue-600 text-white overflow-hidden">
-          <Background />
-          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Ready to Transform Your Future?
-            </h2>
-            <p className="text-xl mb-8 max-w-2xl mx-auto text-purple-100">
-              Join thousands of individuals and organizations who have experienced growth through our programs.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                to="/careers"
-                className="bg-white text-purple-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center justify-center"
-              >
-                Join Our Team
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-              <Link
-                to="/contact"
-                className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-purple-600 transition-colors inline-flex items-center justify-center"
-              >
-                Get In Touch
-              </Link>
-            </div>
-          </div>
-        </section>
-      </AnimatedCard>
       <section className="py-20 bg-transparent">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedCard animation="fadeIn">
