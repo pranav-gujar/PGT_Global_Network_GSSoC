@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import { supabase } from '../lib/supabase'
-import { User, Settings, FileText, Heart, Activity, Edit3, Save, X, Camera } from 'lucide-react'
+import { User, Settings, FileText, Heart, Activity, Edit3, Save, X, Camera, Eye, EyeOff, CheckCircle2, XCircle, AlertCircle } from 'lucide-react'
 import { Navigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import ImageUploadModal from '../components/ImageUploadModal'
@@ -11,7 +11,7 @@ import ImageUploadModal from '../components/ImageUploadModal'
 
 const Dashboard = () => {
   
-  const { user, updateProfile } = useAuth()
+  const { user, updateProfile, updatePassword } = useAuth()
   const [profile, setProfile] = useState<any>(null)
   const [applications, setApplications] = useState<any[]>([])
   const [activities, setActivities] = useState<any[]>([])
@@ -28,6 +28,50 @@ const Dashboard = () => {
     website: '',
     avatar_url: ''
   })
+
+  // Security settings state
+  const [newPassword, setNewPassword] = useState('')
+  const [confirmNewPassword, setConfirmNewPassword] = useState('')
+  const [showNewPassword, setShowNewPassword] = useState(false)
+  const [showConfirmNewPassword, setShowConfirmNewPassword] = useState(false)
+  const [updatingPassword, setUpdatingPassword] = useState(false)
+  const [securityError, setSecurityError] = useState<string | null>(null)
+  const [securitySuccess, setSecuritySuccess] = useState<string | null>(null)
+
+  const isPassLengthValid = newPassword.length >= 8
+  const hasPassUppercase = /[A-Z]/.test(newPassword)
+  const hasPassNumber = /[0-9]/.test(newPassword)
+  const hasPassSpecial = /[^A-Za-z0-9]/.test(newPassword)
+  const isNewPasswordValid = isPassLengthValid && hasPassUppercase && hasPassNumber && hasPassSpecial
+
+  const handleSecuritySubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setSecurityError(null)
+    setSecuritySuccess(null)
+
+    if (!isNewPasswordValid) {
+      setSecurityError('Password does not meet validation requirements.')
+      return
+    }
+    if (newPassword !== confirmNewPassword) {
+      setSecurityError('Passwords do not match.')
+      return
+    }
+
+    setUpdatingPassword(true)
+    try {
+      await updatePassword(newPassword)
+      setSecuritySuccess('Password successfully updated!')
+      setNewPassword('')
+      setConfirmNewPassword('')
+      setShowNewPassword(false)
+      setShowConfirmNewPassword(false)
+    } catch (err: any) {
+      setSecurityError(err.message || 'Failed to update password.')
+    } finally {
+      setUpdatingPassword(false)
+    }
+  }
 
   useEffect(() => {
     if (user !== undefined && user !== null) {
@@ -307,6 +351,154 @@ const Dashboard = () => {
                   )}
                 </div>
               </div>
+            </div>
+
+            {/* Security Settings Card */}
+            <div className="bg-white rounded-xl shadow-lg p-6 mt-8">
+              <h2 className="text-xl font-bold text-gray-900 mb-6 flex items-center">
+                <Settings className="h-5 w-5 mr-2 text-blue-600" />
+                Security Settings
+              </h2>
+
+              {securityError && (
+                <div className="flex items-start bg-red-50 border-l-4 border-red-500 p-4 rounded-md mb-5" role="alert">
+                  <AlertCircle className="h-5 w-5 text-red-500 mr-2 flex-shrink-0 mt-0.5" />
+                  <p className="text-xs text-red-700 text-left font-semibold">{securityError}</p>
+                </div>
+              )}
+
+              {securitySuccess && (
+                <div className="flex items-start bg-green-50 border-l-4 border-green-500 p-4 rounded-md mb-5" role="alert">
+                  <CheckCircle2 className="h-5 w-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
+                  <p className="text-xs text-green-700 text-left font-semibold">{securitySuccess}</p>
+                </div>
+              )}
+
+              <form onSubmit={handleSecuritySubmit} className="space-y-4">
+                {/* New Password */}
+                <div className="space-y-1">
+                  <label htmlFor="dashboard-new-password" className="block text-xs font-semibold text-gray-700">
+                    New Password
+                  </label>
+                  <div className="relative">
+                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                    <input
+                      id="dashboard-new-password"
+                      type={showNewPassword ? 'text' : 'password'}
+                      value={newPassword}
+                      onChange={(e) => setNewPassword(e.target.value)}
+                      aria-describedby="dashboard-pass-checklist"
+                      className="w-full pl-9 pr-9 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all min-h-[38px]"
+                      placeholder="Enter new password"
+                      required
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowNewPassword(!showNewPassword)}
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none"
+                      aria-label={showNewPassword ? 'Hide password' : 'Show password'}
+                    >
+                      {showNewPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                    </button>
+                  </div>
+                </div>
+
+                {/* Password strength checker for dashboard */}
+                {newPassword.length > 0 && (
+                  <div 
+                    className="bg-gray-50 p-3 rounded-lg border border-gray-150 text-[10px] space-y-1.5 transition-all duration-200" 
+                    id="dashboard-pass-checklist"
+                    role="group"
+                    aria-label="New password strength requirements"
+                  >
+                    <p className="font-semibold text-gray-700">Requirements:</p>
+                    <div className="space-y-1 text-left">
+                      <div className="flex items-center space-x-1">
+                        {isPassLengthValid ? (
+                          <CheckCircle2 className="h-3 w-3 text-green-500 flex-shrink-0" />
+                        ) : (
+                          <XCircle className="h-3 w-3 text-gray-300 flex-shrink-0" />
+                        )}
+                        <span className={isPassLengthValid ? 'text-green-700 font-medium' : 'text-gray-500'}>
+                          Min. 8 characters
+                        </span>
+                      </div>
+                      <div className="flex items-center space-x-1">
+                        {hasPassUppercase ? (
+                          <CheckCircle2 className="h-3 w-3 text-green-500 flex-shrink-0" />
+                        ) : (
+                          <XCircle className="h-3 w-3 text-gray-300 flex-shrink-0" />
+                        )}
+                        <span className={hasPassUppercase ? 'text-green-700 font-medium' : 'text-gray-500'}>
+                          Uppercase letter
+                        </span>
+                      </div>
+                      <div className="flex items-center space-x-1">
+                        {hasPassNumber ? (
+                          <CheckCircle2 className="h-3 w-3 text-green-500 flex-shrink-0" />
+                        ) : (
+                          <XCircle className="h-3 w-3 text-gray-300 flex-shrink-0" />
+                        )}
+                        <span className={hasPassNumber ? 'text-green-700 font-medium' : 'text-gray-500'}>
+                          At least 1 number
+                        </span>
+                      </div>
+                      <div className="flex items-center space-x-1">
+                        {hasPassSpecial ? (
+                          <CheckCircle2 className="h-3 w-3 text-green-500 flex-shrink-0" />
+                        ) : (
+                          <XCircle className="h-3 w-3 text-gray-300 flex-shrink-0" />
+                        )}
+                        <span className={hasPassSpecial ? 'text-green-700 font-medium' : 'text-gray-500'}>
+                          Special character
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Confirm Password */}
+                <div className="space-y-1">
+                  <label htmlFor="dashboard-confirm-password" className="block text-xs font-semibold text-gray-700">
+                    Confirm New Password
+                  </label>
+                  <div className="relative">
+                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                    <input
+                      id="dashboard-confirm-password"
+                      type={showConfirmNewPassword ? 'text' : 'password'}
+                      value={confirmNewPassword}
+                      onChange={(e) => setConfirmNewPassword(e.target.value)}
+                      className="w-full pl-9 pr-9 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all min-h-[38px]"
+                      placeholder="Confirm new password"
+                      required
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowConfirmNewPassword(!showConfirmNewPassword)}
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none"
+                      aria-label={showConfirmNewPassword ? 'Hide confirm password' : 'Show confirm password'}
+                    >
+                      {showConfirmNewPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                    </button>
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={updatingPassword || !isNewPasswordValid}
+                  className="w-full flex items-center justify-center bg-blue-600 text-white py-2 rounded-lg font-bold text-sm hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed min-h-[38px]"
+                >
+                  {updatingPassword ? (
+                    <div className="flex items-center space-x-2">
+                      <span className="animate-spin rounded-full h-3.5 w-3.5 border-b-2 border-white" />
+                      <span>Updating...</span>
+                    </div>
+                  ) : (
+                    'Update Password'
+                  )}
+                </button>
+              </form>
             </div>
           </div>
 

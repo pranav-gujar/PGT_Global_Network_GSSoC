@@ -5,7 +5,6 @@ import founderImg from '../assets/founderImg.jpg';
 import AnimatedCard from '../components/AnimatedCard';
 import HeroBackground from '../components/HeroBackground';
 import Background from '../components/Background';
-import Background from '..//components/Background';
 import CountUpNumber from '../components/CountUpNumber';
 import SeminarixLogo from '../assets/programs/Seminarix.png';
 import MotiVMindsLogo from '../assets/programs/MotiVMinds.png';
