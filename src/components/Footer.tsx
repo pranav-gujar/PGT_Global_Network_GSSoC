@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from './TransitionLink';
 import { HashLink } from 'react-router-hash-link';
 import { MapPin, Phone, Mail, Linkedin, Instagram, Youtube } from 'lucide-react';
 

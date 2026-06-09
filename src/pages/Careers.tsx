@@ -1086,7 +1086,7 @@
 // export default Careers;
 
 import React from "react";
-import { MapPin, Clock, Users, ArrowRight, ExternalLink } from "lucide-react";
+import { MapPin, Clock, Users, ArrowRight, ExternalLink, Sparkles } from "lucide-react";
 import ProtectedAction from "../components/ProtectedAction";
 import AnimatedCard from "../components/AnimatedCard";
 import { useAuth } from "../contexts/AuthContext";
@@ -1466,70 +1466,92 @@ const Careers = () => {
         </div>
       </section>
 
-     
-   {/* Mentorship Programs - NEW SECTION */}
-<section className="relative py-20 bg-gradient-to-r from-slate-800 to-indigo-900 overflow-hidden">
-  <Background />
-
-  <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <AnimatedCard animation="fadeIn">
-      <div className="bg-white rounded-2xl shadow-lg overflow-hidden p-8 md:p-12 text-center">
+      {/* Mentorship Programs - NEW SECTION */}
+      <section className="relative py-24 bg-gradient-to-br from-[#0a0f1c] via-[#111827] to-[#0f172a] text-white overflow-hidden border-t border-b border-white/5">
         
-        {/* Header */}
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-          Mentorship Programs
-        </h2>
+        {/* Decorative Blur Backgrounds (Mesh Effect) */}
+        <div className="absolute top-0 -left-1/4 w-full h-full bg-blue-650/10 rounded-full blur-[120px] mix-blend-screen pointer-events-none" />
+        <div className="absolute top-0 -right-1/4 w-full h-full bg-purple-600/10 rounded-full blur-[120px] mix-blend-screen pointer-events-none" />
+        <div className="absolute -bottom-1/2 left-1/4 w-full h-full bg-indigo-600/8 rounded-full blur-[120px] mix-blend-screen pointer-events-none" />
+        
+        {/* Grid Pattern Overlay */}
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_50%,#000_20%,transparent_100%)] pointer-events-none" />
 
-        {/* Intro */}
-        <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-10">
-          Structured mentorship designed to support learners from <span className="font-semibold text-blue-600">any educational background</span>,
-          helping them gain clarity, confidence, and real-world skills.
-        </p>
-
-        {/* Structured Grid for Key Info */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 text-left">
-          
-          {/* Card 1: Domain Scope */}
-          <div className="bg-gray-100 p-6 rounded-xl border border-gray-100 hover:border-blue-100 transition-colors">
-            <h3 className="font-bold text-gray-900 text-lg mb-2">150+ Specialized Domains</h3>
-            <p className="text-gray-600 text-sm leading-relaxed">
-              Spanning <strong>11+ broad categories</strong> including technology, engineering, design, business, content, and social impact.
-            </p>
-          </div>
-
-          {/* Card 2: Eligibility */}
-          <div className="bg-gray-100 p-6 rounded-xl border border-gray-100 hover:border-blue-100 transition-colors">
-            <h3 className="font-bold text-gray-900 text-lg mb-2">Open to All Streams</h3>
-            <p className="text-gray-600 text-sm leading-relaxed">
-              Designed for students of <strong>all branches and degrees</strong>. Focuses on guided learning, hands-on practice, and mentor-led growth.
-            </p>
-          </div>
-
-          {/* Card 3: Internships */}
-          <div className="bg-gray-100 p-6 rounded-xl border border-gray-100 hover:border-blue-100 transition-colors">
-            <h3 className="font-bold text-gray-900 text-lg mb-2">Internship Opportunities</h3>
-            <p className="text-gray-600 text-sm leading-relaxed">
-              Available based on performance and readiness. These are offered <strong>separately and free of cost</strong>.
-            </p>
-          </div>
-
+        {/* Star particles */}
+        <div className="absolute inset-0 pointer-events-none">
+          {[...Array(6)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-1 h-1 bg-white/25 rounded-full animate-pulse shadow-[0_0_4px_rgba(255,255,255,0.4)]"
+              style={{
+                left: `${15 + (i * 14.5)}%`,
+                top: `${20 + ((i % 3) * 25)}%`,
+                animationDelay: `${i * 0.8}s`,
+                animationDuration: `${2 + (i % 2)}s`
+              }}
+            />
+          ))}
         </div>
 
-        {/* CTA Button */}
-        <a
-          href="https://mentorship.pgtglobalnetwork.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center justify-center bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
-        >
-          Apply for Mentorship
-          <ExternalLink className="ml-2 h-5 w-5" />
-        </a>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <AnimatedCard animation="fadeIn">
+            <div className="bg-white rounded-3xl shadow-2xl overflow-hidden p-8 md:p-12 text-center border border-gray-100/50">
+              
+              {/* Header */}
+              <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-4 tracking-tight">
+                Mentorship Programs
+              </h2>
 
-      </div>
-    </AnimatedCard>
-  </div>
-</section>
+              {/* Intro */}
+              <p className="text-base md:text-lg text-gray-600 max-w-3xl mx-auto mb-10 leading-relaxed font-light">
+                Structured mentorship designed to support learners from <span className="font-semibold text-blue-600">any educational background</span>,
+                helping them gain clarity, confidence, and real-world skills.
+              </p>
+
+              {/* Structured Grid for Key Info */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 text-left">
+                
+                {/* Card 1: Domain Scope */}
+                <div className="bg-gray-50 p-6 rounded-2xl border border-gray-100 hover:border-blue-150 transition-colors shadow-sm">
+                  <h3 className="font-bold text-gray-900 text-lg mb-2">150+ Specialized Domains</h3>
+                  <p className="text-gray-600 text-sm leading-relaxed font-light">
+                    Spanning <strong>11+ broad categories</strong> including technology, engineering, design, business, content, and social impact.
+                  </p>
+                </div>
+
+                {/* Card 2: Eligibility */}
+                <div className="bg-gray-50 p-6 rounded-2xl border border-gray-100 hover:border-blue-150 transition-colors shadow-sm">
+                  <h3 className="font-bold text-gray-900 text-lg mb-2">Open to All Streams</h3>
+                  <p className="text-gray-600 text-sm leading-relaxed font-light">
+                    Designed for students of <strong>all branches and degrees</strong>. Focuses on guided learning, hands-on practice, and mentor-led growth.
+                  </p>
+                </div>
+
+                {/* Card 3: Internships */}
+                <div className="bg-gray-50 p-6 rounded-2xl border border-gray-100 hover:border-blue-150 transition-colors shadow-sm">
+                  <h3 className="font-bold text-gray-900 text-lg mb-2">Internship Opportunities</h3>
+                  <p className="text-gray-600 text-sm leading-relaxed font-light">
+                    Available based on performance and readiness. These are offered <strong>separately and free of cost</strong>.
+                  </p>
+                </div>
+
+              </div>
+
+              {/* CTA Button */}
+              <a
+                href="https://mentorship.pgtglobalnetwork.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group/btn relative inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-650 text-white font-extrabold rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.03] transition-all duration-300 text-sm"
+              >
+                <span>Apply for Mentorship</span>
+                <ExternalLink className="ml-2 w-4 h-4 transform group-hover/btn:translate-y-0.5 transition-transform" />
+              </a>
+
+            </div>
+          </AnimatedCard>
+        </div>
+      </section>
 
 
  {/* Internship Programs */}
@@ -1633,35 +1655,73 @@ const Careers = () => {
       </section>
 
       {/* CTA Section */}
-      <AnimatedCard animation="fadeIn">
-        <section className="relative py-20 bg-gradient-to-r from-green-600 to-blue-600 text-white overflow-hidden">
-          <Background />
-          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Ready to Make a Difference?
-            </h2>
-            <p className="text-xl mb-8 max-w-2xl mx-auto text-green-100">
-              Don't see a position that fits? We're always looking for
-              passionate individuals to join our mission.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="/contact"
-                className="bg-white text-green-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center justify-center"
-              >
-                Send Us Your Resume
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </a>
-              <a
-                href="/contact"
-                className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-green-600 transition-colors inline-flex items-center justify-center"
-              >
-                Get In Touch
-              </a>
+      <section className="py-20 bg-transparent">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <AnimatedCard animation="fadeIn">
+            <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#0a0f1c] via-[#111827] to-[#0f172a] text-white p-8 md:p-16 shadow-2xl shadow-gray-250/20 border border-white/10">
+              
+              {/* Decorative Blur Backgrounds (Mesh Effect) */}
+              <div className="absolute top-0 -left-1/4 w-full h-full bg-blue-650/10 rounded-full blur-[120px] mix-blend-screen pointer-events-none" />
+              <div className="absolute top-0 -right-1/4 w-full h-full bg-purple-600/10 rounded-full blur-[120px] mix-blend-screen pointer-events-none" />
+              <div className="absolute -bottom-1/2 left-1/4 w-full h-full bg-indigo-600/8 rounded-full blur-[120px] mix-blend-screen pointer-events-none" />
+              
+              {/* Grid Pattern Overlay */}
+              <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_50%,#000_20%,transparent_100%)] pointer-events-none" />
+
+              {/* Star particles */}
+              <div className="absolute inset-0 pointer-events-none">
+                {[...Array(6)].map((_, i) => (
+                  <div
+                    key={i}
+                    className="absolute w-1 h-1 bg-white/25 rounded-full animate-pulse shadow-[0_0_4px_rgba(255,255,255,0.4)]"
+                    style={{
+                      left: `${15 + (i * 14.5)}%`,
+                      top: `${20 + ((i % 3) * 25)}%`,
+                      animationDelay: `${i * 0.8}s`,
+                      animationDuration: `${2 + (i % 2)}s`
+                    }}
+                  />
+                ))}
+              </div>
+
+              <div className="relative z-10 text-center max-w-3xl mx-auto space-y-6">
+                <div className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md shadow-sm">
+                  <Sparkles className="w-3.5 h-3.5 text-yellow-300 animate-pulse" />
+                  <span className="text-xs font-black tracking-wider uppercase text-white/95">PGT Careers</span>
+                </div>
+                
+                <h2 className="text-3xl md:text-5xl font-black tracking-tight leading-tight">
+                  Ready to Make a Difference?
+                </h2>
+                
+                <p className="text-base md:text-lg text-white/85 max-w-2xl mx-auto font-light leading-relaxed">
+                  Don't see a position that fits? We're always looking for passionate individuals to join our mission.
+                </p>
+
+                <p className="text-sm font-semibold text-blue-200">
+                  Send us your resume or reach out to start a conversation.
+                </p>
+
+                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
+                  <a
+                    href="mailto:careers@pgtglobalnetwork.com"
+                    className="group/btn relative w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-650 text-white font-extrabold rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.03] transition-all duration-300 text-sm"
+                  >
+                    <span>Send Us Your Resume</span>
+                    <ArrowRight className="ml-2 w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform" />
+                  </a>
+                  <a
+                    href="/contact"
+                    className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 bg-white/10 border border-white/25 hover:bg-white/20 backdrop-blur-md text-white font-bold rounded-xl shadow-md hover:shadow-lg hover:scale-[1.03] transition-all duration-300 text-sm"
+                  >
+                    Get In Touch
+                  </a>
+                </div>
+              </div>
             </div>
-          </div>
-        </section>
-      </AnimatedCard>
+          </AnimatedCard>
+        </div>
+      </section>
     </div>
   );
 };
