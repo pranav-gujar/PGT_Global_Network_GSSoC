@@ -8,9 +8,13 @@ interface AuthContextType {
   session: Session | null
   loading: boolean
   signIn: (email: string, password: string) => Promise<void>
-  signUp: (email: string, password: string, fullName: string) => Promise<void>
+  signUp: (email: string, password: string, fullName: string) => Promise<any>
   signOut: () => Promise<void>
   updateProfile: (data: any) => Promise<void>
+  resendVerificationEmail: (email: string) => Promise<void>
+  resetPassword: (email: string) => Promise<void>
+  updatePassword: (password: string) => Promise<void>
+  verifyEmailOtp: (email: string, token: string) => Promise<void>
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
@@ -113,7 +117,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }
 
   const signUp = async (email: string, password: string, fullName: string) => {
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
@@ -125,7 +129,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       toast.error(error.message)
       throw error
     } else {
-      toast.success('Account created successfully! Please check your email to verify your account.')
+      if (data.session) {
+        toast.success('Successfully registered and signed in!')
+      } else {
+        toast.success('Account created successfully! Please verify using the OTP code sent to your email.')
+      }
+      return data
     }
   }
 
@@ -136,6 +145,64 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       throw error
     } else {
       toast.success('Successfully signed out!')
+    }
+  }
+
+  const resendVerificationEmail = async (email: string) => {
+    const { error } = await supabase.auth.resend({
+      type: 'signup',
+      email,
+      options: {
+        emailRedirectTo: window.location.origin
+      }
+    })
+
+    if (error) {
+      toast.error(error.message)
+      throw error
+    } else {
+      toast.success('Verification email resent! Please check your inbox.')
+    }
+  }
+
+  const resetPassword = async (email: string) => {
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/reset-password`
+    })
+
+    if (error) {
+      toast.error(error.message)
+      throw error
+    } else {
+      toast.success('Password reset email sent! Please check your inbox.')
+    }
+  }
+
+  const updatePassword = async (password: string) => {
+    const { error } = await supabase.auth.updateUser({
+      password
+    })
+
+    if (error) {
+      toast.error(error.message)
+      throw error
+    } else {
+      toast.success('Password updated successfully!')
+    }
+  }
+
+  const verifyEmailOtp = async (email: string, token: string) => {
+    const { error } = await supabase.auth.verifyOtp({
+      email,
+      token,
+      type: 'signup'
+    })
+
+    if (error) {
+      toast.error(error.message)
+      throw error
+    } else {
+      toast.success('Email verified successfully!')
     }
   }
 
@@ -198,6 +265,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     signUp,
     signOut,
     updateProfile,
+    resendVerificationEmail,
+    resetPassword,
+    updatePassword,
+    verifyEmailOtp,
   }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

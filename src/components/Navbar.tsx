@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, ChevronDown, User, LogOut } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import AuthModal from '../components/AuthModal';
-import CommandPalette from './CommandPalette';
+import ConfirmModal from '../components/ConfirmModal';
 
 
 const Navbar = () => {
@@ -13,6 +13,7 @@ const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
   const location = useLocation();
@@ -205,43 +206,15 @@ const Navbar = () => {
 
               {/* Auth Section */}
               {user ? (
-                <div className="relative">
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setUserDropdownOpen(!userDropdownOpen);
-                    }}
-                    className={`flex items-center px-3 py-2 rounded-md font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-all duration-200 ${
-                      scrolled ? 'text-xs' : 'text-sm'
-                    }`}
-                  >
-                    <User className="h-4 w-4 mr-1" />
-                    Account
-                    <ChevronDown className={`ml-1 h-4 w-4 transition-transform duration-200 ${userDropdownOpen ? 'rotate-180' : ''}`} />
-                  </button>
-                  
-                  {userDropdownOpen && (
-                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200">
-                      <Link
-                        to="/dashboard"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
-                        onClick={() => setUserDropdownOpen(false)}
-                      >
-                        Dashboard
-                      </Link>
-                      <button
-                        onClick={() => {
-                          handleLogout();
-                          setUserDropdownOpen(false);
-                        }}
-                        className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center"
-                      >
-                        <LogOut className="h-4 w-4 mr-2" />
-                        Sign Out
-                      </button>
-                    </div>
-                  )}
-                </div>
+                <button
+                  onClick={() => setShowConfirmModal(true)}
+                  className={`flex items-center px-3 py-2 rounded-md font-medium text-gray-700 hover:text-red-600 hover:bg-red-50 transition-all duration-200 hover:scale-105 ${
+                    scrolled ? 'text-xs' : 'text-sm'
+                  }`}
+                >
+                  <LogOut className="h-4 w-4 mr-1" />
+                  Sign Out
+                </button>
               ) : (
                 <button
                   onClick={() => setShowAuthModal(true)}
@@ -322,24 +295,16 @@ const Navbar = () => {
 
             {/* Mobile Auth */}
             {user ? (
-              <>
-                <Link
-                  to="/dashboard"
-                  className="flex items-center px-4 py-3 rounded-lg text-base font=medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-all duration-200 min-h-[44px]"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Dashboard
-                </Link>
-                <button
-                  onClick={() => {
-                    handleLogout();
-                    setIsMobileMenuOpen(false);
-                  }}
-                  className="flex w-full items-center text-left px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:text-red-600 hover:bg-red-50 active:bg-red-100 transition-all duration-200 min-h-[44px]"
-                >
-                  Sign Out
-                </button>
-              </>
+              <button
+                onClick={() => {
+                  setShowConfirmModal(true);
+                  setIsMobileMenuOpen(false);
+                }}
+                className="flex w-full items-center text-left px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:text-red-600 hover:bg-red-50 active:bg-red-100 transition-all duration-200 min-h-[44px]"
+              >
+                <LogOut className="h-5 w-5 mr-2 text-gray-750" />
+                Sign Out
+              </button>
             ) : (
               <button
                 onClick={() => {
@@ -359,11 +324,15 @@ const Navbar = () => {
         isOpen={showAuthModal} 
         onClose={() => setShowAuthModal(false)} 
       />
-      <CommandPalette
-        isOpen={isCommandPaletteOpen}
-        onClose={() => setIsCommandPaletteOpen(false)}
-        items={commandItems}
-        onNavigate={(path) => navigate(path)}
+
+      <ConfirmModal
+        isOpen={showConfirmModal}
+        onClose={() => setShowConfirmModal(false)}
+        onConfirm={handleLogout}
+        title="Sign Out Confirmation"
+        message="Are you sure you want to sign out of your account? You will need to enter your email and password to log back in next time."
+        confirmText="Yes, Sign Out"
+        cancelText="Cancel"
       />
     </nav>
   );

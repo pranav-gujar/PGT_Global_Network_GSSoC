@@ -24,7 +24,7 @@ import FAQ from './pages/FAQ';
 import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
 import Dashboard from './pages/Dashboard';
-import NotFound from './pages/NotFound';
+import ResetPassword from './pages/ResetPassword';
 import Footer from './components/Footer';
 
 const AppContent = () => {
@@ -51,7 +51,7 @@ const AppContent = () => {
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
       </Routes>
       <Footer />
       <ScrollToTop />
