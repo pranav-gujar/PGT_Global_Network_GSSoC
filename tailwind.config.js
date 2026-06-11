@@ -13,6 +13,7 @@ export default {
         'wave-slow': 'wave-slow 15s ease-in-out infinite',
         'wave-slower': 'wave-slower 20s ease-in-out infinite',
         'pause-marquee': 'paused',
+        'shimmer': 'shimmer 2s infinite',
       },
       keyframes: {
         marquee: {
@@ -90,6 +91,10 @@ export default {
           '50%': {
             transform: 'translateX(10%) translateY(5px)',
           },
+        },
+        'shimmer': {
+          '0%': { backgroundPosition: '-1000px 0' },
+          '100%': { backgroundPosition: '1000px 0' },
         },
       },
     },
