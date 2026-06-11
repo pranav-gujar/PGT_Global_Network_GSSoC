@@ -8,9 +8,11 @@ import Background from '..//components/Background';
 
 import LoadingSpinner from '../components/LoadingSpinner'; 
 import { usePageLoading } from '../hooks/usePageLoading';
+import { BlogSkeletonGrid } from '../components/SkeletonLoader';
 
 const Blog = () => {
     const loading = usePageLoading();
+    const [isLoadingContent, setIsLoadingContent] = useState(true);
   
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -26,6 +28,15 @@ const Blog = () => {
       const matchesCategory = selectedCategory === 'All' || post.category === selectedCategory;
       return matchesSearch && matchesCategory;
     });
+  }, [searchTerm, selectedCategory]);
+
+  React.useEffect(() => {
+    setIsLoadingContent(true);
+    const timer = setTimeout(() => {
+      setIsLoadingContent(false);
+    }, 1500);
+
+    return () => clearTimeout(timer);
   }, [searchTerm, selectedCategory]);
 
    if (loading) {
@@ -47,7 +58,7 @@ const Blog = () => {
   </section>
 </AnimatedCard>
 
-
+ 
       {/* Search and Filter Section */}
       <section className="py-12 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -88,7 +99,9 @@ const Blog = () => {
       {/* Blog Posts Grid */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {filteredPosts.length === 0 ? (
+          {isLoadingContent ? (
+            <BlogSkeletonGrid />
+          ) : filteredPosts.length === 0 ? (
             <AnimatedCard animation="fadeIn">
               <div className="text-center py-12">
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">No articles found</h3>
@@ -127,7 +140,7 @@ const Blog = () => {
                         </div>
 
                         <Link
-                          to={`/blog/${post.slug}`} // ✅ uses slug
+                          to={`/blog/${post.slug}`}
                           className="text-blue-600 font-medium hover:text-blue-800 inline-flex items-center"
                         >
                           Read More
@@ -142,24 +155,6 @@ const Blog = () => {
           )}
         </div>
       </section>
-
-      {/* Newsletter Subscription */}
-      {/* <section className="py-20 bg-blue-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedCard animation="slideUp">
-            <div className="bg-white rounded-2xl shadow-lg p-8 md:p-12 text-center">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Enjoyed reading?</h2>
-              <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-                Keep exploring more inspiring stories from our community.
-              </p>
-
-              <p className="text-gray-500 text-sm mt-4">
-                Your journey doesn’t end here — more stories await.
-              </p>
-            </div>
-          </AnimatedCard>
-        </div>
-      </section> */}
 
       <AnimatedCard animation="fadeIn">
   <section className="relative py-20 bg-gradient-to-r from-green-600 to-blue-600 text-white overflow-hidden">
@@ -179,7 +174,7 @@ const Blog = () => {
   </section>
 </AnimatedCard>
 
-
+ 
     </div>
   );
 };
