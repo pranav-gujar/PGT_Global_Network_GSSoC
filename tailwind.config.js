@@ -13,6 +13,8 @@ export default {
         'wave-slow': 'wave-slow 15s ease-in-out infinite',
         'wave-slower': 'wave-slower 20s ease-in-out infinite',
         'pause-marquee': 'paused',
+        // ✅ ADD THIS - Shimmer animation for skeleton loaders
+        'shimmer': 'shimmer 2s infinite',
       },
       keyframes: {
         marquee: {
@@ -90,6 +92,11 @@ export default {
           '50%': {
             transform: 'translateX(10%) translateY(5px)',
           },
+        },
+        // ✅ ADD THIS - Shimmer keyframe animation
+        'shimmer': {
+          '0%': { backgroundPosition: '-1000px 0' },
+          '100%': { backgroundPosition: '1000px 0' },
         },
       },
     },
